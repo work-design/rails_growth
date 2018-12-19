@@ -4,8 +4,8 @@ class Reward < ApplicationRecord
   has_many :reward_expenses, dependent: :destroy
 
   def compute_amount
-    self.income_amount = self.reward_incomes.sum(&:amount)
-    self.expense_amount = self.reward_expenses.sum(&:amount)
+    self.income_amount = self.reward_incomes.sum(:amount)
+    self.expense_amount = self.reward_expenses.sum(:amount)
     self.amount = self.income_amount + self.expense_amount
   end
 
