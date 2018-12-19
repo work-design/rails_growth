@@ -16,7 +16,9 @@
   <thead>
     <tr>
       <th><%= AimLog.human_attribute_name(:id) %></th>
-      <th><%= AimLog.human_attribute_name(:user) %>/<%= AimLog.human_attribute_name(:ip) %></th>
+      <th><%= AimLog.human_attribute_name(:user) %></th>
+      <th><%= AimLog.human_attribute_name(:ip) %></th>
+      <th><%= AimLog.human_attribute_name(:code) %></th>
       <th>
         <p><%= AimLog.human_attribute_name(:entity_type) %></p>
         <p><%= AimLog.human_attribute_name(:entity_id) %></p>
@@ -33,8 +35,9 @@
         <% if aim_log.user_id %>
           <%= link_to aim_log.user.name, admin_user_path(aim_log.user_id) %>
         <% end %>
-        <span class="grey text"><%= aim_log.ip %></span>
       </td>
+      <td class="grey text"><%= aim_log.ip %></td>
+      <td><%= aim_log.code %></td>
       <td>
         <p><%= aim_log.entity_type %></p>
         <p><%= aim_log.entity_id %></p>

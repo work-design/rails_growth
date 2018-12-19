@@ -1,4 +1,3 @@
-# todo 支持code 来源
 module RailsGrowthApi
   extend ActiveSupport::Concern
 
@@ -6,9 +5,11 @@ module RailsGrowthApi
     after_action :growth_record
   end
 
-  def growth_api(aim_ids, entity_type, entity_id)
-    aims = Aim.where(id: Array(aim_ids))
-    aims.each do |aim|
+  def growth_api(code, entity_type, entity_id)
+    aim_ids = AimCode.growth_hash[code]
+    return if aim_ids.blank?
+
+    Aim.where(id: aim_ids).each do |aim|
       if current_user
         present_point = current_user.aim_users.find_by(aim_id: aim.id).present_point.to_i
         if aim.task_point.nil? || aim.task_point >= present_point
@@ -23,26 +24,22 @@ module RailsGrowthApi
       aim_log.ip = request.remote_ip
       aim_log.entity_type = entity_type
       aim_log.entity_id = entity_id
+      aim_log.code = code
       aim_log.save
       aim_log
     end
   end
 
   def growth_log(code)
-    aim_ids = AimCode.growth_hash[code]
-    return unless aim_ids
-
-    growth_api(aim_ids, params[:entity_type], params[:entity_id])
+    growth_api(code, params[:entity_type], params[:entity_id])
   end
 
   def growth_record
     code = [controller_path, action_name].join('#')
-    aim_ids = AimCode.growth_hash[code]
-    return unless aim_ids
-
     entity_type = controller_name.classify
     entity_id = params.fetch('id', nil)
-    growth_api(aim_ids, entity_type, entity_id)
+
+    growth_api(code, entity_type, entity_id)
   end
 
 end
