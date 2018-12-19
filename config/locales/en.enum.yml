@@ -1,38 +1,5 @@
 en:
   activerecord:
     attributes:
-      app/chain:
-        eos: EOS
-        eth: ETH
-        nas: NAS
-        other: Other
-      app/language:
-        en: english
-        zh: chinese
-      app_type/type:
-        IosApp: iOS APP
-        AndroidApp: Android APP
-        WebApp: Web APP
-      app/state:
-        draft: Draft
-        pending: Pending
-        rejected: Rejected
-        verified: Verified
-      post/state:
-        init: Pending
-        published: Published
-        rejected: Rejected
-      post/type:
-        InnerPost: Inner Post
-        OuterPost: Outer Post
-        UGCPost: UGC Post
-      tag/type:
-        AppTag: App Tag
-        PostTag: Post Tag
-        ToolTag: Common Tool Tag
-        VideoTag: Video Tag
-      taxon/type:
-        AppTaxon: App Taxon
-        VideoTaxon: Video Taxon
       reward_income/type:
         InhouseIncome: Inhouse Income

@@ -1,38 +1,5 @@
 zh:
   activerecord:
     attributes:
-      app/chain:
-        eos: EOS
-        eth: ETH
-        nas: NAS
-        other: 其他
-      app/language:
-        en: 英文
-        zh: 中文
-      app_type/type:
-        IosApp: iOS APP
-        AndroidApp: Android APP
-        WebApp: Web APP
-      app/state:
-        draft: 草稿箱
-        pending: 待审核
-        rejected: 未通过
-        verified: 审核通过
-      post/state:
-        init: 待审核
-        published: 已发布
-        rejected: 未发布
-      post/type:
-        InnerPost: 内部文章
-        OuterPost: 咨询
-        UGCPost: 帖子
-      tag/type:
-        AppTag: Dapp 标签
-        PostTag: 资讯标签
-        ToolTag: 常用工具分类
-        VideoTag: 视频标签
-      taxon/type:
-        AppTaxon: DApp 分类
-        VideoTaxon: 视频 分类
       reward_income/type:
         InhouseIncome: 平台运营
