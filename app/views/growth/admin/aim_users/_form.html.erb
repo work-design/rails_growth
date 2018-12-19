@@ -1,0 +1,7 @@
+<%= form_with model: @aim_user, local: true do |f| %>
+  <%= render 'shared/error_messages', target: @aim_user %>
+  <%= f.text_field :user %>
+  <%= f.text_field :present_point %>
+  <%= f.text_field :day %>
+  <%= f.submit %>
+<% end %>

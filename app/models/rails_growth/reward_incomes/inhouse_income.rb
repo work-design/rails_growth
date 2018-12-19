@@ -1,0 +1,3 @@
+class InhouseIncome < RewardIncome
+
+end

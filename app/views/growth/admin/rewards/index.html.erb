@@ -1,0 +1,47 @@
+<div class="ui top attached borderless menu">
+  <div class="header item">Admin Rewards</div>
+  <div class="right menu">
+    <div class="item">
+      <%= link_to 'New Admin Reward', new_admin_reward_path, class: 'ui teal button' %>
+    </div>
+  </div>
+</div>
+
+<%= render 'filter' %>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= Reward.human_attribute_name(:id) %></th>
+      <th><%= Reward.human_attribute_name(:amount) %></th>
+      <th><%= Reward.human_attribute_name(:entity_type) %></th>
+      <th><%= Reward.human_attribute_name(:entity_id) %></th>
+      <th><%= Reward.human_attribute_name(:lock_version) %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @rewards.each do |reward| %>
+    <tr>
+      <td><%= reward.id %></td>
+      <td><%= reward.amount %></td>
+      <td><%= reward.entity_type %></td>
+      <td><%= reward.entity_id %></td>
+      <td><%= reward.lock_version %></td>
+      <td class="ui labels">
+        <%= link_to admin_reward_path(reward), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_admin_reward_path(reward), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to admin_reward_path(reward), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @rewards %>

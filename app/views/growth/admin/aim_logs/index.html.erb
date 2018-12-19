@@ -1,0 +1,48 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_aim_aim_users_path(@aim_user.aim_id), class: 'section' %>
+  <div class="divider">/</div>
+  <div class="active section">Edit</div>
+</div>
+
+<div class="ui top attached borderless menu">
+  <div class="header item">Admin Aim Logs</div>
+</div>
+
+<div class="ui attached segment">
+  <%= render 'search_form' %>
+</div>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= AimLog.human_attribute_name(:id) %></th>
+      <th><%= AimLog.human_attribute_name(:ip) %></th>
+      <th>
+        <p><%= AimLog.human_attribute_name(:entity_type) %></p>
+        <p><%= AimLog.human_attribute_name(:entity_id) %></p>
+      </th>
+      <th><%= AimLog.human_attribute_name(:created_at) %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @aim_logs.each do |aim_log| %>
+    <tr>
+      <td><%= aim_log.id %></td>
+      <td><%= aim_log.ip %></td>
+      <td>
+        <p><%= aim_log.entity_type %></p>
+        <p><%= aim_log.entity_id %></p>
+      </td>
+      <td><%= aim_log.created_at %></td>
+      <td class="ui labels">
+        <%= link_to admin_aim_log_path(aim_log, aim_user_id: params[:aim_user_id]), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @aim_logs %>

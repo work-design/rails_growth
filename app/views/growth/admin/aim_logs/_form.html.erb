@@ -1,0 +1,5 @@
+<%= form_with model: @aim_log, local: true do |f| %>
+  <%= render 'shared/error_messages', target: @aim_log %>
+  <%= f.text_field :created_at %>
+  <%= f.submit %>
+<% end %>

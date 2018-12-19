@@ -1,0 +1,24 @@
+<div class="inline fields" id="aim_aim_codes_<%= ef.index %>" data-title="aim_aim_codes">
+  <% if ef.index == 0 %>
+    <%= ef.options[:parent_builder].label :aim_codes %>
+  <% else %>
+    <label class="six wide field"></label>
+  <% end %>
+  
+  <%= ef.text_field :controller_path, css: { wrapper_input: 'three wide field' } %>
+  <%= ef.text_field :action_name %>
+  <%= ef.text_field :code, css: { wrapper_input: 'three wide field' } %>
+  
+  <div class="field">
+    <%= link_to add_item_admin_aims_path('item', index: ef.index), data: { title: 'add_item' }, remote: true do %>
+      <i class="plus circle icon"></i>
+    <% end %>
+    <% if ef.object.id %>
+      <%= ef.check_box :_destroy, { on: { offset: false }, css: { wrapper_checkbox: 'ui checkbox' }, checked: true }, 0, 1 %>
+    <% else %>
+      <%= link_to remove_item_admin_aims_path('item', index: ef.index), remote: true do %>
+        <i class="minus circle icon"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>

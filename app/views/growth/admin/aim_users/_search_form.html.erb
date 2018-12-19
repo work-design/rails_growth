@@ -1,0 +1,10 @@
+<%= search_form_with model: AimUser.new do |f| %>
+  <div class="fields">
+    <%= f.text_field :ip %>
+    <%= f.text_field :entity_type %>
+    <%= f.text_field :entity_id %>
+    <%= f.submit 'Search' %>
+  </div>
+<% end %>
+
+

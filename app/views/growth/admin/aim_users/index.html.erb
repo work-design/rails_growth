@@ -1,0 +1,65 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_aims_path, class: 'section' %>
+  <div class="divider">/</div>
+  <div class="section"><%= @aim.name %></div>
+  <div class="divider">/</div>
+  <div class="action section">Users</div>
+</div>
+
+<div class="ui top attached borderless menu">
+  <div class="header item">Admin Aim Users</div>
+</div>
+
+<div class="ui attached segment">
+  <%= render 'search_form' %>
+</div>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= AimUser.human_attribute_name(:id) %></th>
+      <th><%= AimUser.human_attribute_name(:user) %>/<%= AimUser.human_attribute_name(:ip) %></th>
+      <th><%= AimUser.human_attribute_name(:aim_logs_count) %></th>
+      <th><%= AimUser.human_attribute_name(:present_point) %></th>
+      <th><%= AimUser.human_attribute_name(:serial_number) %></th>
+      <th>
+        <p><%= AimUser.human_attribute_name(:entity_type) %></p>
+        <p><%= AimUser.human_attribute_name(:entity_id) %></p>
+      </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @aim_users.each do |aim_user| %>
+    <tr>
+      <td><%= aim_user.id %></td>
+      <td>
+        <% if aim_user.user_id %>
+          <%= link_to aim_user.user.name, admin_user_path(aim_user.user_id) %>
+        <% end %>
+        <span class="grey text"><%= aim_user.ip %></span>
+      </td>
+      <td><%= aim_user.aim_logs_count %></td>
+      <td><%= aim_user.present_point %></td>
+      <td><%= aim_user.serial_number %></td>
+      <td>
+        <p><%= aim_user.entity_type %></p>
+        <p><%= aim_user.entity_id %></p>
+      </td>
+      <td class="ui labels">
+        <%= link_to admin_aim_user_aim_logs_path(aim_user), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_admin_aim_user_path(aim_user), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to admin_aim_user_path(aim_user), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @aim_users %>
