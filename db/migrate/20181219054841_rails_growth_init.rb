@@ -1,31 +1,52 @@
 class RailsGrowthInit < ActiveRecord::Migration[5.2]
   def change
 
-    create_table :rewards do |t|
-      t.references :entity, polymorphic: true
-      t.decimal :amount, precision: 10, scale: 2
-      t.decimal :income_amount, precision: 10, scale: 2
-      t.decimal :expense_amount, precision: 10, scale: 2
-      t.integer :lock_version
-      t.integer :incomes_count
-      t.integer :expenses_count
-      t.datetime :start_at
-      t.datetime :finish_at
+    create_table :aims do |t|
+      t.string :name
+      t.integer :task_point
+      t.integer :reward_point, default: 1
+      t.string :unit
+      t.integer :score
+      t.string :repeat_type
       t.timestamps
     end
 
-    create_table :reward_incomes do |t|
-      t.references :reward
-      t.string :type
-      t.decimal :amount, precision: 10, scale: 2
-      t.timestamps
-    end
-
-    create_table :reward_expenses do |t|
-      t.references :reward
-      t.references :aim_user
+    create_table :aim_codes do |t|
       t.references :aim
-      t.decimal :amount, precision: 10, scale: 2
+      t.string :controller_path
+      t.string :action_name
+      t.string :code, null: false
+      t.timestamps
+    end
+
+    create_table :aim_users do |t|
+      t.references :aim
+      t.references :user
+      t.references :entity, polymorphic: true
+      t.integer :present_point
+      t.string :state
+      t.string :serial_number
+      t.datetime :last_access_at
+      t.inet :ip
+      t.integer :aim_logs_count, default: 0
+      t.timestamps
+    end
+
+    create_table :aim_logs do |t|
+      t.references :aim
+      t.references :user
+      t.references :entity, polymorphic: true
+      t.inet :ip
+      t.string :code
+      t.datetime :created_at, null: false
+    end
+    
+    create_table :aim_statistics do |t|
+      t.references :aim
+      t.references :user
+      t.string :serial_number
+      t.string :state
+      t.integer :aim_logs_count, default: 0
       t.timestamps
     end
 
