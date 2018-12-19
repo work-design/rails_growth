@@ -1,4 +1,4 @@
-require "rails_growth/engine"
+require 'rails_growth/engine'
 
 module RailsGrowth
   # Your code goes here...

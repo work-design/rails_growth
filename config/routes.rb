@@ -12,7 +12,10 @@ Rails.application.routes.draw do
         resources :aim_logs, only: [:index, :destroy]
       end
     end
-    resources :rewards
+    resources :rewards, shallow: true do
+      resources :reward_incomes
+      resources :reward_expenses
+    end
   end
 
   scope :api, module: 'growth/api', as: :api do

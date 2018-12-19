@@ -29,6 +29,7 @@
       <td><%= reward.entity_id %></td>
       <td><%= reward.lock_version %></td>
       <td class="ui labels">
+        <%= link_to 'incomes', admin_reward_reward_incomes_path(reward) %>
         <%= link_to admin_reward_path(reward), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>

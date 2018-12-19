@@ -1,0 +1,4 @@
+<%= render 'shared/error_messages', target: @reward_income %>
+<%= f.select :type, options_for_select(RewardIncome.options_i18n(:type), @reward_income.type) %>
+<%= f.number_field :amount %>
+<%= f.submit %>
