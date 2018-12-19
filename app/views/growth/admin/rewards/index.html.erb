@@ -14,6 +14,10 @@
     <tr>
       <th><%= Reward.human_attribute_name(:id) %></th>
       <th><%= Reward.human_attribute_name(:amount) %></th>
+      <th>
+        <p><%= Reward.human_attribute_name(:income_amount) %></p>
+        <p><%= Reward.human_attribute_name(:expense_amount) %></p>
+      </th>
       <th><%= Reward.human_attribute_name(:entity_type) %></th>
       <th><%= Reward.human_attribute_name(:entity_id) %></th>
       <th><%= Reward.human_attribute_name(:lock_version) %></th>
@@ -25,6 +29,10 @@
     <tr>
       <td><%= reward.id %></td>
       <td><%= reward.amount %></td>
+      <td>
+        <p><%= reward.income_amount %></p>
+        <p><%= reward.expense_amount %></p>
+      </td>
       <td><%= reward.entity_type %></td>
       <td><%= reward.entity_id %></td>
       <td><%= reward.lock_version %></td>
