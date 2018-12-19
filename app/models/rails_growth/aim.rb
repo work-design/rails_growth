@@ -18,4 +18,8 @@ class Aim < ApplicationRecord
     self.aim_users.find { |i| i.user_id == user_id }
   end
 
+  def serial_number(timestamp)
+    SerialNumberHelper.result(timestamp, repeat_type)
+  end
+
 end

@@ -18,9 +18,14 @@
         <p><%= Reward.human_attribute_name(:income_amount) %></p>
         <p><%= Reward.human_attribute_name(:expense_amount) %></p>
       </th>
-      <th><%= Reward.human_attribute_name(:entity_type) %></th>
-      <th><%= Reward.human_attribute_name(:entity_id) %></th>
-      <th><%= Reward.human_attribute_name(:lock_version) %></th>
+      <th>
+        <p><%= Reward.human_attribute_name(:entity_type) %></p>
+        <p><%= Reward.human_attribute_name(:entity_id) %></p>
+      </th>
+      <th>
+        <p><%= Reward.human_attribute_name(:start_at) %></p>
+        <p><%= Reward.human_attribute_name(:finish_at) %></p>
+      </th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -33,9 +38,14 @@
         <p><%= reward.income_amount %></p>
         <p><%= reward.expense_amount %></p>
       </td>
-      <td><%= reward.entity_type %></td>
-      <td><%= reward.entity_id %></td>
-      <td><%= reward.lock_version %></td>
+      <td>
+        <p><%= reward.entity_type %></p>
+        <p><%= reward.entity_id %></p>
+      </td>
+      <td>
+        <p><time><%= reward.start_at&.to_s(:rfc822) %></time></p>
+        <p><time><%= reward.finish_at&.to_s(:rfc822) %></time></p>
+      </td>
       <td class="ui labels">
         <%= link_to 'incomes', admin_reward_reward_incomes_path(reward) %>
         <%= link_to admin_reward_path(reward), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>

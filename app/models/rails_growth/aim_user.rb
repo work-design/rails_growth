@@ -2,7 +2,7 @@ class AimUser < ApplicationRecord
   attribute :state, :string, default: 'doing'
   belongs_to :aim
   belongs_to :user, optional: true
-  has_many :aim_logs, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
+  has_many :aim_logs, ->(o){ where(user_id: o.user_id, entity_type: o.entity_type, entity_id: o.entity_id) }, foreign_key: :aim_id, primary_key: :aim_id
   belongs_to :entity, polymorphic: true
 
   enum state: {

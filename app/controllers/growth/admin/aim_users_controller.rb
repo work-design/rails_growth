@@ -3,7 +3,10 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
   before_action :set_aim, only: [:index]
 
   def index
-    @aim_users = @aim.aim_users.page(params[:page])
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.permit(:user_id)
+    q_params.merge! params.fetch(:q, {}).permit(:ip, :entity_type, :entity_id)
+    @aim_users = @aim.aim_users.default_where(q_params).page(params[:page])
   end
 
   def new

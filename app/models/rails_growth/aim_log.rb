@@ -21,22 +21,7 @@ class AimLog < ApplicationRecord
   def serial_number
     return @serial_number if defined?(@serial_number)
 
-    year = created_at.year
-    if aim.repeat_type == 'daily'
-      number = created_at.yday
-    elsif aim.repeat_type == 'weekly'
-      number = created_at.cweek
-    elsif aim.repeat_type == 'monthly'
-      number = created_at.month
-    elsif aim.repeat_type == 'yearly'
-      year = created_at.year
-      number = ''
-    else
-      year = ''
-      number = ''
-    end
-
-    @serial_number = [year, number].join('-')
+    @serial_number = SerialNumberHelper.result(created_at, aim.repeat_type)
   end
 
 end

@@ -9,6 +9,8 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.integer :lock_version
       t.integer :incomes_count
       t.integer :expenses_count
+      t.datetime :start_at
+      t.datetime :finish_at
       t.timestamps
     end
 
