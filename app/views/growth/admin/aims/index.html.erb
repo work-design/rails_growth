@@ -39,7 +39,7 @@
         <%= simple_format aim.aim_codes.pluck(:code) %>
       </td>
       <td class="ui labels">
-        <%= link_to admin_aim_aim_statistics_path(aim_id: aim.id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+        <%= link_to admin_aim_aim_users_path(aim_id: aim.id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>
         <%= link_to edit_admin_aim_path(aim), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>

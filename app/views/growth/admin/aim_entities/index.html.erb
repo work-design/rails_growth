@@ -1,0 +1,67 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_aims_path, class: 'section' %>
+  <div class="divider">/</div>
+  <div class="section"><%= @aim.name %>(<%= @aim.repeat_type_i18n %>)</div>
+  <div class="divider">/</div>
+  <%= link_to 'Stat', admin_aim_aim_users_path(@aim), class: 'section' %>
+  <div class="section">/</div>
+  <div class="action section">Users</div>
+</div>
+
+<div class="ui top attached borderless menu">
+  <div class="header item">Admin Aim Users</div>
+</div>
+
+<div class="ui attached segment">
+  <%= render 'search_form' %>
+</div>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= AimUser.human_attribute_name(:id) %></th>
+      <th><%= AimUser.human_attribute_name(:user) %>/<%= AimUser.human_attribute_name(:ip) %></th>
+      <th><%= AimUser.human_attribute_name(:aim_logs_count) %></th>
+      <th><%= AimUser.human_attribute_name(:present_point) %></th>
+      <th><%= AimUser.human_attribute_name(:serial_number) %></th>
+      <th>
+        <p><%= AimUser.human_attribute_name(:entity_type) %></p>
+        <p><%= AimUser.human_attribute_name(:entity_id) %></p>
+      </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @aim_entities.each do |aim_entity| %>
+    <tr>
+      <td><%= aim_entity.id %></td>
+      <td>
+        <% if aim_entity.user_id %>
+          <%= link_to aim_entity.user.name, admin_user_path(aim_entity.user_id) %>
+        <% end %>
+        <span class="grey text"><%= aim_entity.ip %></span>
+      </td>
+      <td><%= aim_entity.aim_logs_count %></td>
+      <td><%= aim_entity.present_point %></td>
+      <td><%= aim_entity.serial_number %></td>
+      <td>
+        <p><%= aim_entity.entity_type %></p>
+        <p><%= aim_entity.entity_id %></p>
+      </td>
+      <td class="ui labels">
+        <%= link_to admin_aim_entity_aim_logs_path(aim_entity), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_admin_aim_entity_path(aim_entity), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to admin_aim_entity_path(aim_entity), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @aim_entitys %>

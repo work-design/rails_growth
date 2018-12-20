@@ -3,31 +3,24 @@
   <div class="divider">/</div>
   <div class="section"><%= @aim.name %>(<%= @aim.repeat_type_i18n %>)</div>
   <div class="divider">/</div>
-  <%= link_to 'Stat', admin_aim_aim_statistics_path(@aim), class: 'section' %>
-  <div class="section">/</div>
   <div class="action section">Users</div>
 </div>
 
 <div class="ui top attached borderless menu">
-  <div class="header item">Admin Aim Users</div>
+  <div class="header item">Aim Statistics</div>
 </div>
 
-<div class="ui attached segment">
-  <%= render 'search_form' %>
-</div>
+<%= render 'filter' %>
 
 <table class="ui bottom attached table">
   <thead>
     <tr>
-      <th><%= AimUser.human_attribute_name(:id) %></th>
-      <th><%= AimUser.human_attribute_name(:user) %>/<%= AimUser.human_attribute_name(:ip) %></th>
-      <th><%= AimUser.human_attribute_name(:aim_logs_count) %></th>
-      <th><%= AimUser.human_attribute_name(:present_point) %></th>
-      <th><%= AimUser.human_attribute_name(:serial_number) %></th>
-      <th>
-        <p><%= AimUser.human_attribute_name(:entity_type) %></p>
-        <p><%= AimUser.human_attribute_name(:entity_id) %></p>
-      </th>
+      <th><%= AimStatistic.human_attribute_name(:id) %></th>
+      <th><%= AimStatistic.human_attribute_name(:user) %></th>
+      <th><%= AimStatistic.human_attribute_name(:ip) %></th>
+      <th><%= AimStatistic.human_attribute_name(:serial_number) %></th>
+      <th><%= AimStatistic.human_attribute_name(:state) %></th>
+      <th><%= AimStatistic.human_attribute_name(:aim_users_count) %></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -37,19 +30,15 @@
       <td><%= aim_user.id %></td>
       <td>
         <% if aim_user.user_id %>
-          <%= link_to aim_user.user.name, admin_user_path(aim_user.user_id) %>
+          <%= link_to aim_user.user.name %>
         <% end %>
-        <span class="grey text"><%= aim_user.ip %></span>
       </td>
-      <td><%= aim_user.aim_logs_count %></td>
-      <td><%= aim_user.present_point %></td>
+      <td><%= aim_user.ip %></td>
       <td><%= aim_user.serial_number %></td>
-      <td>
-        <p><%= aim_user.entity_type %></p>
-        <p><%= aim_user.entity_id %></p>
-      </td>
+      <td><%= aim_user.state %></td>
+      <td><%= aim_user.aim_users_count %></td>
       <td class="ui labels">
-        <%= link_to admin_aim_user_aim_logs_path(aim_user), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+        <%= link_to admin_aim_aim_users_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>
         <%= link_to edit_admin_aim_user_path(aim_user), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>

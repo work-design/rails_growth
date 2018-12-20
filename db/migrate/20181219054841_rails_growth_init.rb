@@ -22,6 +22,15 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
     create_table :aim_users do |t|
       t.references :aim
       t.references :user
+      t.string :serial_number
+      t.string :state
+      t.integer :aim_logs_count, default: 0
+      t.timestamps
+    end
+
+    create_table :aim_entities do |t|
+      t.references :aim
+      t.references :user
       t.references :entity, polymorphic: true
       t.integer :present_point
       t.string :state
@@ -39,15 +48,6 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.inet :ip
       t.string :code
       t.datetime :created_at, null: false
-    end
-    
-    create_table :aim_statistics do |t|
-      t.references :aim
-      t.references :user
-      t.string :serial_number
-      t.string :state
-      t.integer :aim_logs_count, default: 0
-      t.timestamps
     end
 
   end
