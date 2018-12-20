@@ -15,12 +15,12 @@
 <table class="ui bottom attached table">
   <thead>
     <tr>
-      <th><%= AimStatistic.human_attribute_name(:id) %></th>
-      <th><%= AimStatistic.human_attribute_name(:user) %></th>
-      <th><%= AimStatistic.human_attribute_name(:ip) %></th>
-      <th><%= AimStatistic.human_attribute_name(:serial_number) %></th>
-      <th><%= AimStatistic.human_attribute_name(:state) %></th>
-      <th><%= AimStatistic.human_attribute_name(:aim_users_count) %></th>
+      <th><%= AimUser.human_attribute_name(:id) %></th>
+      <th><%= AimUser.human_attribute_name(:user) %></th>
+      <th><%= AimUser.human_attribute_name(:ip) %></th>
+      <th><%= AimUser.human_attribute_name(:serial_number) %></th>
+      <th><%= AimUser.human_attribute_name(:state) %></th>
+      <th><%= AimUser.human_attribute_name(:aim_users_count) %></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -30,7 +30,7 @@
       <td><%= aim_user.id %></td>
       <td>
         <% if aim_user.user_id %>
-          <%= link_to aim_user.user.name %>
+          <%= link_to aim_user.user.name, admin_user_path(aim_user.user_id) %>
         <% end %>
       </td>
       <td><%= aim_user.ip %></td>
@@ -38,7 +38,7 @@
       <td><%= aim_user.state %></td>
       <td><%= aim_user.aim_users_count %></td>
       <td class="ui labels">
-        <%= link_to admin_aim_aim_users_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+        <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>
         <%= link_to edit_admin_aim_user_path(aim_user), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>

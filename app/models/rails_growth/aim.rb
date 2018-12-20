@@ -1,8 +1,8 @@
 class Aim < ApplicationRecord
-  has_many :aim_statistics, dependent: :nullify
-  has_many :aim_users, dependent: :nullify
-  has_many :aim_logs, dependent: :nullify
   has_many :aim_codes, dependent: :delete_all
+  has_many :aim_users, dependent: :nullify
+  has_many :aim_entities, dependent: :nullify
+  has_many :aim_logs, dependent: :nullify
 
   accepts_nested_attributes_for :aim_codes, allow_destroy: true, reject_if: :all_blank
 

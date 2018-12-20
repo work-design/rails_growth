@@ -31,7 +31,7 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
   end
 
   def set_aim_user
-    @aim_user = AimStatistic.find(params[:id])
+    @aim_user = AimUser.find(params[:id])
   end
 
   def aim_user_params

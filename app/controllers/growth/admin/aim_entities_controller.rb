@@ -1,4 +1,4 @@
-class Growth::Admin::AimUsersController < Growth::Admin::BaseController
+class Growth::Admin::AimEntitiesController < Growth::Admin::BaseController
   before_action :set_aim_entity, only: [:show, :edit, :update, :destroy]
   before_action :set_aim, only: [:index]
 
@@ -10,11 +10,11 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
   end
 
   def new
-    @aim_entity = AimUser.new
+    @aim_entity = AimEntity.new
   end
 
   def create
-    @aim_entity = AimUser.new(aim_entity_params)
+    @aim_entity = AimEntity.new(aim_entity_params)
 
     if @aim_entity.save
       redirect_to admin_aim_entities_url, notice: 'Aim user was successfully created.'
@@ -44,7 +44,7 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
 
   private
   def set_aim_entity
-    @aim_entity = AimUser.find(params[:id])
+    @aim_entity = AimEntity.find(params[:id])
   end
 
   def set_aim
