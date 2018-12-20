@@ -1,0 +1,9 @@
+<%= form_with model: @aim_statistic, local: true do |f| %>
+  <%= render 'shared/error_messages', target: @aim_statistic %>
+  <%= f.text_field :user %>
+  <%= f.text_field :ip %>
+  <%= f.text_field :serial_number %>
+  <%= f.text_field :state %>
+  <%= f.text_field :aim_users_count %>
+  <%= f.submit %>
+<% end %>

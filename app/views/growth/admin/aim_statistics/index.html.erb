@@ -1,0 +1,56 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_aims_path, class: 'section' %>
+  <div class="divider">/</div>
+  <div class="section"><%= @aim.name %></div>
+  <div class="divider">/</div>
+  <div class="action section">Users</div>
+</div>
+
+<div class="ui top attached borderless menu">
+  <div class="header item">Aim Statistics</div>
+</div>
+
+<%= render 'filter' %>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= AimStatistic.human_attribute_name(:id) %></th>
+      <th><%= AimStatistic.human_attribute_name(:user) %></th>
+      <th><%= AimStatistic.human_attribute_name(:ip) %></th>
+      <th><%= AimStatistic.human_attribute_name(:serial_number) %></th>
+      <th><%= AimStatistic.human_attribute_name(:state) %></th>
+      <th><%= AimStatistic.human_attribute_name(:aim_users_count) %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @aim_statistics.each do |aim_statistic| %>
+    <tr>
+      <td><%= aim_statistic.id %></td>
+      <td>
+        <% if aim_statistic.user_id %>
+          <%= link_to aim_statistic.user.name %>
+        <% end %>
+      </td>
+      <td><%= aim_statistic.ip %></td>
+      <td><%= aim_statistic.serial_number %></td>
+      <td><%= aim_statistic.state %></td>
+      <td><%= aim_statistic.aim_users_count %></td>
+      <td class="ui labels">
+        <%= link_to admin_aim_aim_users_path(user_id: aim_statistic.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_admin_aim_statistic_path(aim_statistic), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to admin_aim_statistic_path(aim_statistic), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @aim_statistics %>

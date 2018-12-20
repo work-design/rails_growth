@@ -1,4 +1,5 @@
 class Aim < ApplicationRecord
+  has_many :aim_statistics, dependent: :nullify
   has_many :aim_users, dependent: :nullify
   has_many :aim_logs, dependent: :nullify
   has_many :aim_codes, dependent: :delete_all
