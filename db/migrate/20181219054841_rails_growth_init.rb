@@ -24,7 +24,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.references :user
       t.string :serial_number
       t.string :state
-      t.integer :aim_logs_count, default: 0
+      t.integer :aim_entities_count, default: 0
       t.timestamps
     end
 

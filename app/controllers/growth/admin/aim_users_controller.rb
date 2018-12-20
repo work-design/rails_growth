@@ -3,7 +3,7 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
   before_action :set_aim_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @aim_users = @aim.aim_users.page(params[:page])
+    @aim_users = @aim.aim_users.includes(:user).page(params[:page])
   end
 
   def show

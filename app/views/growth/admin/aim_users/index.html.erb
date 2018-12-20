@@ -20,7 +20,7 @@
       <th><%= AimUser.human_attribute_name(:ip) %></th>
       <th><%= AimUser.human_attribute_name(:serial_number) %></th>
       <th><%= AimUser.human_attribute_name(:state) %></th>
-      <th><%= AimUser.human_attribute_name(:aim_users_count) %></th>
+      <th><%= AimUser.human_attribute_name(:aim_entities_count) %></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -36,7 +36,7 @@
       <td><%= aim_user.ip %></td>
       <td><%= aim_user.serial_number %></td>
       <td><%= aim_user.state %></td>
-      <td><%= aim_user.aim_users_count %></td>
+      <td><%= aim_user.aim_entities_count %></td>
       <td class="ui labels">
         <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>

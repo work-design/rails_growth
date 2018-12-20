@@ -6,7 +6,7 @@ class Growth::Admin::AimEntitiesController < Growth::Admin::BaseController
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:user_id)
     q_params.merge! params.fetch(:q, {}).permit(:ip, :entity_type, :entity_id)
-    @aim_entities = @aim.aim_entities.default_where(q_params).page(params[:page])
+    @aim_entities = @aim.aim_entities.includes(:user).default_where(q_params).page(params[:page])
   end
 
   def new

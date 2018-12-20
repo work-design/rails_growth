@@ -26,6 +26,10 @@
         <p><%= Reward.human_attribute_name(:start_at) %></p>
         <p><%= Reward.human_attribute_name(:finish_at) %></p>
       </th>
+      <th>
+        <p><%= Reward.human_attribute_name(:max_piece) %></p>
+        <p><%= Reward.human_attribute_name(:max_piece) %></p>
+      </th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -45,6 +49,10 @@
       <td>
         <p><time><%= reward.start_at&.to_s(:rfc822) %></time></p>
         <p><time><%= reward.finish_at&.to_s(:rfc822) %></time></p>
+      </td>
+      <td>
+        <p><%= reward.max_piece %></p>
+        <p><%= reward.min_piece %></p>
       </td>
       <td class="ui labels">
         <%= link_to 'incomes', admin_reward_reward_incomes_path(reward) %>

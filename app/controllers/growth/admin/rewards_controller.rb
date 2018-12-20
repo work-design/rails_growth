@@ -48,7 +48,10 @@ class Growth::Admin::RewardsController < Growth::Admin::BaseController
       :amount,
       :entity_type,
       :entity_id,
-      :lock_version
+      :max_piece,
+      :min_piece,
+      :start_at,
+      :finish_at
     )
   end
 
