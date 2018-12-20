@@ -17,8 +17,12 @@ class Reward < ApplicationRecord
 
   end
 
-  def per_piece
+  def available?
+    true
+  end
 
+  def per_piece
+    rand(self.min_piece.to_f..self.max_piece.to_f).round(2)
   end
 
 end

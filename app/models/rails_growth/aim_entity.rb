@@ -20,9 +20,9 @@ class AimEntity < ApplicationRecord
     end
   end
 
-  def reward_xx
-    if reward.amount
-
+  def to_reward
+    if reward.available?
+      self.create_reward_expense(amount: reward.per_piece)
     end
   end
 
