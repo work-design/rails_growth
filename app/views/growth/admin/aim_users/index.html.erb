@@ -1,7 +1,7 @@
 <div class="ui segment breadcrumb">
   <%= link_to 'Back', admin_aims_path, class: 'section' %>
   <div class="divider">/</div>
-  <div class="section"><%= @aim.name %></div>
+  <div class="section"><%= @aim.name %>(<%= @aim.repeat_type_i18n %>)</div>
   <div class="divider">/</div>
   <%= link_to 'Stat', admin_aim_aim_statistics_path(@aim), class: 'section' %>
   <div class="section">/</div>
@@ -10,7 +10,6 @@
 
 <div class="ui top attached borderless menu">
   <div class="header item">Admin Aim Users</div>
-  <div class="item"><%= @aim.repeat_type_i18n %></div>
 </div>
 
 <div class="ui attached segment">
