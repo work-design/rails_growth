@@ -12,7 +12,8 @@ class AimEntity < ApplicationRecord
   validates :user_id, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { ip.blank? }
   validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { user_id.blank? }
 
-  after_create_commit :check_aim_user
+  before_create :check_aim_user
+  after_create_commit :to_reward
 
   def check_aim_user
     if self.user_id
@@ -23,8 +24,8 @@ class AimEntity < ApplicationRecord
   end
 
   def to_reward
-    if reward.available?
-      self.create_reward_expense(reward_id: reward.id, amount: reward.per_piece)
+    if self.user && reward.available?
+      self.reward_expense || self.create_reward_expense(reward_id: reward.id, amount: reward.per_piece)
     end
   end
 

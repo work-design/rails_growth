@@ -6,6 +6,7 @@ class Reward < ApplicationRecord
 
   validates :max_piece, numericality: { greater_than_or_equal_to: -> (o) { o.min_piece } }
   validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
   def compute_amount
     self.income_amount = self.reward_incomes.sum(:amount)
@@ -13,12 +14,8 @@ class Reward < ApplicationRecord
     self.amount = self.income_amount - self.expense_amount
   end
 
-  def pieces
-
-  end
-
   def available?
-    true
+    amount > 0
   end
 
   def per_piece

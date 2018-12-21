@@ -1,18 +1,18 @@
 class AimLog < ApplicationRecord
   belongs_to :aim
   belongs_to :user, optional: true
-  belongs_to :aim_entity_user, ->(o){ where(aim_id: o.aim_id, entity_type: o.entity_type, entity_id: o.entity_id, serial_number: o.serial_number) }, class_name: 'AimEntity', primary_key: :user_id, foreign_key: :user_id, counter_cache: true, optional: true
-  belongs_to :aim_entity_ip, ->(o){ where(aim_id: o.aim_id, entity_type: o.entity_type, entity_id: o.entity_id, serial_number: o.serial_number) }, class_name: 'AimEntity', primary_key: :ip, foreign_key: :ip, counter_cache: true, optional: true
+  belongs_to :aim_entity, ->(o){ where(aim_id: o.aim_id, entity_type: o.entity_type, entity_id: o.entity_id, serial_number: o.serial_number) }, primary_key: :user_id, foreign_key: :user_id, counter_cache: true, optional: true
+  belongs_to :aim_entity_ip, ->(o){ where(user_id: o.user_id, aim_id: o.aim_id, entity_type: o.entity_type, entity_id: o.entity_id, serial_number: o.serial_number) }, class_name: 'AimEntity', primary_key: :ip, foreign_key: :ip, counter_cache: true, optional: true
   belongs_to :entity, polymorphic: true
 
   validates :user_id, presence: true, if: -> { ip.blank? }
   validates :ip, presence: true, if: -> { user_id.blank? }
 
-  after_create_commit :check_aim_user
+  before_create :check_aim_user
 
   def check_aim_user
     if self.user_id
-      self.aim_entity_user || create_aim_entity_user
+      self.aim_entity || create_aim_entity
     elsif self.ip
       self.aim_entity_ip || create_aim_entity_ip
     end

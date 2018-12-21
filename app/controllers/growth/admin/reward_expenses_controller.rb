@@ -1,22 +1,9 @@
 class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
+  before_action :set_reward
   before_action :set_reward_expense, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reward_expenses = RewardExpense.page(params[:page])
-  end
-
-  def new
-    @reward_expense = RewardExpense.new
-  end
-
-  def create
-    @reward_expense = RewardExpense.new(reward_expense_params)
-
-    if @reward_expense.save
-      redirect_to admin_reward_expenses_url, notice: 'Reward expense was successfully created.'
-    else
-      render :new
-    end
+    @reward_expenses = @reward.reward_expenses.page(params[:page])
   end
 
   def show
@@ -35,10 +22,14 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
 
   def destroy
     @reward_expense.destroy
-    redirect_to admin_reward_expenses_url, notice: 'Reward expense was successfully destroyed.'
+    redirect_to admin_reward_reward_expenses_url(@reward), notice: 'Reward expense was successfully destroyed.'
   end
 
   private
+  def set_reward
+    @reward = Reward.find(params[:reward_id])
+  end
+
   def set_reward_expense
     @reward_expense = RewardExpense.find(params[:id])
   end
