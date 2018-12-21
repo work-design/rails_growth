@@ -1,23 +1,14 @@
 class Growth::Admin::AimUsersController < Growth::Admin::BaseController
   before_action :set_aim, only: [:index]
-  before_action :set_aim_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_aim_user, only: [:show, :destroy]
 
   def index
-    @aim_users = @aim.aim_users.includes(:user).page(params[:page])
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.fetch(:q, {}).permit(:ip, :user_id)
+    @aim_users = @aim.aim_users.includes(:user).default_where(q_params).page(params[:page])
   end
 
   def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @aim_user.update(aim_user_params)
-      redirect_to admin_aim_users_url, notice: 'Aim statistic was successfully updated.'
-    else
-      render :edit
-    end
   end
 
   def destroy
@@ -32,16 +23,6 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
 
   def set_aim_user
     @aim_user = AimUser.find(params[:id])
-  end
-
-  def aim_user_params
-    params.fetch(:aim_user, {}).permit(
-      :user,
-      :ip,
-      :serial_number,
-      :state,
-      :aim_users_count
-    )
   end
 
 end

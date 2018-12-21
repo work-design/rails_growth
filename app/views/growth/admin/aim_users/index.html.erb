@@ -38,11 +38,14 @@
       <td><%= aim_user.state %></td>
       <td><%= aim_user.aim_entities_count %></td>
       <td class="ui labels">
-        <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
-          <i class="location arrow icon"></i>
-        <% end %>
-        <%= link_to edit_admin_aim_user_path(aim_user), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
-          <i class="pencil alternate icon"></i>
+        <% if aim_user.user_id %>
+          <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+            <i class="location arrow icon"></i>
+          <% end %>
+        <% else %>
+          <%= link_to admin_aim_aim_entities_path(ip: aim_user.ip), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+            <i class="location arrow icon"></i>
+          <% end %>
         <% end %>
         <%= link_to admin_aim_user_path(aim_user), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
           <i class="times icon"></i>

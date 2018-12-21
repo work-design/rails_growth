@@ -4,7 +4,7 @@
   <div class="section"><%= @aim.name %>(<%= @aim.repeat_type_i18n %>)</div>
   <div class="divider">/</div>
   <%= link_to 'Stat', admin_aim_aim_users_path(@aim), class: 'section' %>
-  <div class="section">/</div>
+  <div class="divider">/</div>
   <div class="action section">Users</div>
 </div>
 
@@ -49,9 +49,6 @@
       <td class="ui labels">
         <%= link_to admin_aim_entity_aim_logs_path(aim_entity), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
-        <% end %>
-        <%= link_to edit_admin_aim_entity_path(aim_entity), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
-          <i class="pencil alternate icon"></i>
         <% end %>
         <%= link_to admin_aim_entity_path(aim_entity), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
           <i class="times icon"></i>

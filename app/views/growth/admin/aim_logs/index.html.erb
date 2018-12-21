@@ -1,7 +1,13 @@
 <div class="ui segment breadcrumb">
-  <%= link_to 'Back', admin_aim_aim_users_path(@aim_user.aim_id), class: 'section' %>
+  <%= link_to 'Back', admin_aims_path, class: 'section' %>
   <div class="divider">/</div>
-  <div class="active section">Edit</div>
+  <div class="section"><%= @aim_entity.aim.name %>(<%= @aim_entity.aim.repeat_type_i18n %>)</div>
+  <div class="divider">/</div>
+  <%= link_to 'Stat', admin_aim_aim_users_path(@aim_entity.aim_id), class: 'section' %>
+  <div class="divider">/</div>
+  <%= link_to 'Entities', admin_aim_aim_entities_path(@aim_entity.aim_id), class: 'section' %>
+  <div class="divider">/</div>
+  <div class="action section">Logs</div>
 </div>
 
 <div class="ui top attached borderless menu">
