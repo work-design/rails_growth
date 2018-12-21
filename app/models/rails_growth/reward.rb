@@ -15,6 +15,7 @@ class Reward < ApplicationRecord
   end
 
   def available?
+    disabled? &&
     amount > 0
   end
 
