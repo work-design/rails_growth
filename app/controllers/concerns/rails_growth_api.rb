@@ -39,9 +39,9 @@ module RailsGrowthApi
     entity_type = controller_name.classify
     entity_id = params.fetch('id', nil)
     b = growth_api(code, entity_type, entity_id)
-    #binding.pry
-    self.response_body = self.response_body.map { |i| {body: i, reward:1 }.to_json }
-
+    
+    body = JSON.parse(self.response_body[0])
+    self.response_body = body.merge(reward: 1).to_json
   end
 
 end
