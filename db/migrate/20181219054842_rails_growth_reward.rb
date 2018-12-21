@@ -27,6 +27,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.references :reward
       t.references :aim_entity
       t.references :aim
+      t.references :user
       t.decimal :amount, precision: 10, scale: 2
       t.timestamps
     end

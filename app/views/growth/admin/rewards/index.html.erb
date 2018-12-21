@@ -30,6 +30,7 @@
         <p><%= Reward.human_attribute_name(:max_piece) %></p>
         <p><%= Reward.human_attribute_name(:max_piece) %></p>
       </th>
+      <th>Log</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -54,8 +55,11 @@
         <p><%= reward.max_piece %></p>
         <p><%= reward.min_piece %></p>
       </td>
+      <td>
+        <p><%= link_to 'incomes', admin_reward_reward_incomes_path(reward) %></p>
+        <p><%= link_to 'expenses', admin_reward_reward_expenses_path(reward) %></p>
+      </td>
       <td class="ui labels">
-        <%= link_to 'incomes', admin_reward_reward_incomes_path(reward) %>
         <%= link_to admin_reward_path(reward), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>

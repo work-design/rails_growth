@@ -1,0 +1,26 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_reward_expenses_path, class: 'section' %>
+  <div class="divider">/</div>
+  <div class="active section">Show</div>
+</div>
+
+<table class="ui very basic large table">
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= RewardExpense.human_attribute_name(:amount) %></td>
+      <td><%= @reward_expense.amount %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= RewardExpense.human_attribute_name(:aim) %></td>
+      <td><%= @reward_expense.aim %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= RewardExpense.human_attribute_name(:aim_entity) %></td>
+      <td><%= @reward_expense.aim_entity %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= RewardExpense.human_attribute_name(:user) %></td>
+      <td><%= @reward_expense.user %></td>
+    </tr>
+  </tbody>
+</table>
