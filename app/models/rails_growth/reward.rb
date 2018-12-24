@@ -4,9 +4,9 @@ class Reward < ApplicationRecord
   has_many :reward_expenses, dependent: :destroy
   has_many :aim_users, ->(o){ where(entity_type: o.entity_type) }, primary_key: :entity_id, foreign_key: :entity_id
 
-  validates :max_piece, numericality: { greater_than_or_equal_to: -> (o) { o.min_piece } }
-  validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }
-  validates :amount, numericality: { greater_than_or_equal_to: 0 }
+  validates :max_piece, numericality: { greater_than_or_equal_to: -> (o) { o.min_piece } }, allow_blank: true
+  validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }, allow_blank: true
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
 
   def compute_amount
     self.income_amount = self.reward_incomes.sum(:amount)

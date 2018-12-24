@@ -5,8 +5,8 @@ module RailsGrowthEntity
     has_many :aim_entities, as: :entity
   end
 
-  def per_reward
-    0.01
+  def init_reward
+    self.reward || self.create_reward
   end
 
 end
