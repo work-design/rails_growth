@@ -9,7 +9,7 @@ module RailsGrowthApi
     aim_ids = AimCode.growth_hash[code]
     return if aim_ids.blank?
 
-    Aim.where(id: aim_ids).map do |aim|
+    r = Aim.where(id: aim_ids).map do |aim|
       if current_user
         present_point = current_user.aim_users.find_by(aim_id: aim.id)&.aim_entities_count.to_i
         if aim.task_point.nil? || aim.task_point >= present_point
@@ -28,6 +28,7 @@ module RailsGrowthApi
       aim_log.save
       aim_log
     end
+    r
   end
 
   def growth_log(code)
@@ -38,8 +39,8 @@ module RailsGrowthApi
     code = [controller_path, action_name].join('#')
     entity_type = controller_name.classify
     entity_id = params.fetch('id', nil)
-    b = growth_api(code, entity_type, entity_id)
-    if b
+    r = growth_api(code, entity_type, entity_id)
+    if r
       body = JSON.parse(self.response_body[0])
       self.response_body = body.merge(reward: 1).to_json
     end

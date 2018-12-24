@@ -9,7 +9,7 @@ class Growth::Api::AimLogsController < Growth::Api::BaseController
     r = growth_log(params[:code])
 
     if r
-      render json: { aim_log: r }, status: :created
+      render json: { aim_log: r, reward: 1 }, status: :created
     else
       render json: { message: 'wrong' }, status: :unprocessable_entity
     end
