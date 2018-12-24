@@ -38,6 +38,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.datetime :last_access_at
       t.inet :ip
       t.integer :aim_logs_count, default: 0
+      t.decimal :reward_amount, precision: 10, scale: 2
       t.timestamps
     end
 
