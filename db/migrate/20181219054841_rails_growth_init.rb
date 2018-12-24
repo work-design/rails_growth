@@ -40,6 +40,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.integer :aim_logs_count, default: 0
       t.references :reward_expense
       t.decimal :reward_amount, precision: 10, scale: 2
+      t.boolean :meaningful
       t.timestamps
     end
 
@@ -49,7 +50,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.references :entity, polymorphic: true
       t.inet :ip
       t.string :code
-      t.boolean :meaningful
+      t.boolean :rewarded
       t.datetime :created_at, null: false
     end
 

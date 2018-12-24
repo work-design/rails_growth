@@ -15,8 +15,8 @@ class AimLog < ApplicationRecord
       if self.aim_entity
         self.aim_entity
       else
-        self.meaningful = true
-        create_aim_entity
+        self.rewarded = true
+        create_aim_entity!
         aim_entity.to_reward
       end
     elsif self.ip

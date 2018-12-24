@@ -11,10 +11,7 @@ module RailsGrowthApi
 
     Aim.where(id: aim_ids).map do |aim|
       if current_user
-        present_point = current_user.aim_users.find_by(aim_id: aim.id)&.aim_entities_count.to_i
-        if aim.task_point.nil? || aim.task_point >= present_point
-          aim_log = current_user.aim_logs.build(aim_id: aim.id)
-        end
+        aim_log = current_user.aim_logs.build(aim_id: aim.id)
       else
         aim_log = AimLog.new(aim_id: aim.id)
       end
@@ -23,7 +20,7 @@ module RailsGrowthApi
       aim_log.entity_type = entity_type
       aim_log.entity_id = entity_id
       aim_log.code = code
-      aim_log.save
+      aim_log.save!
       aim_log
     end
   end

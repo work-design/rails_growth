@@ -5,10 +5,10 @@ class RewardExpense < ApplicationRecord
   has_one :aim_entity#, inverse_of: :reward_expense
 
   after_save :sync_amount, if: -> { saved_change_to_amount? }
-  # after_initialize if: :new_record? do
-  #   self.aim_id = self.aim_entity&.aim_id
-  #   self.user_id = self.aim_entity&.user_id
-  # end
+  after_initialize if: :new_record? do
+    self.aim_id = self.aim_entity&.aim_id
+    self.user_id = self.aim_entity&.user_id
+  end
 
   def sync_amount
     reward.reload

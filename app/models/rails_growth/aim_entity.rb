@@ -16,13 +16,16 @@ class AimEntity < ApplicationRecord
   def check_aim_user
     if self.user_id
       self.aim_user || create_aim_user
+      if aim.task_point.nil? || aim.task_point >= aim_user.aim_entities_count.to_i
+        self.meaningful = true
+      end
     end
   end
 
   def to_reward
     if self.user && reward&.available?
       self.reward_amount = reward.per_piece
-      self.reward_expense || self.create_reward_expense(reward_id: reward.id, amount: self.reward_amount)
+      self.reward_expense || self.create_reward_expense!(reward_id: reward.id, amount: self.reward_amount)
     end
   end
 
