@@ -11,8 +11,12 @@ module RailsGrowthApi
 
     Aim.where(id: aim_ids).map do |aim|
       if current_user
+        sn = SerialNumberHelper.result(Time.now, aim.repeat_type)
+        au = current_user.aim_users.find_by(aim_id: aim.id, serial_number: sn)
+        next if au.done?
         aim_log = current_user.aim_logs.build(aim_id: aim.id)
       else
+        next unless aim.verbose
         aim_log = AimLog.new(aim_id: aim.id)
       end
 

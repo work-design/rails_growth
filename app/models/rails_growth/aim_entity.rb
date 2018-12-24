@@ -16,9 +16,6 @@ class AimEntity < ApplicationRecord
   def check_aim_user
     if self.user_id
       self.aim_user || create_aim_user
-      if aim.task_point.nil? || aim.task_point >= aim_user.aim_entities_count.to_i
-        self.meaningful = true
-      end
     end
   end
 

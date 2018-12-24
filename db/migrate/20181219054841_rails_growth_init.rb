@@ -3,11 +3,12 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
 
     create_table :aims do |t|
       t.string :name
-      t.integer :task_point
-      t.integer :reward_point, default: 1
+      t.integer :task_point, default: 0
+      t.integer :reward_point, default: 0
       t.string :unit
       t.integer :score
       t.string :repeat_type
+      t.boolean :verbose
       t.timestamps
     end
 
@@ -40,7 +41,6 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.integer :aim_logs_count, default: 0
       t.references :reward_expense
       t.decimal :reward_amount, precision: 10, scale: 2
-      t.boolean :meaningful
       t.timestamps
     end
 

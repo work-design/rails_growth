@@ -10,4 +10,12 @@ class AimUser < ApplicationRecord
     done: 'done'
   }
 
+  before_save :check_state
+
+  def check_state
+    if aim.task_point >= aim_user.aim_entities_count.to_i
+      self.state = 'done'
+    end
+  end
+
 end
