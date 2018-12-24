@@ -10,8 +10,4 @@ class AimUser < ApplicationRecord
     done: 'done'
   }
 
-  validates :user_id, presence: true, uniqueness: { scope: [:aim_id, :serial_number] }, if: -> { ip.blank? }
-  validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number] }, if: -> { user_id.blank? }
-
-
 end

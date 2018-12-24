@@ -64,7 +64,6 @@ class Growth::Admin::AimsController < Growth::Admin::BaseController
       :unit,
       :score,
       :repeat_type,
-      :params,
       aim_codes_attributes: {}
     )
   end
