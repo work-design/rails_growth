@@ -32,5 +32,12 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
+    create_table :coin_logs do |t|
+      t.references :source, polymorphic: true
+      t.string :title
+      t.decimal :amount, precision: 10, scale: 2
+      t.timestamps
+    end
+
   end
 end

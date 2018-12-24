@@ -16,6 +16,11 @@ class AimEntity < ApplicationRecord
   def check_aim_user
     if self.user_id
       self.aim_user || create_aim_user
+      self.aim_user.state = 'done'
+
+      # if aim.task_point <= aim_user.aim_entities_count.to_i
+      #   self.aim_user.state = 'done'
+      # end
     end
   end
 
