@@ -26,7 +26,6 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
 
     create_table :reward_expenses do |t|
       t.references :reward
-      t.references :aim_entity
       t.references :aim
       t.references :user
       t.decimal :amount, precision: 10, scale: 2

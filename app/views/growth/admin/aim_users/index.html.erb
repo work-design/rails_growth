@@ -17,7 +17,6 @@
     <tr>
       <th><%= AimUser.human_attribute_name(:id) %></th>
       <th><%= AimUser.human_attribute_name(:user) %></th>
-      <th><%= AimUser.human_attribute_name(:ip) %></th>
       <th><%= AimUser.human_attribute_name(:serial_number) %></th>
       <th><%= AimUser.human_attribute_name(:state) %></th>
       <th><%= AimUser.human_attribute_name(:aim_entities_count) %></th>
@@ -33,7 +32,6 @@
           <%= link_to aim_user.user.name, admin_user_path(aim_user.user_id) %>
         <% end %>
       </td>
-      <td><%= aim_user.ip %></td>
       <td><%= aim_user.serial_number %></td>
       <td><%= aim_user.state %></td>
       <td><%= aim_user.aim_entities_count %></td>

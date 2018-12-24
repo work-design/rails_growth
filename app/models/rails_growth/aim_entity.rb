@@ -6,13 +6,12 @@ class AimEntity < ApplicationRecord
   has_many :aim_logs, ->(o){ where(user_id: o.user_id, entity_type: o.entity_type, entity_id: o.entity_id) }, foreign_key: :aim_id, primary_key: :aim_id
 
   belongs_to :reward, ->(o){ where(entity_type: o.entity_type) }, primary_key: :entity_id, foreign_key: :entity_id, optional: true
-  has_one :reward_expense
+  belongs_to :reward_expense, inverse_of: :aim_entity, optional: true
 
   validates :user_id, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { ip.blank? }
   validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { user_id.blank? }
 
   before_create :check_aim_user
-  before_create :to_reward
 
   def check_aim_user
     if self.user_id

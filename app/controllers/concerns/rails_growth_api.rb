@@ -9,13 +9,11 @@ module RailsGrowthApi
     aim_ids = AimCode.growth_hash[code]
     return if aim_ids.blank?
 
-    r = Aim.where(id: aim_ids).map do |aim|
+    Aim.where(id: aim_ids).map do |aim|
       if current_user
         present_point = current_user.aim_users.find_by(aim_id: aim.id)&.aim_entities_count.to_i
         if aim.task_point.nil? || aim.task_point >= present_point
           aim_log = current_user.aim_logs.build(aim_id: aim.id)
-        else
-          next
         end
       else
         aim_log = AimLog.new(aim_id: aim.id)
@@ -28,7 +26,6 @@ module RailsGrowthApi
       aim_log.save
       aim_log
     end
-    r
   end
 
   def growth_log(code)
@@ -40,13 +37,15 @@ module RailsGrowthApi
     entity_type = controller_name.classify
     entity_id = params.fetch('id', nil)
     r = growth_api(code, entity_type, entity_id)
-    growth_response(r)
+    growth_response(r) if r
   end
 
   def growth_response(r)
-    if r
+    reward_amount = r.select(&:meaningful).sum { |i| i.aim_entity.reward_amount }
+
+    if reward_amount > 0
       body = JSON.parse(self.response_body[0])
-      self.response_body = body.merge(reward: 1).to_json
+      self.response_body = body.merge(reward: reward_amount).to_json
     end
   end
 

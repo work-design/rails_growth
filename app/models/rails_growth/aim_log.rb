@@ -12,7 +12,13 @@ class AimLog < ApplicationRecord
 
   def check_aim_user
     if self.user_id
-      self.aim_entity || create_aim_entity
+      if self.aim_entity
+        self.aim_entity
+      else
+        self.meaningful = true
+        create_aim_entity
+        aim_entity.to_reward
+      end
     elsif self.ip
       self.aim_entity_ip || create_aim_entity_ip
     end

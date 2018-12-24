@@ -9,4 +9,8 @@ module RailsGrowthEntity
     self.reward || self.create_reward
   end
 
+  def rewardable
+    reward && reward.amount.to_d > 0
+  end
+
 end
