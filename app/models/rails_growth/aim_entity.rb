@@ -13,7 +13,7 @@ class AimEntity < ApplicationRecord
   validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { user_id.blank? }
 
   before_create :check_aim_user
-  after_create_commit :to_reward
+  before_create :to_reward
 
   def check_aim_user
     if self.user_id
