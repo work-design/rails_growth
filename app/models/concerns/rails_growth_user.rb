@@ -15,4 +15,8 @@ module RailsGrowthUser
     self.reward_expenses.sum(:amount)
   end
 
+  def user_coin
+    super ? super : create_user_coin
+  end
+
 end
