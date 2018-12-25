@@ -1,0 +1,8 @@
+<%= form_with model: @user_coin, local: true do |f| %>
+  <%= render 'shared/error_messages', target: @user_coin %>
+  <%= f.text_field :amount %>
+  <%= f.text_field :income_amount %>
+  <%= f.text_field :expense_amount %>
+  <%= f.text_field :user %>
+  <%= f.submit %>
+<% end %>

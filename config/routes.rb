@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   end
 
   scope :api, module: 'growth/api', as: :api do
+    resources :coin_logs, only: [:index] do
+      get :top, on: :collection
+    end
     resources :aim_logs, only: [:create]
     scope ':entity_type/:entity_id' do
       resources :aim_logs, only: [:create]
