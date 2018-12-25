@@ -42,9 +42,10 @@ module RailsGrowthApi
   end
 
   def growth_response(r)
-    reward_amount = r.select(&:meaningful).sum { |i| i.aim_entity.reward_amount }
+    reward_amount = r.select(&:rewarded).sum { |i| i.aim_entity.reward_amount }
 
-    if reward_amount > 0
+    # todo remove for test
+    if reward_amount >= 0
       body = JSON.parse(self.response_body[0])
       self.response_body = body.merge(reward: reward_amount).to_json
     end
