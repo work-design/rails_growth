@@ -6,7 +6,7 @@ class Growth::Api::CoinLogsController < Growth::Api::BaseController
     @user_coin = current_user.user_coin || current_user.create_user_coin
 
     render json: {
-      user_coin: @user_coin.as_json(only: [:amount, :income_amount, :expense_amount]),
+      user_coin: @user_coin.as_json(only: [:amount, :income_amount, :expense_amount], methods: [:today_amount]),
       coin_logs: @coin_logs.as_json(only: [:title, :amount, :created_at])
     }
   end
@@ -14,6 +14,5 @@ class Growth::Api::CoinLogsController < Growth::Api::BaseController
   def top
     @user_coins = UserCoin.order(amount: :desc).page(params[:page])
   end
-
 
 end
