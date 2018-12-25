@@ -13,7 +13,7 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.integer :expenses_count
       t.datetime :start_at
       t.datetime :finish_at
-      t.boolean :disabled, default: true
+      t.boolean :enabled, default: true
       t.timestamps
     end
 

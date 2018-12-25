@@ -7,9 +7,14 @@ class Growth::Api::AimLogsController < Growth::Api::BaseController
 
   def create
     r = growth_log(params[:code])
+    if r.present?
+      @reward_amount = r.select(&:rewarded).sum { |i| i.aim_entity.reward_amount }
+    end
 
-    if r
-      render json: { aim_log: r, reward: 1 }, status: :created
+    if @reward_amount
+      render json: { aim_log: r, reward: @reward_amount }, status: :created
+    elsif @reward_amount.to_i <= 0
+      render json: { aim_log: r }, status: :created
     else
       render json: { message: 'wrong' }, status: :unprocessable_entity
     end

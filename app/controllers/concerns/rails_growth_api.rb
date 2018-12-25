@@ -26,7 +26,7 @@ module RailsGrowthApi
       aim_log.code = code
       aim_log.save!
       aim_log
-    end
+    end.compact
   end
 
   def growth_log(code)
@@ -38,14 +38,13 @@ module RailsGrowthApi
     entity_type = controller_name.classify
     entity_id = params.fetch('id', nil)
     r = growth_api(code, entity_type, entity_id)
-    growth_response(r) if r
+    growth_response(r) if r.present?
   end
 
   def growth_response(r)
     reward_amount = r.select(&:rewarded).sum { |i| i.aim_entity.reward_amount }
 
-    # todo remove for test
-    if reward_amount >= 0
+    if reward_amount > 0
       body = JSON.parse(self.response_body[0])
       self.response_body = body.merge(reward: reward_amount).to_json
     end

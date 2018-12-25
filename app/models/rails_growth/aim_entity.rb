@@ -12,17 +12,25 @@ class AimEntity < ApplicationRecord
   validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { user_id.blank? }
 
   before_create :check_aim_user
+  after_create_commit :sync_aim_user_state
 
   def check_aim_user
-    if self.user_id
-      if self.aim_user
-        if aim.task_point.to_i <= aim_user.aim_entities_count.to_i
-          self.aim_user.update(state: 'done')
-        end
-      else
-        create_aim_user
-      end
+    self.aim_user || create_aim_user if self.user_id
+  end
+
+  def sync_aim_user_state
+    if aim_user.aim_entities_count.to_i >= aim.task_point.to_i
+      self.aim_user.update(state: 'done')
     end
+    if reward_expense_id
+      sync_aim_and_user
+    end
+  end
+
+  def sync_aim_and_user
+    reward_expense.aim_id = self.aim_id
+    reward_expense.user_id = self.user_id
+    reward_expense.save
   end
 
   def to_reward

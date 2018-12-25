@@ -52,7 +52,7 @@ class Growth::Admin::RewardsController < Growth::Admin::BaseController
       :min_piece,
       :start_at,
       :finish_at,
-      :disabled
+      :enabled
     )
   end
 

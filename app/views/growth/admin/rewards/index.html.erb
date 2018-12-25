@@ -30,7 +30,7 @@
         <p><%= Reward.human_attribute_name(:max_piece) %></p>
         <p><%= Reward.human_attribute_name(:max_piece) %></p>
       </th>
-      <th><%= Reward.human_attribute_name(:disabled) %></th>
+      <th><%= Reward.human_attribute_name(:enabled) %></th>
       <th>Log</th>
       <th>Actions</th>
     </tr>
@@ -58,7 +58,7 @@
       </td>
       <td>
         <div class="ui toggle checkbox">
-          <%= check_box_tag '[reward]disabled', nil, reward.disabled, data: { method: :patch, remote: true, params: "[reward]disabled=#{!reward.disabled}", url: admin_reward_path(reward), submit: true }, id: nil %>
+          <%= check_box_tag '[reward]enabled', nil, reward.enabled, data: { method: :patch, remote: true, params: "[reward]enabled=#{!reward.enabled}", url: admin_reward_path(reward), submit: true }, id: nil %>
         </div>
       </td>
       <td>
