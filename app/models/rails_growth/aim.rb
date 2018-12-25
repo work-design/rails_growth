@@ -1,4 +1,5 @@
 class Aim < ApplicationRecord
+  attribute :verbose, :boolean
   has_many :aim_codes, dependent: :delete_all
   has_many :aim_users, dependent: :nullify
   has_many :aim_entities, dependent: :nullify
