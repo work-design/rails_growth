@@ -45,6 +45,7 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.decimal :amount, precision: 10, scale: 2
       t.decimal :income_amount, precision: 10, scale: 2
       t.decimal :expense_amount, precision: 10, scale: 2
+      t.integer :position, default: 1
       t.timestamps
     end
 

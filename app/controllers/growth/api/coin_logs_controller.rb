@@ -8,6 +8,9 @@ class Growth::Api::CoinLogsController < Growth::Api::BaseController
 
   def top
     @user_coins = UserCoin.order(amount: :desc).page(params[:page])
+    if current_user
+      @user_coin = current_user.user_coin || current_user.create_user_coin
+    end
   end
 
 end
