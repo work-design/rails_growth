@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       resources :reward_incomes
       resources :reward_expenses
     end
+    resources :coins
+    resources :coin_logs
   end
 
   scope :api, module: 'growth/api', as: :api do

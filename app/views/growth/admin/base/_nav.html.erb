@@ -12,5 +12,15 @@
       <%= link_to '赏金管理', admin_rewards_path, class: active_helper(controllers: 'rewards') %>
     </div>
   </div>
+  <div class="item ui dropdown">
+    <a class="<%= active_helper(controllers: ['coins', 'coin_logs'], active_class: 'title active', item_class: 'title') %>">
+      <i class="alarm outline icon"></i>
+      <span>金币</span>
+    </a>
+    <div class="<%= active_helper(controllers: ['coins', 'coin_logs'], active_class: 'menu content active', item_class: 'menu content') %>">
+      <%= link_to '金币管理', admin_coins_path, class: active_helper(controllers: 'coins') %>
+      <%= link_to '金币明细', admin_coin_logs_path, class: active_helper(controllers: 'coin_logs') %>
+    </div>
+  </div>
 </div>
 

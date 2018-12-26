@@ -1,0 +1,30 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_coin_logs_path, class: 'section' %>
+  <div class="divider">/</div>
+  <div class="active section">Show</div>
+</div>
+
+<table class="ui very basic large table">
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= CoinLog.human_attribute_name(:title) %></td>
+      <td><%= @coin_log.title %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= CoinLog.human_attribute_name(:amount) %></td>
+      <td><%= @coin_log.amount %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= CoinLog.human_attribute_name(:user) %></td>
+      <td><%= @coin_log.user %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= CoinLog.human_attribute_name(:source_type) %></td>
+      <td><%= @coin_log.source_type %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= CoinLog.human_attribute_name(:source_id) %></td>
+      <td><%= @coin_log.source_id %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,9 @@
+<%= form_with model: @coin_log, local: true do |f| %>
+  <%= render 'shared/error_messages', target: @coin_log %>
+  <%= f.text_field :title %>
+  <%= f.text_field :amount %>
+  <%= f.text_field :user %>
+  <%= f.text_field :source_type %>
+  <%= f.text_field :source_id %>
+  <%= f.submit %>
+<% end %>
