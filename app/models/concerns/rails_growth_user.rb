@@ -1,7 +1,7 @@
 module RailsGrowthUser
   extend ActiveSupport::Concern
   included do
-    has_one :user_coin
+    has_one :coin
 
     has_many :aim_users, dependent: :destroy
     has_many :aim_entities, dependent: :nullify
@@ -15,8 +15,8 @@ module RailsGrowthUser
     self.reward_expenses.sum(:amount)
   end
 
-  def user_coin
-    super ? super : create_user_coin
+  def coin
+    super ? super : create_coin
   end
 
 end

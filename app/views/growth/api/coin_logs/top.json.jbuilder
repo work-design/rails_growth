@@ -1,5 +1,5 @@
 if current_user
-  json.user_coin @user_coin, partial: 'user_coin', as: :user_coin
+  json.coin @coin, partial: 'coin', as: :coin
 end
-json.user_coins @user_coins, partial: 'user_coin', as: :user_coin
-json.partial! 'api/shared/pagination', items: @user_coins
+json.coins @coins, partial: 'coin', as: :coin
+json.partial! 'api/shared/pagination', items: @coins
