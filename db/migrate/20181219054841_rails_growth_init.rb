@@ -37,7 +37,11 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.string :state
       t.string :serial_number
       t.datetime :last_access_at
-      t.inet :ip
+      if connection.adapter_name == 'PostgreSQL'
+        t.inet :ip
+      else
+        t.string :ip
+      end
       t.integer :aim_logs_count, default: 0
       t.references :reward_expense
       t.decimal :reward_amount, precision: 10, scale: 2
@@ -48,7 +52,11 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.references :aim
       t.references :user
       t.references :entity, polymorphic: true
-      t.inet :ip
+      if connection.adapter_name == 'PostgreSQL'
+        t.inet :ip
+      else
+        t.string :ip
+      end
       t.string :code
       t.boolean :rewarded
       t.datetime :created_at, null: false
