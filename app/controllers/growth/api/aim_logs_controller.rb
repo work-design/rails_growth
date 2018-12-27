@@ -12,7 +12,11 @@ class Growth::Api::AimLogsController < Growth::Api::BaseController
     end
 
     if @reward_amount.to_d > 0
-      render json: { aim_logs: r, reward: @reward_amount }, status: :created
+      reward = {
+        amount: @reward_amount,
+        code: 'success'
+      }
+      render json: { aim_logs: r, reward: reward }, status: :created
     elsif r.present?
       render json: { aim_logs: r }, status: :created
     else
