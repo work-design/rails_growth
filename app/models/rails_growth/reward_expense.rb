@@ -15,13 +15,9 @@ class RewardExpense < ApplicationRecord
   end
 
   def sync_to_coin
-    init_coin
+    self.coin || create_coin
     coin.compute_amount
     coin.save!
-  end
-
-  def init_coin
-    coin || create_coin
   end
 
   def sync_log

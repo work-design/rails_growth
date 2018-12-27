@@ -24,5 +24,5 @@ $ gem install rails_growth
 ## Contributing
 Contribution directions go here.
 
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+## 依赖
+* [rails_wallet]() 金币兑换到虚拟币功能；
