@@ -9,6 +9,7 @@ module RailsGrowthUser
     has_many :aim_logs
     has_many :reward_expenses
     has_many :coin_logs
+    has_many :coin_cashes
   end
 
   def reward_amount

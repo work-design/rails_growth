@@ -49,5 +49,13 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
+    create_table :coin_cashes do |t|
+      t.references :user
+      t.references :coin
+      t.decimal :coin_amount, precision: 10, scale: 2
+      t.decimal :cash_amount, precision: 10, scale: 2
+      t.timestamps
+    end
+
   end
 end
