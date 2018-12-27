@@ -36,6 +36,7 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.references :user
       t.references :source, polymorphic: true
       t.string :title
+      t.string :tag_str
       t.decimal :amount, precision: 10, scale: 2
       t.timestamps
     end

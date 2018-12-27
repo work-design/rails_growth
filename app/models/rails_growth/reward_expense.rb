@@ -15,7 +15,8 @@ class RewardExpense < ApplicationRecord
 
   def sync_log
     cl = self.coin_log || self.build_coin_log
-    cl.title = self.aim.name
+    cl.title = self.reward.entity&.title
+    cl.tag_str = self.aim.name
     cl.amount = self.amount
     cl.save
   end

@@ -1,6 +1,7 @@
 module RailsGrowthEntity
   extend ActiveSupport::Concern
   included do
+    attribute :title, :string
     has_one :reward, as: :entity
     has_many :aim_entities, as: :entity
   end
