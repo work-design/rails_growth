@@ -14,10 +14,13 @@
     <tr>
       <th><%= CoinLog.human_attribute_name(:id) %></th>
       <th><%= CoinLog.human_attribute_name(:title) %></th>
+      <th><%= CoinLog.human_attribute_name(:tag_str) %></th>
       <th><%= CoinLog.human_attribute_name(:amount) %></th>
       <th><%= CoinLog.human_attribute_name(:user) %></th>
-      <th><%= CoinLog.human_attribute_name(:source_type) %></th>
-      <th><%= CoinLog.human_attribute_name(:source_id) %></th>
+      <th>
+        <p><%= CoinLog.human_attribute_name(:source_type) %></p>
+        <p><%= CoinLog.human_attribute_name(:source_id) %></p>
+      </th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -26,10 +29,15 @@
     <tr>
       <td><%= coin_log.id %></td>
       <td><%= coin_log.title %></td>
+      <td><%= coin_log.tag_str %></td>
       <td><%= coin_log.amount %></td>
-      <td><%= coin_log.user %></td>
-      <td><%= coin_log.source_type %></td>
-      <td><%= coin_log.source_id %></td>
+      <td>
+        <%= link_to coin_log.user.name, admin_user_path(coin_log.user_id) %>
+      </td>
+      <td>
+        <p><%= coin_log.source_type %></p>
+        <p><%= coin_log.source_id %></p>
+      </td>
       <td class="ui labels">
         <%= link_to admin_coin_log_path(coin_log), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>

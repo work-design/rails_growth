@@ -27,7 +27,9 @@
       <td><%= coin.amount %></td>
       <td><%= coin.income_amount %></td>
       <td><%= coin.expense_amount %></td>
-      <td><%= coin.user %></td>
+      <td>
+        <%= link_to coin.user.name, admin_user_path(coin.user_id) %>
+      </td>
       <td class="ui labels">
         <%= link_to admin_coin_path(coin), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>

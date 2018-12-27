@@ -13,6 +13,10 @@ class RewardExpense < ApplicationRecord
     reward.save!
   end
 
+  def sync_to_coin
+    
+  end
+
   def sync_log
     cl = self.coin_log || self.build_coin_log
     cl.title = self.reward.entity&.title
