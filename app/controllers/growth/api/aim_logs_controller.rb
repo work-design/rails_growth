@@ -20,7 +20,8 @@ class Growth::Api::AimLogsController < Growth::Api::BaseController
     elsif r.present?
       render json: { aim_logs: r }, status: :created
     else
-      render json: { message: 'wrong' }, status: :unprocessable_entity
+      # todo
+      render json: { reward: { amount: 0, code: 'over_limit' } }, status: :ok
     end
   end
 

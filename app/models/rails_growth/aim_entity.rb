@@ -34,9 +34,8 @@ class AimEntity < ApplicationRecord
   end
 
   def to_reward
-    if self.user && reward&.available?
-      self.reward_amount = reward.per_piece
-      self.reward_expense || self.create_reward_expense!(reward_id: reward.id, amount: self.reward_amount)
+    if self.user && reward.available?
+      self.reward_expense || self.create_reward_expense!(user_id: user_id, reward_id: reward.id, amount: self.reward_amount)
     end
   end
 
