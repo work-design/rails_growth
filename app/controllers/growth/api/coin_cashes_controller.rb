@@ -1,7 +1,7 @@
 class Growth::Api::CoinCashesController < Growth::Api::BaseController
 
   def index
-    @coin_cashes = CoinCash.all
+    @coin_cashes = current_user.coin_cashes.page(params[:page])
   end
 
   def list

@@ -6,11 +6,20 @@ class CoinWallet < ApplicationRecord
   has_one :wallet_log, as: :source, primary_key: :user_id, foreign_key: :user_id
   has_one :coin_log, as: :source, primary_key: :user_id, foreign_key: :user_id
 
+  enum state: {
+    verified: 'verified',
+    done: 'done'
+  }
+
   after_initialize if: :new_record? do
     self.wallet_amount = self.coin_amount / 100
   end
   after_save :sync_to_coin, if: -> { saved_change_to_coin_amount? }
   after_create_commit :sync_wallet_log, :sync_coin_log
+
+  def title
+    '微信提现'
+  end
 
   def sync_wallet_log
     cl = self.wallet_log || self.build_wallet_log
