@@ -48,7 +48,7 @@ class Growth::Admin::CoinsController < Growth::Admin::BaseController
       :amount,
       :income_amount,
       :expense_amount,
-      :user
+      :position
     )
   end
 

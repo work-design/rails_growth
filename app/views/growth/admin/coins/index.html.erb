@@ -16,6 +16,7 @@
       <th><%= Coin.human_attribute_name(:amount) %></th>
       <th><%= Coin.human_attribute_name(:income_amount) %></th>
       <th><%= Coin.human_attribute_name(:expense_amount) %></th>
+      <th><%= Coin.human_attribute_name(:position) %></th>
       <th><%= Coin.human_attribute_name(:user) %></th>
       <th>Actions</th>
     </tr>
@@ -27,6 +28,7 @@
       <td><%= coin.amount %></td>
       <td><%= coin.income_amount %></td>
       <td><%= coin.expense_amount %></td>
+      <td><%= coin.position %></td>
       <td>
         <%= link_to coin.user.name, admin_user_path(coin.user_id) %>
       </td>
