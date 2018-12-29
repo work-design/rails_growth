@@ -9,6 +9,10 @@ class CoinCash < ApplicationRecord
   after_save :sync_to_coin, if: -> { saved_change_to_coin_amount? }
   after_create_commit :sync_coin_log
 
+  def comment
+    '微信提现'
+  end
+
   def sync_coin_log
     cl = self.coin_log || self.build_coin_log
     cl.title = '提现'

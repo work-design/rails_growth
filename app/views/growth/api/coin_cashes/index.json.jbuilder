@@ -1,1 +1,1 @@
-json.array! @coin_cashes, partial: 'coin_cashes/coin_cash', as: :coin_cash
+json.coin_cashes @coin_cashes, partial: 'coin_cash', as: :coin_cash

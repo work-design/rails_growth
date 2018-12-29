@@ -1,2 +1,13 @@
-json.extract! coin_cash, :id, :coin_amount, :cash_amount, :state, :done_at, :created_at
-json.coin coin_cash.coin, :id, :amount, :expense_amount
+json.extract! coin_cash,
+              :id,
+              :coin_amount,
+              :cash_amount,
+              :state,
+              :comment,
+              :state_i18n,
+              :done_at,
+              :created_at
+json.coin coin_cash.coin,
+          :id,
+          :amount,
+          :expense_amount

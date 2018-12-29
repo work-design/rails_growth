@@ -17,10 +17,6 @@ class CoinWallet < ApplicationRecord
   after_save :sync_to_coin, if: -> { saved_change_to_coin_amount? }
   after_create_commit :sync_wallet_log, :sync_coin_log
 
-  def title
-    '微信提现'
-  end
-
   def sync_wallet_log
     cl = self.wallet_log || self.build_wallet_log
     cl.title = '金币兑换'
