@@ -49,9 +49,11 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
   def reward_expense_params
     q = params.fetch(:reward_expense, {}).permit(
       :amount,
-      :reward_id
+      :reward_id,
+      :user_id
     )
-    q.merge! user_id: current_user.id
+    q.merge! user_id: current_user.id if q[:user_id].blank?
+    q
   end
 
 end

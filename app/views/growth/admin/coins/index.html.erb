@@ -37,7 +37,7 @@
         <%= link_to coin.user.name, admin_user_path(coin.user_id) %>
       </td>
       <td class="ui labels">
-        <%= link_to admin_coin_path(coin), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+        <%= link_to admin_coin_logs_path(coin_id: coin.id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>
         <%= link_to edit_admin_coin_path(coin), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
