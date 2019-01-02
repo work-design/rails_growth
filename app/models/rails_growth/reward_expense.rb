@@ -24,7 +24,7 @@ class RewardExpense < ApplicationRecord
   def sync_to_coin
     return unless user_id
 
-    self.coin || create_coin
+    (self.coin && coin.reload) || create_coin
 
     coin.income_amount += self.amount
 
@@ -38,12 +38,11 @@ class RewardExpense < ApplicationRecord
 
   def sync_log
     return unless user_id
-      cl = self.coin_log || self.build_coin_log
-      cl.title = self.reward.entity&.title
-      cl.tag_str = self.aim&.name
-      cl.amount = self.amount
-      cl.save
-
+    cl = self.coin_log || self.build_coin_log
+    cl.title = self.reward.entity&.title
+    cl.tag_str = self.aim&.name
+    cl.amount = self.amount
+    cl.save
   end
 
 end

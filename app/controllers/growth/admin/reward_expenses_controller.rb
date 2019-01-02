@@ -1,5 +1,4 @@
 class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
-  before_action :set_reward, only: [:new, :create]
   before_action :set_reward_expense, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -9,14 +8,15 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
   end
 
   def new
+    @reward = Reward.find params[:reward_id]
     @reward_expense = @reward.reward_expenses.build
   end
 
   def create
-    @reward_expense = @reward.reward_expenses.build(reward_expense_params)
+    @reward_expense = RewardExpense.new(reward_expense_params)
 
     if @reward_expense.save
-      redirect_to admin_reward_reward_expenses_url(@reward), notice: 'Reward expense was successfully created.'
+      redirect_to admin_reward_expenses_url(reward_id: @reward_expense.reward_id), notice: 'Reward expense was successfully created.'
     else
       render :new
     end
@@ -42,17 +42,14 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
   end
 
   private
-  def set_reward
-    @reward = Reward.find(params[:reward_id])
-  end
-
   def set_reward_expense
     @reward_expense = RewardExpense.find(params[:id])
   end
 
   def reward_expense_params
     q = params.fetch(:reward_expense, {}).permit(
-      :amount
+      :amount,
+      :reward_id
     )
     q.merge! user_id: current_user.id
   end

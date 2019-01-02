@@ -1,5 +1,6 @@
-<%= form_with model: [:admin, @reward, @reward_expense], local: true do |f| %>
+<%= form_with model: [:admin, @reward_expense], local: true do |f| %>
   <%= render 'shared/error_messages', target: @reward_expense %>
+  <%= f.hidden_field :reward_id, valud: @reward.id %>
   <%= f.text_field :amount %>
   <%= f.submit %>
 <% end %>

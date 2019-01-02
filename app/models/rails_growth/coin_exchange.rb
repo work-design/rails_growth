@@ -18,7 +18,7 @@ class CoinExchange < ApplicationRecord
   end
 
   def sync_to_coin
-    self.coin || create_coin
+    (self.coin && coin.reload) || create_coin
 
     coin.expense_amount += self.amount
 
