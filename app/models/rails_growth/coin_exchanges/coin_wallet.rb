@@ -1,15 +1,23 @@
 class CoinWallet < CoinExchange
   alias_attribute :wallet_amount, :amount
 
-  belongs_to :wallet, primary_key: :user_id, foreign_key: :user_id
+  belongs_to :wallet
+  belongs_to :user_wallet, ->{ where(active: true) }, class_name: 'Wallet', primary_key: :user_id, foreign_key: :user_id
   has_one :wallet_log, as: :source
 
   validates :coin_amount, numericality: { greater_than_or_equal_to: 1 }
 
   after_initialize if: :new_record? do
+    self.state = 'done'
     self.wallet_amount = self.coin_amount / 100
+    init_wallet
   end
   after_create_commit :sync_wallet_log
+
+  def init_wallet
+    _wallet = (self.user_wallet) || create_user_wallet
+    self.wallet_id = _wallet.id
+  end
 
   def sync_to_coin
     (self.coin && coin.reload) || create_coin
@@ -22,9 +30,14 @@ class CoinWallet < CoinExchange
       raise ActiveRecord::RecordInvalid.new(coin)
     end
 
-    self.wallet || create_wallet
-    wallet.compute_amount
-    wallet.save!
+    wallet.reload
+    wallet.income_amount += self.amount
+    if wallet.income_amount == wallet.compute_income_amount
+      wallet.save!
+    else
+      wallet.errors.add :income_amount, 'not equal'
+      raise ActiveRecord::RecordInvalid.new(wallet)
+    end
   end
 
   def sync_wallet_log

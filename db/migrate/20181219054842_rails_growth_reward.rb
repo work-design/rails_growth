@@ -53,6 +53,7 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
 
     create_table :coin_exchanges do |t|
       t.references :user
+      t.references :wallet
       t.string :type
       t.decimal :coin_amount, precision: 10, scale: 2
       t.decimal :amount, precision: 10, scale: 2
