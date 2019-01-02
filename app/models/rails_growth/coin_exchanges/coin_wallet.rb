@@ -10,13 +10,9 @@ class CoinWallet < CoinExchange
   after_initialize if: :new_record? do
     self.state = 'done'
     self.wallet_amount = self.coin_amount / 100
-    init_wallet
-  end
-  after_create_commit :sync_wallet_log
-
-  def init_wallet
     self.wallet = (self.user_wallet) || create_user_wallet
   end
+  after_create_commit :sync_wallet_log
 
   def sync_to_coin
     (self.coin && coin.reload) || create_coin
