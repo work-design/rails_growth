@@ -39,6 +39,7 @@ class RewardExpense < ApplicationRecord
   def sync_log
     return unless user_id
     cl = self.coin_log || self.build_coin_log
+    cl.user_id = self.user_id
     cl.title = self.reward.entity&.title
     cl.tag_str = self.aim&.name
     cl.amount = self.amount
