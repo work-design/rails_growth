@@ -4,7 +4,7 @@ class Growth::Admin::CoinLogsController < Growth::Admin::BaseController
   def index
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:user_id)
-    @coin_logs = CoinLog.page(params[:page])
+    @coin_logs = CoinLog.includes(:user).default_where(q_params).page(params[:page])
   end
 
   def new

@@ -4,7 +4,7 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
   def index
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:reward_id, :user_id)
-    @reward_expenses = RewardExpense.default_where(q_params).page(params[:page])
+    @reward_expenses = RewardExpense.includes(:user).default_where(q_params).page(params[:page])
   end
 
   def new
