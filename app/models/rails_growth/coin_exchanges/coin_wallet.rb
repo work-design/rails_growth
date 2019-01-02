@@ -2,7 +2,6 @@ class CoinWallet < CoinExchange
   alias_attribute :wallet_amount, :amount
 
   belongs_to :wallet
-  belongs_to :user_wallet, ->{ where(active: true) }, class_name: 'Wallet', primary_key: :user_id, foreign_key: :user_id
   has_one :wallet_log, as: :source
 
   validates :coin_amount, numericality: { greater_than_or_equal_to: 1 }
@@ -10,7 +9,7 @@ class CoinWallet < CoinExchange
   after_initialize if: :new_record? do
     self.state = 'done'
     self.wallet_amount = self.coin_amount / 100
-    self.wallet = (self.user_wallet) || create_user_wallet
+    self.wallet = user.wallet
   end
   after_create_commit :sync_wallet_log
 
