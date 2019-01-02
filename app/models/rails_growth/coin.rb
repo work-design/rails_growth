@@ -9,6 +9,7 @@ class Coin < ApplicationRecord
   has_many :coin_wallets, primary_key: :user_id, foreign_key: :user_id
 
   validates :user_id, uniqueness: true, presence: true
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
   def today_amount
     td = Date.today
