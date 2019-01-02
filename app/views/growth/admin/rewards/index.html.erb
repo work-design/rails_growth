@@ -63,7 +63,7 @@
       </td>
       <td>
         <p><%= link_to 'incomes', admin_reward_reward_incomes_path(reward) %></p>
-        <p><%= link_to 'expenses', admin_reward_reward_expenses_path(reward) %></p>
+        <p><%= link_to 'expenses', admin_reward_expenses_path(reward_id: reward.id) %></p>
       </td>
       <td class="ui labels">
         <%= link_to admin_reward_path(reward), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>

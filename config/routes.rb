@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     end
     resources :rewards, shallow: true do
       resources :reward_incomes
-      resources :reward_expenses
     end
+    resources :reward_expenses
     resources :coins
     resources :coin_logs
   end

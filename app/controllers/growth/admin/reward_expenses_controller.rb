@@ -1,9 +1,11 @@
 class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
-  before_action :set_reward
+  before_action :set_reward, only: [:new, :create]
   before_action :set_reward_expense, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reward_expenses = @reward.reward_expenses.page(params[:page])
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.permit(:reward_id, :user_id)
+    @reward_expenses = RewardExpense.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -49,9 +51,10 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
   end
 
   def reward_expense_params
-    params.fetch(:reward_expense, {}).permit(
+    q = params.fetch(:reward_expense, {}).permit(
       :amount
     )
+    q.merge! user_id: current_user.id
   end
 
 end
