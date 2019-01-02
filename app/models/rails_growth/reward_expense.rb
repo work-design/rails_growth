@@ -14,7 +14,7 @@ class RewardExpense < ApplicationRecord
     reward.reload
     reward.expense_amount += self.amount
     reward.amount -= self.amount
-    if reward.expense_amount == self.reward_expenses.sum(:amount)
+    if reward.expense_amount == reward.reward_expenses.sum(:amount)
       reward.save!
     else
       reward.errors.add :amount, 'not equal'
@@ -23,17 +23,21 @@ class RewardExpense < ApplicationRecord
   end
 
   def sync_to_coin
-    self.coin || create_coin
-    coin.compute_amount
-    coin.save!
+    if user_id
+      self.coin || create_coin
+      coin.compute_amount
+      coin.save!
+    end
   end
 
   def sync_log
-    cl = self.coin_log || self.build_coin_log
-    cl.title = self.reward.entity&.title
-    cl.tag_str = self.aim.name
-    cl.amount = self.amount
-    cl.save
+    if user_id
+      cl = self.coin_log || self.build_coin_log
+      cl.title = self.reward.entity&.title
+      cl.tag_str = self.aim&.name
+      cl.amount = self.amount
+      cl.save
+    end
   end
 
 end

@@ -6,6 +6,20 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
     @reward_expenses = @reward.reward_expenses.page(params[:page])
   end
 
+  def new
+    @reward_expense = @reward.reward_expenses.build
+  end
+
+  def create
+    @reward_expense = @reward.reward_expenses.build(reward_expense_params)
+
+    if @reward_expense.save
+      redirect_to admin_reward_reward_expenses_url(@reward), notice: 'Reward expense was successfully created.'
+    else
+      render :new
+    end
+  end
+
   def show
   end
 
@@ -36,10 +50,7 @@ class Growth::Admin::RewardExpensesController < Growth::Admin::BaseController
 
   def reward_expense_params
     params.fetch(:reward_expense, {}).permit(
-      :amount,
-      :aim,
-      :aim_entity,
-      :user
+      :amount
     )
   end
 
