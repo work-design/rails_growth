@@ -5,6 +5,7 @@ class Coin < ApplicationRecord
   belongs_to :user
   has_many :coin_logs, primary_key: :user_id, foreign_key: :user_id
   has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
+  has_many :coin_exchanges, primary_key: :user_id, foreign_key: :user_id
   has_many :coin_cashes, primary_key: :user_id, foreign_key: :user_id
   has_many :coin_wallets, primary_key: :user_id, foreign_key: :user_id
 
@@ -18,9 +19,8 @@ class Coin < ApplicationRecord
 
   def compute_amount
     self.income_amount = self.reward_expenses.sum(:amount)
-    cash_sum = self.coin_cashes.sum(:coin_amount)
-    wallet_sum = self.coin_wallets.sum(:coin_amount)
-    self.expense_amount = cash_sum + wallet_sum
+    exchange_sum = self.coin_exchanges.sum(:coin_amount)
+    self.expense_amount = exchange_sum
     self.amount = self.income_amount - self.expense_amount
   end
 

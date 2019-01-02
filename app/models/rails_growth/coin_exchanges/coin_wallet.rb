@@ -1,21 +1,13 @@
-class CoinWallet < ApplicationRecord
-  belongs_to :user
-  belongs_to :coin, primary_key: :user_id, foreign_key: :user_id
+class CoinWallet < Coinchange
+  alias_attribute :wallet_amount, :amount
+
   belongs_to :wallet, primary_key: :user_id, foreign_key: :user_id
-
   has_one :wallet_log, as: :source, primary_key: :user_id, foreign_key: :user_id
-  has_one :coin_log, as: :source, primary_key: :user_id, foreign_key: :user_id
-
-  enum state: {
-    verified: 'verified',
-    done: 'done'
-  }
 
   after_initialize if: :new_record? do
     self.wallet_amount = self.coin_amount / 100
   end
-  after_save :sync_to_coin, if: -> { saved_change_to_coin_amount? }
-  after_create_commit :sync_wallet_log, :sync_coin_log
+  after_create_commit :sync_wallet_log
 
   def sync_wallet_log
     cl = self.wallet_log || self.build_wallet_log

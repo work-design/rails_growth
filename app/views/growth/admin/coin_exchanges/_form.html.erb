@@ -1,0 +1,11 @@
+<%= form_with model: @coin_exchange, local: true do |f| %>
+  <%= render 'shared/error_messages', target: @coin_exchange %>
+  <%= f.text_field :type %>
+  <%= f.text_field :coin_amount %>
+  <%= f.text_field :amount %>
+  <%= f.text_field :user %>
+  <%= f.text_field :state %>
+  <%= f.text_field :done_at %>
+  <%= f.text_field :created_at %>
+  <%= f.submit %>
+<% end %>

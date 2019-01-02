@@ -26,8 +26,12 @@
     <tr>
       <td><%= coin.id %></td>
       <td><%= coin.amount %></td>
-      <td><%= coin.income_amount %></td>
-      <td><%= coin.expense_amount %></td>
+      <td>
+        <%= link_to coin.income_amount, admin_reward_expenses_path(user_id: coin.user_id) %>
+      </td>
+      <td>
+        <%= link_to coin.expense_amount, admin_coin_exchanges_path(user_id: coin.user_id) %>
+      </td>
       <td><%= coin.position %></td>
       <td>
         <%= link_to coin.user.name, admin_user_path(coin.user_id) %>

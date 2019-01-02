@@ -2,6 +2,8 @@ class Growth::Admin::CoinLogsController < Growth::Admin::BaseController
   before_action :set_coin_log, only: [:show, :edit, :update, :destroy]
 
   def index
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.permit(:user_id)
     @coin_logs = CoinLog.page(params[:page])
   end
 
@@ -47,7 +49,6 @@ class Growth::Admin::CoinLogsController < Growth::Admin::BaseController
     params.fetch(:coin_log, {}).permit(
       :title,
       :amount,
-      :user,
       :source_type,
       :source_id
     )

@@ -1,7 +1,7 @@
-class CoinCash < ApplicationRecord
+class CoinExchange < ApplicationRecord
   attribute :state, :string, default: 'pending'
   belongs_to :user
-  belongs_to :coin, primary_key: :user_id, foreign_key: :user_id
+  belongs_to :coin, primary_key: :user_id, foreign_key: :user_id, inverse_of: :coin_exchanges
   has_one :coin_log, as: :source, primary_key: :user_id, foreign_key: :user_id
 
   enum state: {
@@ -10,22 +10,11 @@ class CoinCash < ApplicationRecord
     done: 'done'
   }
 
-  after_initialize if: :new_record? do
-    self.cash_amount = self.coin_amount / 100
-  end
   after_save :sync_to_coin, if: -> { saved_change_to_coin_amount? }
   after_create_commit :sync_coin_log
 
-  def comment
-    '微信提现'
-  end
-
   def sync_coin_log
-    cl = self.coin_log || self.build_coin_log
-    cl.title = '提现'
-    cl.tag_str = '兑换支出'
-    cl.amount = self.coin_amount
-    cl.save
+
   end
 
   def sync_to_coin

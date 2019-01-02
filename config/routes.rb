@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
     resources :reward_expenses
     resources :coins
+    resources :coin_exchanges
     resources :coin_logs
   end
 
