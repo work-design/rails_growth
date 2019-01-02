@@ -16,5 +16,5 @@ class CoinCash < CoinExchange
     cl.amount = self.coin_amount
     cl.save
   end
-  
+
 end

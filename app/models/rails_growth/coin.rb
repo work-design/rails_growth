@@ -12,15 +12,14 @@ class Coin < ApplicationRecord
   validates :user_id, uniqueness: true, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
+  before_save :compute_amount
+
   def today_amount
     td = Date.today
     self.coin_logs.default_where('created_at-gte': td.beginning_of_day, 'created_at-lt': (td + 1).beginning_of_day).sum(:amount)
   end
 
   def compute_amount
-    self.income_amount = self.reward_expenses.sum(:amount)
-    exchange_sum = self.coin_exchanges.sum(:coin_amount)
-    self.expense_amount = exchange_sum
     self.amount = self.income_amount - self.expense_amount
   end
 

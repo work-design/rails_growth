@@ -7,7 +7,6 @@ class RewardIncome < ApplicationRecord
   def sync_amount
     reward.reload
     reward.income_amount += self.amount
-    reward.amount += self.amount
     if reward.income_amount == reward.reward_incomes.sum(:amount)
       reward.save!
     else

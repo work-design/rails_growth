@@ -19,8 +19,15 @@ class CoinExchange < ApplicationRecord
 
   def sync_to_coin
     self.coin || create_coin
-    coin.compute_amount
-    coin.save!
+
+    coin.expense_amount += self.amount
+
+    if coin.expense_amount == coin.coin_exchanges.sum(:coin_amount)
+      coin.save!
+    else
+      coin.errors.add :income_amount, 'not equal'
+      raise ActiveRecord::RecordInvalid.new(coin)
+    end
   end
 
 end
