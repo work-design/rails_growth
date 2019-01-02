@@ -6,12 +6,20 @@ class RewardExpense < ApplicationRecord
   belongs_to :aim, optional: true
   has_one :aim_entity, inverse_of: :reward_expense
 
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }
+
   after_save :sync_amount, :sync_to_coin, if: -> { saved_change_to_amount? }
 
   def sync_amount
     reward.reload
-    reward.compute_amount
-    reward.save!
+    reward.expense_amount += self.amount
+    reward.amount -= self.amount
+    if reward.expense_amount == self.reward_expenses.sum(:amount)
+      reward.save!
+    else
+      reward.errors.add :amount, 'not equal'
+      raise ActiveRecord::RecordInvalid.new(reward)
+    end
   end
 
   def sync_to_coin

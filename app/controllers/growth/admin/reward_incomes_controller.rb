@@ -36,7 +36,7 @@ class Growth::Admin::RewardIncomesController < Growth::Admin::BaseController
 
   def destroy
     @reward_income.destroy
-    redirect_to admin_reward_incomes_url, notice: 'Reward income was successfully destroyed.'
+    redirect_to admin_reward_reward_incomes_url(@reward_income.reward_id), notice: 'Reward income was successfully destroyed.'
   end
 
   private

@@ -8,10 +8,10 @@ class Reward < ApplicationRecord
   validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }, allow_blank: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
 
+  before_save :compute_amount, if: -> { income_amount_changed? || expense_amount_changed? }
+
   def compute_amount
-    self.income_amount = self.reward_incomes.sum(:amount)
-    self.expense_amount = self.reward_expenses.sum(:amount)
-    self.amount = self.income_amount - self.expense_amount
+    self.amount = income_amount - expense_amount
   end
 
   def available?
