@@ -13,7 +13,8 @@ module RailsGrowthApi
       if current_user
         sn = SerialNumberHelper.result(Time.now, aim.repeat_type)
         au = current_user.aim_users.find_by(aim_id: aim.id, serial_number: sn)
-        next if au&.done?
+        ae = current_user.aim_entities.find_by(aim_id: aim.id, serial_number: sn, entity_type: entity_type, entity_id: entity_id)
+        next if au&.task_done? && ae
         aim_log = current_user.aim_logs.build(aim_id: aim.id)
       else
         next unless aim.verbose
