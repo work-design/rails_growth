@@ -15,8 +15,7 @@ class CoinWallet < CoinExchange
   after_create_commit :sync_wallet_log
 
   def init_wallet
-    _wallet = (self.user_wallet) || create_user_wallet
-    self.wallet_id = _wallet.id
+    self.wallet = (self.user_wallet) || create_user_wallet
   end
 
   def sync_to_coin
@@ -51,7 +50,6 @@ class CoinWallet < CoinExchange
 
   def sync_coin_log
     cl = self.coin_log || self.build_coin_log
-    cl.user_id = self.user_id
     cl.title = '兑换虚拟币'
     cl.tag_str = '兑换支出'
     cl.amount = self.coin_amount

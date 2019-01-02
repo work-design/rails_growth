@@ -13,7 +13,6 @@ class CoinCash < CoinExchange
 
   def sync_coin_log
     cl = self.coin_log || self.build_coin_log
-    cl.user_id = self.user_id
     cl.title = '提现'
     cl.tag_str = '兑换支出'
     cl.amount = -self.coin_amount

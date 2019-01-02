@@ -2,7 +2,7 @@ class CoinExchange < ApplicationRecord
   attribute :state, :string, default: 'pending'
   belongs_to :user
   belongs_to :coin, primary_key: :user_id, foreign_key: :user_id, inverse_of: :coin_exchanges
-  has_one :coin_log, as: :source
+  has_one :coin_log, ->(o) { where(user_id: o.user_id) }, as: :source
 
   enum state: {
     pending: 'pending',
