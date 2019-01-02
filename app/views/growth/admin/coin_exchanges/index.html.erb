@@ -18,8 +18,10 @@
       <th><%= CoinExchange.human_attribute_name(:amount) %></th>
       <th><%= CoinExchange.human_attribute_name(:user) %></th>
       <th><%= CoinExchange.human_attribute_name(:state) %></th>
-      <th><%= CoinExchange.human_attribute_name(:done_at) %></th>
-      <th><%= CoinExchange.human_attribute_name(:created_at) %></th>
+      <th>
+        <p><%= CoinExchange.human_attribute_name(:created_at) %></p>
+        <p><%= CoinExchange.human_attribute_name(:done_at) %></p>
+      </th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -30,10 +32,14 @@
       <td><%= coin_exchange.type %></td>
       <td><%= coin_exchange.coin_amount %></td>
       <td><%= coin_exchange.amount %></td>
-      <td><%= coin_exchange.user %></td>
+      <td>
+        <%= link_to coin_exchange.user.name, admin_user_path(coin_exchange.user_id) %>
+      </td>
       <td><%= coin_exchange.state %></td>
-      <td><%= coin_exchange.done_at %></td>
-      <td><%= coin_exchange.created_at %></td>
+      <td>
+        <p><time><%= coin_exchange.created_at.to_s(:rfc822) %></time></p>
+        <p><time><%= coin_exchange.done_at.to_s(:rfc822) if coin_exchange.done_at %></time></p>
+      </td>
       <td class="ui labels">
         <%= link_to admin_coin_exchange_path(coin_exchange), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>

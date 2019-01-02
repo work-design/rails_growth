@@ -2,7 +2,7 @@ class CoinExchange < ApplicationRecord
   attribute :state, :string, default: 'pending'
   belongs_to :user
   belongs_to :coin, primary_key: :user_id, foreign_key: :user_id, inverse_of: :coin_exchanges
-  has_one :coin_log, as: :source, primary_key: :user_id, foreign_key: :user_id
+  has_one :coin_log, as: :source
 
   enum state: {
     pending: 'pending',
@@ -20,8 +20,7 @@ class CoinExchange < ApplicationRecord
   def sync_to_coin
     (self.coin && coin.reload) || create_coin
 
-    coin.expense_amount += self.amount
-
+    coin.expense_amount += self.coin_amount
     if coin.expense_amount == coin.coin_exchanges.sum(:coin_amount)
       coin.save!
     else
