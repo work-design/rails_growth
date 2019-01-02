@@ -1,4 +1,4 @@
-class CoinWallet < Coinchange
+class CoinWallet < CoinExchange
   alias_attribute :wallet_amount, :amount
 
   belongs_to :wallet, primary_key: :user_id, foreign_key: :user_id
