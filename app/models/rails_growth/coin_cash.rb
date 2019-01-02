@@ -1,7 +1,14 @@
 class CoinCash < ApplicationRecord
+  attribute :state, :string, default: 'pending'
   belongs_to :user
   belongs_to :coin, primary_key: :user_id, foreign_key: :user_id
   has_one :coin_log, as: :source, primary_key: :user_id, foreign_key: :user_id
+
+  enum state: {
+    pending: 'pending',
+    handling: 'handling',
+    done: 'done'
+  }
 
   after_initialize if: :new_record? do
     self.cash_amount = self.coin_amount / 100
