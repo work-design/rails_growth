@@ -16,7 +16,7 @@ class Coin < ApplicationRecord
 
   def today_amount
     td = Date.today
-    self.coin_logs.default_where('created_at-gte': td.beginning_of_day, 'created_at-lt': (td + 1).beginning_of_day).sum(:amount)
+    self.coin_logs.default_where('created_at-gte': td.beginning_of_day, 'created_at-lt': (td + 1).beginning_of_day, 'amount-gte': 0).sum(:amount)
   end
 
   def compute_amount
