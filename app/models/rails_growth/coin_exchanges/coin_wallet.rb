@@ -32,7 +32,7 @@ class CoinWallet < CoinExchange
     wl.user_id = self.user_id
     wl.title = '金币兑换'
     wl.tag_str = '兑换收入'
-    wl.amount = self.wallet_amount
+    wl.amount = -self.wallet_amount
     wl.save
   end
 

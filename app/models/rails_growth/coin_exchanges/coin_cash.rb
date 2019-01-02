@@ -16,7 +16,7 @@ class CoinCash < CoinExchange
     cl.user_id = self.user_id
     cl.title = '提现'
     cl.tag_str = '兑换支出'
-    cl.amount = self.coin_amount
+    cl.amount = -self.coin_amount
     cl.save
   end
 
