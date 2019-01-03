@@ -23,6 +23,11 @@ class Coin < ApplicationRecord
     self.amount = self.income_amount - self.expense_amount
   end
 
+  def reset_amount
+    self.income_amount = self.reward_expenses.sum(:amount)
+    self.expense_amount = self.coin_exchanges.sum(:coin_amount)
+  end
+
   def self.reset_position
     self.order(income_amount: :desc).each.with_index(1) do |item, index|
       item.update_column :position, index

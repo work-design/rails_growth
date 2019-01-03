@@ -19,6 +19,11 @@ class Reward < ApplicationRecord
     amount > 0
   end
 
+  def reset_amount
+    self.income_amount = self.reward_incomes.sum(:amount)
+    self.expense_amount = self.reward_expenses.sum(:amount)
+  end
+
   def per_piece
     rand(self.min_piece.to_f..self.max_piece.to_f).round(2)
   end
