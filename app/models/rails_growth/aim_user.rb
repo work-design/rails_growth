@@ -1,5 +1,5 @@
 class AimUser < ApplicationRecord
-  attribute :state, :string, default: 'doing'
+  attribute :state, :string, default: 'task_doing'
 
   belongs_to :aim, optional: true
   belongs_to :user, optional: true
