@@ -6,6 +6,8 @@ class AimLog < ApplicationRecord
   belongs_to :entity, polymorphic: true, optional: true
   belongs_to :reward, ->(o){ where(entity_type: o.entity_type) }, primary_key: :entity_id, foreign_key: :entity_id, optional: true
 
+  default_scope -> { order(id: :desc) }
+
   validates :user_id, presence: true, if: -> { ip.blank? }
   validates :ip, presence: true, if: -> { user_id.blank? }
 
