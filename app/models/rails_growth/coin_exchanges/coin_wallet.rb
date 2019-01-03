@@ -47,7 +47,7 @@ class CoinWallet < CoinExchange
     cl = self.coin_log || self.build_coin_log
     cl.title = '兑换虚拟币'
     cl.tag_str = '兑换支出'
-    cl.amount = self.coin_amount
+    cl.amount = -self.coin_amount
     cl.save
   end
 
