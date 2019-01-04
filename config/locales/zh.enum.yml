@@ -3,3 +3,6 @@ zh:
     attributes:
       reward_income/type:
         InhouseIncome: 平台运营
+      coin_exchange/type:
+        CoinWallet: 兑换虚拟币
+        CoinCash: 提现

@@ -3,3 +3,6 @@ en:
     attributes:
       reward_income/type:
         InhouseIncome: Inhouse Income
+      coin_exchange/type:
+        CoinWallet: Coin To Wallet
+        CoinCash: Coin To Cash

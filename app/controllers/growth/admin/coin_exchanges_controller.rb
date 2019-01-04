@@ -50,10 +50,9 @@ class Growth::Admin::CoinExchangesController < Growth::Admin::BaseController
       :type,
       :coin_amount,
       :amount,
-      :user,
+      :user_id,
       :state,
-      :done_at,
-      :created_at
+      :done_at
     )
   end
 

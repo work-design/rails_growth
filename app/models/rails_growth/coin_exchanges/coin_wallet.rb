@@ -2,7 +2,7 @@ class CoinWallet < CoinExchange
   alias_attribute :wallet_amount, :amount
 
   belongs_to :wallet
-  has_one :wallet_log, as: :source
+  has_one :wallet_log, ->(o){ where(wallet_id: o.wallet_id) }, as: :source
 
   validates :coin_amount, numericality: { greater_than_or_equal_to: 1 }
 
@@ -36,7 +36,6 @@ class CoinWallet < CoinExchange
 
   def sync_wallet_log
     wl = self.wallet_log || self.build_wallet_log
-    wl.user_id = self.user_id
     wl.title = '金币兑换'
     wl.tag_str = '兑换收入'
     wl.amount = -self.wallet_amount
