@@ -6,3 +6,18 @@ en:
       coin_exchange/type:
         CoinWallet: Coin To Wallet
         CoinCash: Coin To Cash
+  coin_log:
+    income:
+      coin_wallet:
+        title:
+        tag_str:
+    expense:
+      coin_wallet:
+        title: 金币兑换氧育币
+        tag_str: 兑换支出
+  wallet_log:
+    income:
+      coin_wallet:
+        title: 金币兑换氧育币
+        tag_str: 兑换收入
+    expense:
