@@ -26,8 +26,8 @@ class AimLog < ApplicationRecord
   end
 
   def check_reward
-    self.rewarded = true
     if user && reward&.available?
+      self.rewarded = true
       create_aim_entity!(reward_amount: reward.per_piece)
       aim_entity.to_reward
     end
