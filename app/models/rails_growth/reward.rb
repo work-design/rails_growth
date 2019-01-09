@@ -22,6 +22,12 @@ class Reward < ApplicationRecord
   def reset_amount
     self.income_amount = self.reward_incomes.sum(:amount)
     self.expense_amount = self.reward_expenses.sum(:amount)
+    self.changes
+  end
+
+  def reset_amount!
+    self.reset_amount
+    self.save
   end
 
   def per_piece
