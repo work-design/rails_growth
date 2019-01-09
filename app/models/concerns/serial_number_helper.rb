@@ -12,6 +12,9 @@ module SerialNumberHelper
     when 'yearly'
       year = timestamp.year
       number = ''
+    when 'forever'
+      year = timestamp.year
+      number = timestamp.to_i
     else
       year = ''
       number = ''
