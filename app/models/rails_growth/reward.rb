@@ -1,4 +1,8 @@
 class Reward < ApplicationRecord
+
+  attribute :income_amount, :decimal, default: 0
+  attribute :expense_amount, :decimal, default: 0
+
   belongs_to :entity, polymorphic: true
   has_many :reward_incomes, dependent: :destroy
   has_many :reward_expenses, dependent: :destroy
