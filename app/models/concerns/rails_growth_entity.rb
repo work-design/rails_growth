@@ -11,7 +11,7 @@ module RailsGrowthEntity
   end
 
   def rewardable
-    reward && reward.amount.to_d > 0
+    reward.present? && reward.amount.to_d > 0
   end
 
 end
