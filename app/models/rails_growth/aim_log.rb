@@ -30,6 +30,8 @@ class AimLog < ApplicationRecord
       self.rewarded = true
       create_aim_entity!(reward_amount: reward.per_piece)
       aim_entity.to_reward
+    else
+      self.create_aim_entity!
     end
   end
 
