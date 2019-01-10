@@ -3,7 +3,7 @@ class Growth::Admin::AimLogsController < Growth::Admin::BaseController
 
   def index
     @aim_entity = AimEntity.find(params[:aim_entity_id])
-    @aim_logs = @aim_entity.aim_logs.page(params[:page])
+    @aim_logs = @aim_entity.aim_logs.order(id: :desc).page(params[:page])
   end
 
   def destroy

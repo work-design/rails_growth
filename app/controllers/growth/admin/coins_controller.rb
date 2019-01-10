@@ -2,7 +2,7 @@ class Growth::Admin::CoinsController < Growth::Admin::BaseController
   before_action :set_coin, only: [:show, :edit, :update, :destroy]
 
   def index
-    @coins = Coin.includes(:user).page(params[:page])
+    @coins = Coin.includes(:user).order(id: :desc).page(params[:page])
   end
 
   def new

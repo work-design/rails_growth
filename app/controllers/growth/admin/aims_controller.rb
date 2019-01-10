@@ -2,7 +2,7 @@ class Growth::Admin::AimsController < Growth::Admin::BaseController
   before_action :set_aim, only: [:show, :edit, :update, :destroy]
 
   def index
-    @aims = Aim.includes(:aim_codes).page(params[:page])
+    @aims = Aim.includes(:aim_codes).order(id: :desc).page(params[:page])
   end
 
   def new

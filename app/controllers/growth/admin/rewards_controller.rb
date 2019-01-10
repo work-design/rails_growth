@@ -2,7 +2,7 @@ class Growth::Admin::RewardsController < Growth::Admin::BaseController
   before_action :set_reward, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rewards = Reward.page(params[:page])
+    @rewards = Reward.order(id: :desc).page(params[:page])
   end
 
   def new

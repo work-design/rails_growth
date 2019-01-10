@@ -4,7 +4,7 @@ class Growth::Admin::CoinExchangesController < Growth::Admin::BaseController
   def index
     q_params = {}.with_indifferent_access
     q_params.merge! params.permit(:user_id, :type)
-    @coin_exchanges = CoinExchange.includes(:user).default_where(q_params).page(params[:page])
+    @coin_exchanges = CoinExchange.includes(:user).default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def new

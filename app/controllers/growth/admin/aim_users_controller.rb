@@ -5,7 +5,7 @@ class Growth::Admin::AimUsersController < Growth::Admin::BaseController
   def index
     q_params = {}.with_indifferent_access
     q_params.merge! params.fetch(:q, {}).permit(:ip, :user_id)
-    @aim_users = @aim.aim_users.includes(:user).default_where(q_params).page(params[:page])
+    @aim_users = @aim.aim_users.includes(:user).default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def show
