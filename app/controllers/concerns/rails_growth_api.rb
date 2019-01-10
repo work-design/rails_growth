@@ -5,17 +5,21 @@ module RailsGrowthApi
     after_action :growth_record
   end
 
+  def aim_user
+    current_user
+  end
+
   def growth_api(code, entity_type, entity_id)
     aim_ids = AimCode.growth_hash[code]
     return if aim_ids.blank?
 
     Aim.where(id: aim_ids).map do |aim|
-      if current_user
+      if aim_user
         sn = SerialNumberHelper.result(Time.now, aim.repeat_type)
-        au = current_user.aim_users.find_by(aim_id: aim.id, serial_number: sn)
-        ae = current_user.aim_entities.find_by(aim_id: aim.id, serial_number: sn, entity_type: entity_type, entity_id: entity_id)
+        au = aim_user.aim_users.find_by(aim_id: aim.id, serial_number: sn)
+        ae = aim_user.aim_entities.find_by(aim_id: aim.id, serial_number: sn, entity_type: entity_type, entity_id: entity_id)
         next if au&.task_done? && ae
-        aim_log = current_user.aim_logs.build(aim_id: aim.id)
+        aim_log = aim_user.aim_logs.build(aim_id: aim.id)
       else
         next unless aim.verbose
         aim_log = AimLog.new(aim_id: aim.id)
