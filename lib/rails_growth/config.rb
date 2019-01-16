@@ -5,6 +5,7 @@ module RailsGrowth
 
   configure do |config|
     config.admin_class = 'AdminController'
+    config.my_class = 'MyController'
     config.api_class = 'ApiController'
     config.disabled_models = []
   end

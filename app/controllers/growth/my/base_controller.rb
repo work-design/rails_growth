@@ -1,4 +1,4 @@
-class Growth::My::BaseController < MyController
+class Growth::My::BaseController < RailsGrowth.
 
 
 
