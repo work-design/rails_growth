@@ -1,4 +1,4 @@
-class Growth::My::BaseController < RailsGrowth.
+class Growth::My::BaseController < RailsGrowth.config.my_class.constantize
 
 
 

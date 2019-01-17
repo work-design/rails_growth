@@ -1,5 +1,5 @@
 class Growth::Api::CoinLogsController < Growth::Api::BaseController
-  skip_before_action :require_login_from_token, only: [:top]
+  skip_before_action :require_login, only: [:top]
 
   def index
     @coin_logs = current_user.coin_logs.page(params[:page])
