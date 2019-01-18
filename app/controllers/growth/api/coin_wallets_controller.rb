@@ -5,6 +5,7 @@ class Growth::Api::CoinWalletsController < Growth::Api::BaseController
   end
 
   def list
+    @coin = current_user.coin
     @coin_wallets = [6, 68, 88, 108, 228, 388].map { |i| { wallet_amount: i, coin_amount: i * 100 } }
   end
 
