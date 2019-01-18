@@ -18,9 +18,9 @@ module RailsGrowthEntity
   # weekly
   # monthly
   # yearly
-  def access_count(timestamp, type)
+  def access_count(timestamp, type, aim_id)
     sn = SerialNumberHelper.result(timestamp, type)
-    aim_entities.default_where('serial_number-ll': sn).count
+    aim_entities.default_where(aim_id: aim_id, 'serial_number-ll': sn).count
   end
 
 end
