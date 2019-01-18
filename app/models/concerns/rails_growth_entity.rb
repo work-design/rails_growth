@@ -14,4 +14,13 @@ module RailsGrowthEntity
     reward.present? && reward.amount.to_d > 0
   end
 
+  # daily
+  # weekly
+  # monthly
+  # yearly
+  def access_count(timestamp, type)
+    sn = SerialNumberHelper.result(timestamp, type)
+    aim_entities.default_where('serial_number-ll': sn).count
+  end
+
 end

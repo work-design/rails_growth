@@ -1,26 +1,27 @@
 module SerialNumberHelper
 
   def self.result(timestamp, repeat_type)
-    year = timestamp.year
-    case repeat_type
-    when 'daily'
-      number = timestamp.yday
-    when 'weekly'
-      number = timestamp.cweek
-    when 'monthly'
-      number = timestamp.month
-    when 'yearly'
-      year = timestamp.year
-      number = ''
-    when 'forever'
-      year = timestamp.year
-      number = timestamp.to_i
-    else
-      year = ''
-      number = ''
-    end
+    time = timestamp.to_datetime
+    year = time.year
+    month = time.month
+    day = time.day
+    cweek = time.cweek
+    seconds = time.seconds_since_midnight
 
-    [year, number].join('-')
+    case repeat_type
+    when 'forever'
+      [year, month, cweek, day, seconds, UidHelper.rand_string].join('-')
+    when 'daily'
+      [year, month, cweek, day].join('-')
+    when 'weekly'
+      [year, month, cweek].join('-')
+    when 'monthly'
+      [year, month].join('-')
+    when 'yearly'
+      year.to_s
+    else
+      ''
+    end
   end
 
 end
