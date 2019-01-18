@@ -19,11 +19,11 @@ module RailsGrowthEntity
   # monthly
   # yearly
   def access_count(timestamp, type, aim_code)
-    aim = Aim.find_by(code: aim_code)
-    return 0 unless aim
+    aim_code = AimCode.find_by(code: aim_code)
+    return 0 unless aim_code
 
     sn = SerialNumberHelper.result(timestamp, type)
-    aim_entities.default_where(aim_id: aim.id, 'serial_number-ll': sn).count
+    aim_entities.default_where(aim_id: aim_code.aim_id, 'serial_number-ll': sn).count
   end
 
 end
