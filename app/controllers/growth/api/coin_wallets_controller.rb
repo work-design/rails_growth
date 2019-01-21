@@ -1,7 +1,7 @@
 class Growth::Api::CoinWalletsController < Growth::Api::BaseController
 
   def index
-
+    @coin_wallets = current_user.coin_wallets.page(params[:page])
   end
 
   def list

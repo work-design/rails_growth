@@ -1,1 +1,2 @@
-json.array! @api_coin_wallets, partial: 'api_coin_wallets/api_coin_wallet', as: :api_coin_wallet
+json.array! @coin_wallets, partial: 'coin_wallet', as: :coin_wallet
+json.partial! 'api/shared/pagination', items: @coin_wallets
