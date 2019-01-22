@@ -38,7 +38,7 @@ class CoinWallet < CoinExchange
     wl = self.wallet_log || self.build_wallet_log
     wl.title = I18n.t('wallet_log.income.coin_wallet.title')
     wl.tag_str = I18n.t('wallet_log.income.coin_wallet.tag_str')
-    wl.amount = -self.wallet_amount
+    wl.amount = self.wallet_amount
     wl.save
   end
 
