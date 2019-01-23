@@ -17,6 +17,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.string :controller_path
       t.string :action_name
       t.string :code, null: false
+      t.string :params, array: true
       t.timestamps
     end
 

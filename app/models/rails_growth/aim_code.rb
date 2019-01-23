@@ -1,4 +1,5 @@
 class AimCode < ApplicationRecord
+  attribute :params, :string, array: true
   belongs_to :aim
 
   validates :code, uniqueness: { scope: :aim_id }, presence: true
