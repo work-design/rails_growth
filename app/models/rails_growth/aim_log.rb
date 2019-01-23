@@ -17,6 +17,7 @@ class AimLog < ApplicationRecord
     if self.user_id
       if self.aim_entity
         self.aim_entity.sync_reward_state
+        check_rewarded
         self.aim_entity
       else
        check_reward
@@ -28,11 +29,17 @@ class AimLog < ApplicationRecord
 
   def check_reward
     if user && reward&.available?
-      self.rewarded = true
       create_aim_entity!(reward_amount: reward.per_piece)
       aim_entity.to_reward
+      check_rewarded
     else
       self.create_aim_entity!
+    end
+  end
+
+  def check_rewarded
+    if aim_entity.state == 'reward_done'
+      self.rewarded = true
     end
   end
 

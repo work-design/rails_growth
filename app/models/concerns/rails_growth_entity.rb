@@ -19,9 +19,11 @@ module RailsGrowthEntity
     reward.present? && reward.amount.to_d > 0
   end
 
-  def rewardable_codes
-
-
+  def rewardable_codes(user_id)
+    aim_ids = aim_entities.reward_done.where(user_id: user_id).pluck(:aim_id)
+    done_codes = Aim.where(id: aim_ids).reward_codes.map { |i| [i, 'reward_done'] }
+    available_codes = Aim.where.not(id: aim_ids).reward_codes.map { |i| [i, 'rewardable'] }
+    done_codes.to_h.merge available_codes.to_h
   end
 
   # daily
