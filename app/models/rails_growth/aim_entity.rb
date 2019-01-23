@@ -14,8 +14,21 @@ class AimEntity < ApplicationRecord
   before_create :check_aim_user
   after_create_commit :sync_aim_user_state
 
+  enum state: {
+    reward_none: 'reward_none',
+    reward_doing: 'reward_doing',
+    reward_done: 'reward_done'
+  }
+
   def check_aim_user
     self.aim_user || create_aim_user if self.user_id
+    if aim.reward_point == 0
+      self.state = 'reward_none'
+    elsif aim.reward_point == 1
+      self.state = 'reward_done'
+    else
+      self.state = 'reward_doing'
+    end
   end
 
   def sync_aim_user_state
@@ -24,6 +37,12 @@ class AimEntity < ApplicationRecord
     end
     if reward_expense_id
       sync_aim_and_user
+    end
+  end
+
+  def sync_reward_state
+    if self.aim_logs_count.to_i >= aim.reward_point.to_i
+      self.update(state: 'reward_done')
     end
   end
 

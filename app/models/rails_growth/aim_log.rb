@@ -16,6 +16,7 @@ class AimLog < ApplicationRecord
   def check_aim_user
     if self.user_id
       if self.aim_entity
+        self.aim_entity.sync_reward_state
         self.aim_entity
       else
        check_reward

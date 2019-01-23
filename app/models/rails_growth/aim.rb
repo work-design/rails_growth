@@ -16,12 +16,18 @@ class Aim < ApplicationRecord
     forever: 'forever'
   }
 
+  scope :reward, -> { default_where('reward_point-gt': 0) }
+
   def aim_user(user_id)
     self.aim_users.find { |i| i.user_id == user_id }
   end
 
   def serial_number(timestamp)
     SerialNumberHelper.result(timestamp, repeat_type)
+  end
+
+  def self.reward_codes
+    includes(:aim_codes).reward.map { |i| i.aim_codes.pluck(:code) }.flatten
   end
 
 end

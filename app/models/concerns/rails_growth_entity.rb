@@ -19,6 +19,11 @@ module RailsGrowthEntity
     reward.present? && reward.amount.to_d > 0
   end
 
+  def rewardable_codes
+
+
+  end
+
   # daily
   # weekly
   # monthly
