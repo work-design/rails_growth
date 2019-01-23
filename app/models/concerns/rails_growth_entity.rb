@@ -20,6 +20,7 @@ module RailsGrowthEntity
   end
 
   def rewardable_codes(user_id)
+    return [] unless rewardable
     aim_ids = aim_entities.reward_done.where(user_id: user_id).pluck(:aim_id)
     #done_codes = Aim.where(id: aim_ids).reward_codes
     available_codes = Aim.where.not(id: aim_ids).reward_codes
