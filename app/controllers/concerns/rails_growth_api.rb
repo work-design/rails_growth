@@ -48,11 +48,16 @@ module RailsGrowthApi
 
   def growth_response(r)
     reward_amount = r.select(&:rewarded).sum { |i| i.aim_entity.reward_amount }
+    rewardable_codes = []
+    unless r.blank?
+      rewardable_codes = r[0].entity.rewardable_codes(aim_user.id)
+    end
 
     if reward_amount > 0
       reward = {
         amount: reward_amount,
-        code: 'success'
+        code: 'success',
+        rewardable_codes: rewardable_codes
       }
       body = JSON.parse(self.response_body[0])
       self.response_body = body.merge(reward: reward).to_json
