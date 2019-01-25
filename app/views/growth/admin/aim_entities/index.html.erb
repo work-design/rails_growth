@@ -27,6 +27,7 @@
         <p><%= AimEntity.human_attribute_name(:entity_type) %></p>
         <p><%= AimEntity.human_attribute_name(:entity_id) %></p>
       </th>
+      <th><%= AimEntity.human_attribute_name(:state) %></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -46,6 +47,7 @@
         <p><%= aim_entity.entity_type %></p>
         <p><%= aim_entity.entity_id %></p>
       </td>
+      <td><%= aim_entity.state_i18n %></td>
       <td class="ui labels">
         <%= link_to admin_aim_entity_aim_logs_path(aim_entity), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
