@@ -30,7 +30,7 @@ module RailsGrowthEntity
   # weekly
   # monthly
   # yearly
-  def access_count(timestamp, type, aim_code)
+  def entity_count(timestamp, type, aim_code)
     aim_code = AimCode.find_by(code: aim_code)
     return 0 unless aim_code
 
