@@ -35,7 +35,14 @@
       <td>
         <%= link_to coin_exchange.user.name, admin_user_path(coin_exchange.user_id) %>
       </td>
-      <td><%= coin_exchange.state %></td>
+      <td>
+        <label class="ui label"><%= coin_exchange.state_i18n %></label>
+        <div class="ui mini buttons">
+          <%= link_to t('.approve'), new_check_path('CoinExchange', coin_exchange.id, state: CoinExchange.states[:handling]), remote: true, class: 'ui positive button' %>
+          <div class="or"></div>
+          <%= link_to t('.reject'), new_check_path('CoinExchange', coin_exchange.id, state: CoinExchange.states[:rejected]), remote: true, class: 'ui negative button' %>
+        </div>
+      </td>
       <td>
         <p><time><%= coin_exchange.created_at.to_s(:rfc822) %></time></p>
         <p><time><%= coin_exchange.done_at.to_s(:rfc822) if coin_exchange.done_at %></time></p>
