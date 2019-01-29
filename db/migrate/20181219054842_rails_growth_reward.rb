@@ -32,35 +32,5 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :coin_logs do |t|
-      t.references :user
-      t.references :source, polymorphic: true
-      t.string :title
-      t.string :tag_str
-      t.decimal :amount, precision: 10, scale: 2
-      t.timestamps
-    end
-
-    create_table :coins do |t|
-      t.references :user
-      t.decimal :amount, precision: 10, scale: 2
-      t.decimal :income_amount, precision: 10, scale: 2
-      t.decimal :expense_amount, precision: 10, scale: 2
-      t.integer :position, default: 1
-      t.integer :lock_version
-      t.timestamps
-    end
-
-    create_table :coin_exchanges do |t|
-      t.references :user
-      t.references :wallet
-      t.string :type
-      t.decimal :coin_amount, precision: 10, scale: 2
-      t.decimal :amount, precision: 10, scale: 2
-      t.string :state
-      t.datetime :done_at
-      t.timestamps
-    end
-
   end
 end

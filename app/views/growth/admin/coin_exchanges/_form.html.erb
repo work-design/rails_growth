@@ -1,7 +1,0 @@
-<%= form_with model: [:admin, @coin_exchange], local: true do |f| %>
-  <%= render 'shared/error_messages', target: @coin_exchange %>
-  <%= f.hidden_field :user_id, value: params[:user_id] %>
-  <%= f.select :type, options_for_select(CoinExchange.options_i18n(:type), @coin_exchange.type) %>
-  <%= f.text_field :coin_amount %>
-  <%= f.submit %>
-<% end %>

@@ -17,21 +17,9 @@ Rails.application.routes.draw do
       resources :reward_incomes
     end
     resources :reward_expenses
-    resources :coins
-    resources :coin_exchanges
-    resources :coin_logs
   end
 
   scope :api, module: 'growth/api', as: :api do
-    resources :coin_logs, only: [:index] do
-      get :top, on: :collection
-    end
-    resources :coin_cashes, only: [:index, :create] do
-      get :list, on: :collection
-    end
-    resources :coin_wallets, only: [:index, :create] do
-      get :list, on: :collection
-    end
     resources :aim_logs, only: [:create]
     scope ':entity_type/:entity_id' do
       resources :aim_logs, only: [:create]
