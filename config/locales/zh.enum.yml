@@ -6,18 +6,3 @@ zh:
       coin_exchange/type:
         CoinWallet: 兑换虚拟币
         CoinCash: 提现
-  coin_log:
-    income:
-      coin_wallet:
-        title:
-        tag_str:
-    expense:
-      coin_wallet:
-        title: 金币兑换氧育币
-        tag_str: 兑换支出
-  wallet_log:
-    income:
-      coin_wallet:
-        title: 金币兑换氧育币
-        tag_str: 兑换收入
-    expense:
