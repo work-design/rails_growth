@@ -13,7 +13,7 @@ class AimCode < ApplicationRecord
 
   def delete_cache
     if Rails.cache.delete('rails_growth')
-      puts "-----> Cache key rails_growth deleted"
+      logger.debug "-----> Cache key rails_growth deleted"
     end
   end
 

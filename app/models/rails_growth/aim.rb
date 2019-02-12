@@ -1,4 +1,5 @@
 class Aim < ApplicationRecord
+  attribute :rate, :decimal, default: 1
   attribute :verbose, :boolean
   has_many :aim_codes, dependent: :delete_all
   has_many :aim_users, dependent: :nullify
@@ -25,14 +26,6 @@ class Aim < ApplicationRecord
 
   def serial_number(timestamp)
     SerialNumberHelper.result(timestamp, repeat_type)
-  end
-
-  def done?(user_id)
-    aim_users.exists?(user_id: user_id, state: 'task_done')
-  end
-
-  def process()
-
   end
 
   def self.reward_codes

@@ -4,7 +4,7 @@
   <%= f.number_field :task_point %>
   <%= f.number_field :reward_point %>
   <%= f.text_field :unit %>
-  <%= f.number_field :score %>
+  <%= f.number_field :rate %>
   <%= f.select :repeat_type, options_for_select(Aim.options_i18n(:repeat_type), @aim.repeat_type) %>
   <%= f.fields :aim_codes, on: { wrapper_all: false, label: false, placeholder: true }, css: { wrapper_input: 'two wide field' } do |ef| %>
     <%= render partial: 'item_form', locals: { ef: ef } %>

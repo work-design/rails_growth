@@ -62,7 +62,7 @@ class Growth::Admin::AimsController < Growth::Admin::BaseController
       :task_point,
       :reward_point,
       :unit,
-      :score,
+      :rate,
       :repeat_type,
       aim_codes_attributes: {}
     )

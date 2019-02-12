@@ -29,12 +29,17 @@ class AimLog < ApplicationRecord
 
   def check_reward
     if user && reward&.available?
-      create_aim_entity!(reward_amount: reward.per_piece)
+      create_aim_entity!(reward_amount: per_amount)
       aim_entity.to_reward
       check_rewarded
     else
       self.create_aim_entity!
     end
+  end
+
+  def per_amount
+    amount = reward.per_piece * aim.rate
+    amount > reward.amount ? amount : reward.amount
   end
 
   def check_rewarded

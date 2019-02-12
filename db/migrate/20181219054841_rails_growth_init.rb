@@ -6,7 +6,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.integer :task_point, default: 0
       t.integer :reward_point, default: 0
       t.string :unit
-      t.integer :score
+      t.decimal :rate, precision: 10, scale: 2
       t.string :repeat_type
       t.boolean :verbose
       t.timestamps

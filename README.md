@@ -8,8 +8,7 @@
 * 可以对相应请求进行统计记录，用于数据分析；
 
 ## Usage
-How to use my plugin.
-
+* 赏金的单位是金币；
 
 ## Contributing
 Contribution directions go here.
