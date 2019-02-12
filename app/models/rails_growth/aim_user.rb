@@ -10,4 +10,8 @@ class AimUser < ApplicationRecord
     task_done: 'task_done'
   }
 
+  def progress
+    [aim_entities_count.to_i, aim.task_point]
+  end
+
 end

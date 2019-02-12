@@ -17,6 +17,7 @@ class Aim < ApplicationRecord
   }
 
   scope :reward, -> { default_where('reward_point-gt': 0) }
+  scope :task, -> { default_where('task_point-gt': 0) }
 
   def aim_user(user_id)
     self.aim_users.find { |i| i.user_id == user_id }
@@ -24,6 +25,14 @@ class Aim < ApplicationRecord
 
   def serial_number(timestamp)
     SerialNumberHelper.result(timestamp, repeat_type)
+  end
+
+  def done?(user_id)
+    aim_users.exists?(user_id: user_id, state: 'task_done')
+  end
+
+  def process()
+
   end
 
   def self.reward_codes
