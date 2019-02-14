@@ -35,7 +35,14 @@ class Reward < ApplicationRecord
   end
 
   def per_piece
-    rand(self.min_piece.to_f..self.max_piece.to_f).round(2)
+    if self.amount > 0
+      r = self.max_piece - 1/ (self.amount + 1/(self.max_piece - min_piece))
+    else
+      r = 0
+    end
+    pad = (max_piece - r)
+
+    rand((r - pad)..(r + pad)).round(2)
   end
 
 end
