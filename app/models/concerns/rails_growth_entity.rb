@@ -11,8 +11,12 @@ module RailsGrowthEntity
     end
   end
 
-  def init_reward
-    self.reward || self.create_reward
+  def reward
+    if super
+      super
+    else
+      create_reward
+    end
   end
 
   def rewardable

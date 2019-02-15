@@ -19,6 +19,8 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
 
     create_table :reward_incomes do |t|
       t.references :reward
+      t.references :user #2019.2.15
+      t.references :source
       t.string :type
       t.decimal :amount, precision: 10, scale: 2
       t.timestamps
@@ -29,6 +31,13 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.references :aim
       t.references :user
       t.decimal :amount, precision: 10, scale: 2
+      t.timestamps
+    end
+
+    create_table :reward_coins do |t|
+      t.integer :amount
+      t.string :code
+      t.integer :praise_incomes_count, default: 0
       t.timestamps
     end
 
