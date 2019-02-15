@@ -38,8 +38,8 @@ class AimLog < ApplicationRecord
   end
 
   def per_amount
-    per_amount = reward.per_piece * aim.rate
-    per_amount > reward.amount ? per_amount : reward.amount
+    per = reward.per_piece * aim.rate
+    per < reward.amount ? per : reward.amount
   end
 
   def check_rewarded
