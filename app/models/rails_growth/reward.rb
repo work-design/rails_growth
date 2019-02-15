@@ -36,7 +36,7 @@ class Reward < ApplicationRecord
 
   def per_piece
     if self.amount > 0
-      r = self.max_piece - 1/ (self.amount + 1/(self.max_piece - min_piece))
+      r = self.max_piece - 1 / (self.amount + 1/(self.max_piece - min_piece))
     else
       r = 0
     end
