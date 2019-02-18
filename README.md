@@ -15,3 +15,11 @@ Contribution directions go here.
 
 ## 依赖
 * [rails_wallet]() 金币兑换到虚拟币功能；
+
+## 注意
+由于在`rails_growth`中覆写了`rails_wallet`中 `Coin` 的方法，所以在gemfile中，将`rails_growth`放在更后面的位置，这样在常量查找时，`rails_growth`拥有更高的优先级；
+
+```ruby
+gem 'rails_wallet'
+gem 'rails_growth' # 放在 `rails_wallet` 后面
+```

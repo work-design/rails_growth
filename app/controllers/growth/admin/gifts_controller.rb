@@ -1,5 +1,5 @@
 class Growth::Admin::GiftsController < Growth::Admin::BaseController
-  before_action :set_gift, only: [:show, :edit, :update, :destroy]
+  before_action :set_gift, only: [:show, :give]
 
   def index
     @gifts = Gift.page(params[:page])
@@ -19,7 +19,10 @@ class Growth::Admin::GiftsController < Growth::Admin::BaseController
     end
   end
 
-  def show
+  def give
+    @reward = Reward.find_or_create_by(entity_type: params[:entity_type], entity_id: params[:entity_id])
+    @reward
+
   end
 
   def edit
@@ -41,14 +44,6 @@ class Growth::Admin::GiftsController < Growth::Admin::BaseController
   private
   def set_gift
     @gift = Gift.find(params[:id])
-  end
-
-  def gift_params
-    params.fetch(:gift, {}).permit(
-      :name,
-      :code,
-      :amount
-    )
   end
 
 end

@@ -8,6 +8,8 @@ module RailsGrowth
     config.my_class = 'MyController'
     config.api_class = 'ApiController'
     config.disabled_models = []
+
+    config.gift_purchase = 'Coin'
   end
 
 end

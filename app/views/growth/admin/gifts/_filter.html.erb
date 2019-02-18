@@ -1,7 +1,8 @@
 <div class="ui attached segment">
 
-<%= search_form_with do |f| %>
+<%= search_form_with model: Gift.new do |f| %>
   <div class="fields">
+    <%= f.text_field :name %>
     <%= f.submit 'Search' %>
   </div>
 <% end %>
