@@ -44,7 +44,8 @@ class Growth::Admin::GiftsController < Growth::Admin::BaseController
     params.fetch(:gift, {}).permit(
       :name,
       :code,
-      :amount
+      :amount,
+      :icon
     )
   end
 

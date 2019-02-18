@@ -16,6 +16,7 @@
       <th><%= Gift.human_attribute_name(:name) %></th>
       <th><%= Gift.human_attribute_name(:code) %></th>
       <th><%= Gift.human_attribute_name(:amount) %></th>
+      <th><%= Gift.human_attribute_name(:icon) %></th>
       <th><%= Gift.human_attribute_name(:praise_incomes_count) %></th>
       <th>Actions</th>
     </tr>
@@ -27,6 +28,9 @@
       <td><%= gift.name %></td>
       <td><%= gift.code %></td>
       <td><%= gift.amount %></td>
+      <td>
+        <%= image_tag gift.icon, class: 'ui avatar image' if gift.icon.attached? %>
+      </td>
       <td><%= gift.praise_incomes_count %></td>
       <td class="ui labels">
         <%= link_to admin_gift_path(gift), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
