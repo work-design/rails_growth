@@ -1,6 +1,12 @@
 class PraiseIncome < RewardIncome
   belongs_to :gift, foreign_key: :source_id, counter_cache: true
 
+  has_one :wallet_log, ->(o){ where(wallet_id: o.user.wallet_id) }, as: :source
+  has_one :coin_log, ->(o){ where(user_id: o.user_id) }, as: :source
+
+  after_save :sync_to_account, if: -> { saved_change_to_amount? }
+  after_create_commit :sync_log
+
   def sync_to_account
     if RailsGrowth.config.gift_purchase == 'Coin'
       sync_to_coin
@@ -33,11 +39,19 @@ class PraiseIncome < RewardIncome
     end
   end
 
+  def sync_log
+    if RailsGrowth.config.gift_purchase == 'Coin'
+      sync_coin_log
+    else
+      sync_wallet_log
+    end
+  end
+
   def sync_wallet_log
     wl = self.wallet_log || self.build_wallet_log
     wl.title = I18n.t('wallet_log.expense.praise_income.title')
     wl.tag_str = I18n.t('wallet_log.expense.praise_income.tag_str')
-    wl.amount = -self.wallet_amount
+    wl.amount = -self.amount
     wl.save
   end
 
@@ -45,7 +59,7 @@ class PraiseIncome < RewardIncome
     cl = self.coin_log || self.build_coin_log
     cl.title = I18n.t('coin_log.expense.praise_income.title')
     cl.tag_str = I18n.t('coin_log.expense.praise_income.tag_str')
-    cl.amount = -self.coin_amount
+    cl.amount = -self.amount
     cl.save
   end
 

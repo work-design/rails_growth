@@ -10,8 +10,10 @@ class Gift < ApplicationRecord
     praise = self.praise_incomes.build
     praise.reward = reward
     praise.user = user
+    praise.amount = self.amount
 
     praise.save
+    praise
   end
 
 end

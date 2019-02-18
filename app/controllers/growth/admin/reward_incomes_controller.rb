@@ -49,10 +49,11 @@ class Growth::Admin::RewardIncomesController < Growth::Admin::BaseController
   end
 
   def reward_income_params
-    params.fetch(:reward_income, {}).permit(
+    q = params.fetch(:reward_income, {}).permit(
       :type,
       :amount
     )
+    q.merge(user_id: current_user.id)
   end
 
 end

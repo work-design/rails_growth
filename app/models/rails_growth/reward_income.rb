@@ -1,5 +1,6 @@
 class RewardIncome < ApplicationRecord
   belongs_to :reward, counter_cache: :incomes_count
+  belongs_to :user
 
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
   after_save :sync_amount, if: -> { saved_change_to_amount? }
