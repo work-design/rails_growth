@@ -3,13 +3,13 @@ class Growth::Api::GiftsController < Growth::Api::BaseController
   before_action :require_login, only: [:give]
 
   def index
-    @api_gifts = Gift.page(params[:page]).per(params[:per])
+    @gifts = Gift.page(params[:page]).per(params[:per])
 
-    render json: @api_gifts
+    render json: { gifts: @gifts.as_json(only: [:id, :name, :code, :amount], methods: [:icon_url]) }
   end
 
   def give
-    @reward = Reward.find_or_create_by(entity_type: params[:entity_type], entity_id: params[:entity_id])
+    @reward = Reward.find_or_create_by!(entity_type: params[:entity_type], entity_id: params[:entity_id])
     @reward
 
     if @gift.give_to(@reward, current_user)
