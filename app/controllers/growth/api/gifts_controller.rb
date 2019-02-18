@@ -1,5 +1,6 @@
 class Growth::Api::GiftsController < Growth::Api::BaseController
-  before_action :set_api_gift, only: [:show, :update, :destroy]
+  before_action :set_gift, only: [:give]
+  before_action :require_login, only: [:give]
 
   def index
     @api_gifts = Gift.page(params[:page]).per(params[:per])
@@ -7,39 +8,20 @@ class Growth::Api::GiftsController < Growth::Api::BaseController
     render json: @api_gifts
   end
 
-  def show
-    render json: @api_gift
-  end
+  def give
+    @reward = Reward.find_or_create_by(entity_type: params[:entity_type], entity_id: params[:entity_id])
+    @reward
 
-  def create
-    @api_gift = Gift.new(api_gift_params)
-
-    if @api_gift.save
-      render json: @api_gift, status: :created, location: @api_gift
+    if @gift.give_to(@reward, current_user)
+      render json: @gift
     else
-      render json: @api_gift.errors, status: :unprocessable_entity
+      render json: @gift.errors, status: :unprocessable_entity
     end
-  end
-
-  def update
-    if @api_gift.update(api_gift_params)
-      render json: @api_gift
-    else
-      render json: @api_gift.errors, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @api_gift.destroy
   end
 
   private
   def set_gift
-    @api_gift = Gift.find(params[:id])
-  end
-
-  def api_gift_params
-    params.require(:gift).permit(:name, :code, :amount, :praise_incomes_count)
+    @gift = Gift.find(params[:id])
   end
 
 end

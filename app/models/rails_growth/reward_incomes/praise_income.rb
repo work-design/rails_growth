@@ -35,16 +35,16 @@ class PraiseIncome < RewardIncome
 
   def sync_wallet_log
     wl = self.wallet_log || self.build_wallet_log
-    wl.title = I18n.t('wallet_log.expense.coin_wallet.title')
-    wl.tag_str = I18n.t('wallet_log.expense.coin_wallet.tag_str')
-    wl.amount = self.wallet_amount
+    wl.title = I18n.t('wallet_log.expense.praise_income.title')
+    wl.tag_str = I18n.t('wallet_log.expense.praise_income.tag_str')
+    wl.amount = -self.wallet_amount
     wl.save
   end
 
   def sync_coin_log
     cl = self.coin_log || self.build_coin_log
-    cl.title = I18n.t('coin_log.expense.coin_wallet.title')
-    cl.tag_str = I18n.t('coin_log.expense.coin_wallet.tag_str')
+    cl.title = I18n.t('coin_log.expense.praise_income.title')
+    cl.tag_str = I18n.t('coin_log.expense.praise_income.tag_str')
     cl.amount = -self.coin_amount
     cl.save
   end

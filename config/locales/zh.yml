@@ -9,3 +9,13 @@ zh:
       coin_exchange/type:
         CoinWallet: 兑换虚拟币
         CoinCash: 提现
+  coin_log:
+    expense:
+      praise_income:
+        title: 金币打赏
+        tag_str: 打赏
+  wallet_log:
+    expense:
+      praise_income:
+        title: 虚拟币打赏
+        tag_str: 打赏

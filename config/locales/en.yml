@@ -6,3 +6,13 @@ en:
       coin_exchange/type:
         CoinWallet: Coin To Wallet
         CoinCash: Coin To Cash
+  coin_log:
+    expense:
+      praise_income:
+        title:
+        tag_str:
+  wallet_log:
+    expense:
+      praise_income:
+        title:
+        tag_str:
