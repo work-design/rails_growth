@@ -10,10 +10,10 @@ class Growth::Api::GiftsController < Growth::Api::BaseController
 
   def give
     @reward = Reward.find_or_create_by!(entity_type: params[:entity_type], entity_id: params[:entity_id])
-    @reward
+    @praise_income = @gift.give_to(@reward, current_user)
 
-    if @gift.give_to(@reward, current_user)
-      render json: @gift
+    if @praise_income.persisted?
+      render json: { praise_income: @praise_income }
     else
       render json: @gift.errors, status: :unprocessable_entity
     end
