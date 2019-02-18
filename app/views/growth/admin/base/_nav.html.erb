@@ -3,13 +3,14 @@
     <i class="content icon"></i>
   </div>
   <div class="item ui dropdown">
-    <a class="<%= active_helper(controllers: ['aims', 'aim_users', 'rewards'], active_class: 'title active', item_class: 'title') %>">
+    <a class="<%= active_helper(controllers: ['aims', 'aim_users', 'rewards', 'gifts'], active_class: 'title active', item_class: 'title') %>">
       <i class="calendar check icon"></i>
       <span>任务</span>
     </a>
-    <div class="<%= active_helper(controllers: ['aims', 'aim_users', 'rewards'], active_class: 'menu content active', item_class: 'menu content') %>">
+    <div class="<%= active_helper(controllers: ['aims', 'aim_users', 'rewards', 'gifts'], active_class: 'menu content active', item_class: 'menu content') %>">
       <%= link_to '任务管理', admin_aims_path, class: active_helper(controllers: 'aims') %>
       <%= link_to '赏金管理', admin_rewards_path, class: active_helper(controllers: 'rewards') %>
+      <%= link_to '打赏管理', admin_gifts_path, class: active_helper(controllers: 'gifts') %>
     </div>
   </div>
 </div>

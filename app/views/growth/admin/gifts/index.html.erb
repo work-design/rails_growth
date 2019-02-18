@@ -1,0 +1,47 @@
+<div class="ui top attached borderless menu">
+  <div class="header item">Admin Gifts</div>
+  <div class="right menu">
+    <div class="item">
+      <%= link_to 'New Admin Gift', new_admin_gift_path, class: 'ui teal button' %>
+    </div>
+  </div>
+</div>
+
+<%= render 'filter' %>
+
+<table class="ui bottom attached table">
+  <thead>
+    <tr>
+      <th><%= Gift.human_attribute_name(:id) %></th>
+      <th><%= Gift.human_attribute_name(:name) %></th>
+      <th><%= Gift.human_attribute_name(:code) %></th>
+      <th><%= Gift.human_attribute_name(:amount) %></th>
+      <th><%= Gift.human_attribute_name(:praise_incomes_count) %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @gifts.each do |gift| %>
+    <tr>
+      <td><%= gift.id %></td>
+      <td><%= gift.name %></td>
+      <td><%= gift.code %></td>
+      <td><%= gift.amount %></td>
+      <td><%= gift.praise_incomes_count %></td>
+      <td class="ui labels">
+        <%= link_to admin_gift_path(gift), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_admin_gift_path(gift), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+          <i class="pencil alternate icon"></i>
+        <% end %>
+        <%= link_to admin_gift_path(gift), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @gifts %>
