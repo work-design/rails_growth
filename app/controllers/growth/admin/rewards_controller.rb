@@ -2,7 +2,9 @@ class Growth::Admin::RewardsController < Growth::Admin::BaseController
   before_action :set_reward, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rewards = Reward.order(id: :desc).page(params[:page])
+    q_params = {}.with_indifferent_access
+    q_params.merge! params.fetch(:q, {}).permit(:entity_type, :entity_id)
+    @rewards = Reward.default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def new

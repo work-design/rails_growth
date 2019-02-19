@@ -45,4 +45,8 @@ class Reward < ApplicationRecord
     rand((r - pad)..(r + pad)).round(2)
   end
 
+  def self.entity_types
+    self.distinct(:entity_type).pluck(:entity_type)
+  end
+
 end

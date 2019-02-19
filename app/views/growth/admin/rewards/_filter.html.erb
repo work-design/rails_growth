@@ -1,7 +1,11 @@
 <div class="ui attached segment">
 
-<%= search_form_with do |f| %>
+<%= search_form_with model: Reward.new do |f| %>
   <div class="fields">
+    <div class="ui left action input field">
+      <%= f.select :entity_type, options_for_select(Reward.entity_types), { on: { wrapper_input: false } } %>
+      <%= f.text_field :entity_id, on: { wrapper_input: false } %>
+    </div>
     <%= f.submit 'Search' %>
   </div>
 <% end %>
