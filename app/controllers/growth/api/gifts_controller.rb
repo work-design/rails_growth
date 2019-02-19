@@ -4,8 +4,6 @@ class Growth::Api::GiftsController < Growth::Api::BaseController
 
   def index
     @gifts = Gift.page(params[:page]).per(params[:per])
-
-    render json: { gifts: @gifts.as_json(only: [:id, :name, :code, :amount], methods: [:icon_url]) }
   end
 
   def give
