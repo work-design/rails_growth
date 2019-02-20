@@ -25,6 +25,15 @@ Rails.application.routes.draw do
     scope ':entity_type/:entity_id' do
       resources :aim_logs, only: [:create]
     end
+    resources :rewards, only: [] do
+      get :top, on: :member
+      get :top, on: :collection
+    end
+    scope ':entity_type/:entity_id' do
+      resources :rewards, only: [] do
+        get :top, on: :collection
+      end
+    end
     resources :gifts, only: [:index] do
       get :top, on: :collection
       post :give, on: :member

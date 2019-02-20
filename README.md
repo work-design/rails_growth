@@ -10,9 +10,6 @@
 ## Usage
 * 赏金的单位是金币；
 
-## Contributing
-Contribution directions go here.
-
 ## 依赖
 * [rails_wallet]() 金币兑换到虚拟币功能；
 
