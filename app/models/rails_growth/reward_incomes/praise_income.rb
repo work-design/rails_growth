@@ -66,14 +66,8 @@ class PraiseIncome < RewardIncome
 
   def sync_to_praise_user
     pu = self.praise_user || self.build_praise_user
-
-    pu.amount += self.amount
-    if pu.amount == pu.compute_amount
-      pu.save!
-    else
-      pu.errors.add :amount, 'not equal'
-      raise ActiveRecord::RecordInvalid.new(pu)
-    end
+    pu.amount = pu.compute_amount
+    pu.save!
   end
 
 end
