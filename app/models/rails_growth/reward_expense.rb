@@ -17,7 +17,7 @@ class RewardExpense < ApplicationRecord
       reward.save!
     else
       reward.errors.add :expense_amount, 'not equal'
-      logger.debug "Reward: #{reward.errors.full_messages.join(', ')}"
+      logger.error "Reward: #{reward.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(reward)
     end
   end
@@ -33,7 +33,7 @@ class RewardExpense < ApplicationRecord
       coin.save!
     else
       coin.errors.add :income_amount, 'not equal'
-      logger.debug "Coin: #{coin.errors.full_messages.join(', ')}"
+      logger.error "Coin: #{coin.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(coin)
     end
   end

@@ -36,6 +36,7 @@ class PraiseIncome < RewardIncome
       wallet.save!
     else
       wallet.errors.add :expense_amount, 'not equal'
+      logger.error "Wallet: #{wallet.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(wallet)
     end
   end
