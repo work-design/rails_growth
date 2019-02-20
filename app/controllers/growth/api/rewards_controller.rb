@@ -5,7 +5,7 @@ class Growth::Api::RewardsController < Growth::Api::BaseController
     @praise_users = @reward.praise_users.includes(:user).order(amount: :desc).page(params[:page])
 
     if current_user
-      @praise_user = @praise_users.where(user_id: current_user.id)
+      @praise_user = @praise_users.find_by(user_id: current_user.id)
     end
   end
 
