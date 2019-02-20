@@ -32,6 +32,7 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.references :reward
       t.references :entity, polymorphic: true
       t.decimal :amount, precision: 10, scale: 2
+      t.integer :position, default: 1
       t.timestamps
     end
 
