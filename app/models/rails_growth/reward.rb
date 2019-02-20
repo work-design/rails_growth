@@ -1,7 +1,5 @@
 class Reward < ApplicationRecord
-
-  attribute :income_amount, :decimal, default: 0
-  attribute :expense_amount, :decimal, default: 0
+  include WalletComputeAmount
 
   belongs_to :entity, polymorphic: true
   has_many :reward_incomes, dependent: :destroy
@@ -14,26 +12,17 @@ class Reward < ApplicationRecord
   validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }, allow_blank: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
 
-  before_save :compute_amount, if: -> { income_amount_changed? || expense_amount_changed? }
+  def compute_expense_amount
+    self.reward_expenses.sum(:amount)
+  end
 
-  def compute_amount
-    self.amount = income_amount - expense_amount
+  def compute_income_amount
+    self.reward_incomes.sum(:amount)
   end
 
   def available?
     enabled? &&
     amount > 0
-  end
-
-  def reset_amount
-    self.income_amount = self.reward_incomes.sum(:amount)
-    self.expense_amount = self.reward_expenses.sum(:amount)
-    self.changes
-  end
-
-  def reset_amount!
-    self.reset_amount
-    self.save
   end
 
   def per_piece

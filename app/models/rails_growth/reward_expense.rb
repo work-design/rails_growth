@@ -13,7 +13,7 @@ class RewardExpense < ApplicationRecord
   def sync_amount
     reward.reload
     reward.expense_amount += self.amount
-    if reward.expense_amount == reward.reward_expenses.sum(:amount)
+    if reward.expense_amount == reward.compute_expense_amount
       reward.save!
     else
       reward.errors.add :expense_amount, 'not equal'
@@ -29,7 +29,7 @@ class RewardExpense < ApplicationRecord
 
     coin.income_amount += self.amount
 
-    if coin.income_amount == coin.reward_expenses.sum(:amount)
+    if coin.income_amount == coin.compute_income_amount
       coin.save!
     else
       coin.errors.add :income_amount, 'not equal'
