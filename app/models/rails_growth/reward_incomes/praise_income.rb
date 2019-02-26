@@ -1,4 +1,10 @@
 class PraiseIncome < RewardIncome
+
+  attribute :received_amount, :decimal, default: 0  # 用户打赏
+  attribute :profit_amount, :decimal, default: 0  # 平台收入
+  attribute :royalty_amount, :decimal, default: 0  # 作者分成
+  attribute :amount, :decimal, default: 0  # 赏金池
+
   belongs_to :gift, foreign_key: :source_id, counter_cache: true
   belongs_to :praise_user, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
