@@ -3,7 +3,7 @@ class Growth::Api::GiftsController < Growth::Api::BaseController
   before_action :require_login, only: [:give]
 
   def index
-    @gifts = Gift.page(params[:page]).per(params[:per])
+    @gifts = Gift.order('created_at').page(params[:page]).per(params[:per])
   end
 
   def give
