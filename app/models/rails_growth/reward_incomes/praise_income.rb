@@ -8,6 +8,12 @@ class PraiseIncome < RewardIncome
   after_save :sync_to_account, if: -> { saved_change_to_amount? }
   after_create_commit :sync_log, :sync_to_praise_user
 
+  delegate :name, to: :praise_user, prefix: :user
+
+  acts_as_notify :default,
+                 only: [:amount],
+                 methods: [:user_name]
+
   def sync_to_account
     if RailsGrowth.config.gift_purchase == 'Coin'
       sync_to_coin
@@ -70,6 +76,14 @@ class PraiseIncome < RewardIncome
     pu = self.praise_user || self.build_praise_user
     pu.amount = pu.compute_amount
     pu.save!
+  end
+
+  def sync_to_notification
+    to_notification(
+      receiver: self.reward.entity.user,
+      sender: self.praise_user,
+      verbose: true
+    )
   end
 
 end

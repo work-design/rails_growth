@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    notify:
+      praise_income:
+        default:
+          title: '@%{user_name}'
+          body: 赞了你的评论
