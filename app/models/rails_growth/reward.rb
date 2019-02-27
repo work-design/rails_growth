@@ -17,7 +17,7 @@ class Reward < ApplicationRecord
   end
 
   def compute_income_amount
-    self.reward_incomes.sum(:amount)
+    self.reward_incomes.sum(:reward_amount)
   end
 
   def available?
