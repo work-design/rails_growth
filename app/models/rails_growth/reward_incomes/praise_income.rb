@@ -12,7 +12,7 @@ class PraiseIncome < RewardIncome
 
   before_save :split_amount, if: -> { amount_changed? }
   after_save :sync_to_account, if: -> { saved_change_to_amount? }
-  after_create_commit :sync_log, :sync_to_praise_user
+  after_create_commit :sync_log, :sync_to_praise_user, :sync_to_notification
 
   delegate :name, to: :praise_user, prefix: :user
 
