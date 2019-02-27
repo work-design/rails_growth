@@ -9,6 +9,10 @@ class Growth::Api::RewardsController < Growth::Api::BaseController
     end
   end
 
+  def broadcast
+    @praise_amounts = PraiseIncome.top
+  end
+
   private
   def set_reward
     if params[:id]
