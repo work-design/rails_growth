@@ -1,9 +1,8 @@
 class PraiseIncome < RewardIncome
-
-  attribute :received_amount, :decimal, default: 0  # 用户打赏
+  attribute :amount, :decimal, default: 0  # 用户打赏
   attribute :profit_amount, :decimal, default: 0  # 平台收入
   attribute :royalty_amount, :decimal, default: 0  # 作者分成
-  attribute :amount, :decimal, default: 0  # 赏金池
+  attribute :reward_amount, :decimal, default: 0  # 赏金池
 
   belongs_to :gift, foreign_key: :source_id, counter_cache: true
   belongs_to :praise_user, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
@@ -11,6 +10,7 @@ class PraiseIncome < RewardIncome
   has_one :wallet_log, ->(o){ where(wallet_id: o.user.wallet_id) }, as: :source
   has_one :coin_log, ->(o){ where(user_id: o.user_id) }, as: :source
 
+  before_save :split_amount, if: -> { amount_changed? }
   after_save :sync_to_account, if: -> { saved_change_to_amount? }
   after_create_commit :sync_log, :sync_to_praise_user
 
@@ -82,6 +82,12 @@ class PraiseIncome < RewardIncome
     pu = self.praise_user || self.build_praise_user
     pu.amount = pu.compute_amount
     pu.save!
+  end
+
+  def split_amount
+    self.reward_amount = amount * RailsGrowth.config.rate_to_reward
+    self.royalty_amount = amount * RailsGrowth.config.rate_to_royalty
+    self.profit_amount = self.amount - reward_amount - royalty_amount
   end
 
   def sync_to_notification

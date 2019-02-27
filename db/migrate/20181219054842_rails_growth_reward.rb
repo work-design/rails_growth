@@ -23,6 +23,9 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.references :source, polymorphic: true
       t.string :type
       t.decimal :amount, precision: 10, scale: 2
+      t.decimal :royalty_amount, precision: 10, scale: 2
+      t.decimal :reward_amount, precision: 10, scale: 2
+      t.decimal :profit_amount, precision: 10, scale: 2
       t.timestamps
     end
 

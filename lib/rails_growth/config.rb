@@ -10,6 +10,8 @@ module RailsGrowth
     config.disabled_models = []
 
     config.gift_purchase = 'Coin'
+    config.rate_to_reward = 0.3
+    config.rate_to_royalty = 0.5
   end
 
 end
