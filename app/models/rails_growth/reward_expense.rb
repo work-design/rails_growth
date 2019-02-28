@@ -76,7 +76,7 @@ class RewardExpense < ApplicationRecord
     wl = self.cash_log || self.build_cash_log
     wl.title = self.reward.entity&.title
     wl.tag_str = self.aim&.name
-    wl.amount = -self.amount
+    wl.amount = self.amount
     wl.save
   end
 
