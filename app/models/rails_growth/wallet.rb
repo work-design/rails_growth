@@ -1,5 +1,4 @@
 require_dependency 'rails_wallet/wallet'
-puts 'from rails growth'
 class Wallet < ApplicationRecord
   has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
 
