@@ -1,9 +1,6 @@
 class Gift < ApplicationRecord
   has_many :praise_incomes, as: :source
-
   has_one_attached :icon
-
-  validates :code, uniqueness: true
 
   def icon_url
     icon.service_url if icon.attachment.present?

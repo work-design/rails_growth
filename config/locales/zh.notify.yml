@@ -1,7 +1,7 @@
 zh:
   activerecord:
     notify:
-      praise_income:
+      reward_income:
         default:
           title: '@%{user_name}'
-          body: 赞了你的评论
+          body: 打赏给你一个%{gift_name}礼物
