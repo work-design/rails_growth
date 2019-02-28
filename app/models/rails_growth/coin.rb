@@ -14,7 +14,7 @@ class Coin < ApplicationRecord
   alias_method :origin_compute_income_amount, :compute_income_amount
   def compute_income_amount
     origin_amount = origin_compute_income_amount
-    aim_amount = self.aim_incomes.sum(:coin_amount)
+    aim_amount = self.aim_users.sum(:coin_amount)
     origin_amount + aim_amount
   end
 
