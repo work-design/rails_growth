@@ -33,7 +33,7 @@ class AimEntity < ApplicationRecord
 
   def sync_aim_user_state
     if aim_user.aim_entities_count.to_i >= aim.task_point.to_i
-      self.aim_user.update(state: 'task_done')
+      self.aim_user.commit_task_done
     end
     if reward_expense_id
       sync_aim_and_user

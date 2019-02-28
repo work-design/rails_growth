@@ -13,8 +13,20 @@ class AimUser < ApplicationRecord
     task_done: 'task_done'
   }
 
+  after_commit :sync_log, if: -> { saved_change_to_coin_amount? }, on: [:create, :update]
+
   def progress
     [aim_entities_count.to_i, aim.task_point]
+  end
+
+  def commit_task_done
+    self.state = 'task_done'
+    self.coin_amount = aim.coin_amount
+
+    self.class.transaction do
+      self.save!
+      sync_to_coin
+    end
   end
 
   def sync_log

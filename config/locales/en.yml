@@ -11,6 +11,10 @@ en:
       praise_income:
         title:
         tag_str:
+    income:
+      aim_user:
+        title:
+        tag_str:
   wallet_log:
     expense:
       praise_income:

@@ -19,6 +19,7 @@
       <th><%= AimUser.human_attribute_name(:user) %></th>
       <th><%= AimUser.human_attribute_name(:serial_number) %></th>
       <th><%= AimUser.human_attribute_name(:state) %></th>
+      <th><%= AimUser.human_attribute_name(:coin_amount) %></th>
       <th><%= AimUser.human_attribute_name(:aim_entities_count) %></th>
       <th><%= AimUser.human_attribute_name(:created_at) %></th>
       <th>Actions</th>
@@ -35,6 +36,7 @@
       </td>
       <td><%= aim_user.serial_number %></td>
       <td><%= aim_user.state_i18n %></td>
+      <td><%= aim_user.coin_amount %></td>
       <td><%= aim_user.aim_entities_count %></td>
       <td><time><%= aim_user.created_at.to_s(:rfc822) %></time></td>
       <td class="ui labels">
