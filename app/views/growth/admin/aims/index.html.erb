@@ -20,6 +20,7 @@
       <th><%= Aim.human_attribute_name(:task_point) %></th>
       <th><%= Aim.human_attribute_name(:reward_point) %></th>
       <th><%= Aim.human_attribute_name(:unit) %></th>
+      <th><%= Aim.human_attribute_name(:coin_amount) %></th>
       <th><%= Aim.human_attribute_name(:rate) %></th>
       <th><%= Aim.human_attribute_name(:code) %></th>
       <th>Actions</th>
@@ -34,6 +35,7 @@
       <td><%= aim.task_point %></td>
       <td><%= aim.reward_point %></td>
       <td><%= aim.unit %></td>
+      <td><%= aim.coin_amount %></td>
       <td><%= aim.rate %></td>
       <td>
         <%= simple_format aim.aim_codes.pluck(:code) %>
