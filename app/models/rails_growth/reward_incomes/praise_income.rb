@@ -14,8 +14,8 @@ class PraiseIncome < RewardIncome
   after_save :sync_to_account, if: -> { saved_change_to_amount? }
   after_create_commit :sync_log, :sync_to_praise_user, :sync_to_notification
 
-  delegate :name, to: :praise_user, prefix: :user
-  delegate :name, to: :gift, prefix: true
+  delegate :name, to: :user, prefix: :user
+  delegate :name, to: :gift, prefix: :gift
 
   def sync_to_account
     if RailsGrowth.config.gift_purchase == 'Coin'
