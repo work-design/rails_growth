@@ -16,6 +16,7 @@ class PraiseIncome < ApplicationRecord
   has_one :wallet_log, ->(o){ where(wallet_id: o.user.wallet_id) }, as: :source
   has_one :coin_log, ->(o){ where(user_id: o.user_id) }, as: :source
 
+  before_save :sync_earner
   before_save :split_amount, if: -> { amount_changed? }
   after_save :sync_to_reward, if: -> { saved_change_to_reward_amount? }
   after_create_commit :sync_to_praise_user,
@@ -35,7 +36,7 @@ class PraiseIncome < ApplicationRecord
                  methods: [:user_name, :gift_name]
 
   def sync_earner
-    reward.entity.respond_to?(:author) && reward.entity.author_id
+    author_id = reward.entity.respond_to?(:author) && reward.entity.author_id
     self.earner_id = author_id
   end
 

@@ -1,7 +1,7 @@
 en:
   activerecord:
     notify:
-      reward_income:
+      praise_income:
         default:
           title: '@%{user_name}'
           body: 打赏给你一个%{gift_name}礼物
