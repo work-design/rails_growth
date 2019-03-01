@@ -15,8 +15,15 @@ en:
       aim_user:
         title:
         tag_str:
+      praise_income:
+        title:
+        tag_str:
   wallet_log:
     expense:
+      praise_income:
+        title:
+        tag_str:
+    income:
       praise_income:
         title:
         tag_str:
