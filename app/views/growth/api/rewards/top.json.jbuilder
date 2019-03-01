@@ -1,4 +1,4 @@
-if current_user
+if @praise_user&.persisted?
   json.praise_user @praise_user, partial: 'praise_user', as: :praise_user
 end
 json.praise_users @praise_users, partial: 'praise_user', as: :praise_user
