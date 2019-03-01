@@ -14,8 +14,8 @@ class PraiseIncome < ApplicationRecord
   belongs_to :gift, foreign_key: :source_id, counter_cache: true
   belongs_to :praise_user, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
-  has_one :wallet_log, ->(o){ where(wallet_id: o.user.wallet_id) }, as: :source
-  has_one :coin_log, ->(o){ where(user_id: o.user_id) }, as: :source
+  has_many :wallet_log, ->(o){ where(wallet_id: o.user.wallet_id) }, as: :source
+  has_many :coin_log, ->(o){ where(user_id: o.user_id) }, as: :source
 
   before_save :sync_earner
   before_save :split_amount, if: -> { amount_changed? }
