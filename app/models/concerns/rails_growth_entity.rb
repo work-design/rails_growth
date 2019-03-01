@@ -15,7 +15,9 @@ module RailsGrowthEntity
     if super
       super
     else
-      create_reward
+      r = build_reward
+      r.save_with_amount
+      r
     end
   end
 
