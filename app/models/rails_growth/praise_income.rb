@@ -1,4 +1,4 @@
-class PraiseIncome < ApplicationRecrod
+class PraiseIncome < ApplicationRecord
   include PraiseCompute
   include RoyaltyCompute
 
