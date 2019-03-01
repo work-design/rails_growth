@@ -5,10 +5,6 @@ class RewardIncome < ApplicationRecord
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
   after_save :sync_to_reward, if: -> { saved_change_to_reward_amount? }
 
-  acts_as_notify :default,
-                 only: [:amount],
-                 methods: [:user_name, :gift_name]
-
   def sync_to_reward
     reward.reload
     reward.income_amount += self.reward_amount

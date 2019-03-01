@@ -20,9 +20,17 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
     create_table :reward_incomes do |t|
       t.references :reward
       t.references :user #2019.2.15
+      t.decimal :reward_amount, precision: 10, scale: 2
+      t.timestamps
+    end
+
+    create_table :praise_incomes do |t|
+      t.references :reward
+      t.references :user
+      t.references :earner
       t.references :source, polymorphic: true
-      t.string :type
       t.decimal :amount, precision: 10, scale: 2
+      t.string :state
       t.decimal :royalty_amount, precision: 10, scale: 2
       t.decimal :reward_amount, precision: 10, scale: 2
       t.decimal :profit_amount, precision: 10, scale: 2

@@ -4,8 +4,7 @@ module RailsGrowth
 
     config.eager_load_paths += Dir[
       "#{config.root}/app/models/rails_growth",
-      "#{config.root}/app/models/rails_growth/reward_incomes",
-      "#{config.root}/app/models/rails_growth/coin_exchanges"
+      "#{config.root}/app/models/rails_growth/concerns"
     ]
 
     config.generators do |g|

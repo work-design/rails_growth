@@ -4,6 +4,8 @@ class Coin < ApplicationRecord
   has_many :aim_users, primary_key: :user_id, foreign_key: :user_id
   has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
 
+  has_many :earned_incomes
+
   alias_method :origin_compute_expense_amount, :compute_expense_amount
   def compute_expense_amount
     origin_amount = origin_compute_expense_amount
@@ -28,10 +30,6 @@ class Coin < ApplicationRecord
     origin_amount = origin_compute_income_amount
     aim_amount = self.aim_users.sum(:coin_amount)
     origin_amount + aim_amount
-  end
-
-  def commit_praise_coin
-    coin.income_amount += self.royalty_amount
   end
 
 end

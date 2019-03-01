@@ -17,7 +17,10 @@ class Reward < ApplicationRecord
   end
 
   def compute_income_amount
-    self.reward_incomes.sum(:reward_amount)
+    inhouse = self.reward_incomes.sum(:reward_amount)
+    praise = self.praise_incomes.sum(:reward_amount)
+
+    inhouse + praise
   end
 
   def available?
