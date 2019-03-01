@@ -42,6 +42,11 @@ class Reward < ApplicationRecord
     rand((r - pad)..(r + pad)).round(2)
   end
 
+  def save_with_amount(amount = 0)
+    self.reward_incomes.build(reward_amount: amount) if amount > 0
+    self.save
+  end
+
   def self.entity_types
     self.distinct(:entity_type).pluck(:entity_type)
   end

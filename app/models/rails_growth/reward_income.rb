@@ -1,6 +1,6 @@
 class RewardIncome < ApplicationRecord
   belongs_to :reward, counter_cache: :incomes_count
-  belongs_to :user
+  belongs_to :user, optional: true
 
   attribute :reward_amount, :decimal, default: 0
   validates :reward_amount, numericality: { greater_than_or_equal_to: 0 }

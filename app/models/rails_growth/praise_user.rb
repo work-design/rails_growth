@@ -1,5 +1,5 @@
 class PraiseUser < ApplicationRecord
-
+  acts_as_list
   attribute :amount, :decimal, default: 0
 
   belongs_to :user
