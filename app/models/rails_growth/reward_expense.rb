@@ -51,12 +51,12 @@ class RewardExpense < ApplicationRecord
 
   def sync_to_coin
     coin = user.coin.reload
-
+    compute_amount = coin.compute_income_amount
     coin.income_amount += self.amount
-    if coin.income_amount == coin.compute_income_amount
+    if coin.income_amount == compute_amount
       coin.save!
     else
-      coin.errors.add :income_amount, 'not equal'
+      coin.errors.add :income_amount, "Amount: #{coin.income_amount} not equal Compute: #{compute_amount}"
       logger.error "#{self.class.name}/Coin: #{coin.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(coin)
     end
