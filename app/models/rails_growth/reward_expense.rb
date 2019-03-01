@@ -1,5 +1,4 @@
 class RewardExpense < ApplicationRecord
-
   attribute :amount, :decimal, default: 0
   belongs_to :reward, counter_cache: :expenses_count
   belongs_to :user, optional: true
