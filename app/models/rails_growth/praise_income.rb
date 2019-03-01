@@ -10,6 +10,7 @@ class PraiseIncome < ApplicationRecord
 
   belongs_to :reward
   belongs_to :user
+  belongs_to :earner, class_name: 'User', optional: true
   belongs_to :gift, foreign_key: :source_id, counter_cache: true
   belongs_to :praise_user, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
@@ -29,7 +30,6 @@ class PraiseIncome < ApplicationRecord
     init: 'init',
     royalty_done: 'royalty_done'
   }
-
 
   acts_as_notify :default,
                  only: [:amount],
