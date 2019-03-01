@@ -30,4 +30,8 @@ class Coin < ApplicationRecord
     origin_amount + aim_amount
   end
 
+  def commit_praise_coin
+    coin.income_amount += self.royalty_amount
+  end
+
 end

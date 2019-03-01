@@ -11,21 +11,21 @@ class PraiseIncome < RewardIncome
   has_one :coin_log, ->(o){ where(user_id: o.user_id) }, as: :source
 
   before_save :split_amount, if: -> { amount_changed? }
-  after_save :sync_to_account, if: -> { saved_change_to_amount? }
+  after_save :sync_to_praise_account, if: -> { saved_change_to_amount? }
   after_create_commit :sync_log, :sync_to_praise_user, :sync_to_notification
 
   delegate :name, to: :user, prefix: :user
   delegate :name, to: :gift, prefix: :gift
 
-  def sync_to_account
+  def sync_to_praise_account
     if RailsGrowth.config.gift_purchase == 'Coin'
-      sync_to_coin
+      sync_to_praise_coin
     else
-      sync_to_wallet
+      sync_to_praise_wallet
     end
   end
 
-  def sync_to_coin
+  def sync_to_praise_coin
     coin = user.coin.reload
 
     coin.expense_amount += self.amount
@@ -38,7 +38,7 @@ class PraiseIncome < RewardIncome
     end
   end
 
-  def sync_to_wallet
+  def sync_to_praise_wallet
     wallet = user.wallet.reload
 
     wallet.expense_amount += self.amount
@@ -85,6 +85,12 @@ class PraiseIncome < RewardIncome
     self.reward_amount = amount * RailsGrowth.config.rate_to_reward
     self.royalty_amount = amount * RailsGrowth.config.rate_to_royalty
     self.profit_amount = self.amount - reward_amount - royalty_amount
+  end
+
+  def sync_to_author_account
+    author = reward.entity.respond_to?(:author) && reward.entity.author
+    return unless author
+    coin = author.coin
   end
 
   def sync_to_notification
