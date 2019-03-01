@@ -48,7 +48,7 @@ module PraiseCompute
   end
 
   def sync_praise_wallet_log
-    wl = self.wallet_log || self.build_wallet_log
+    wl = self.wallet_logs.build
     wl.title = I18n.t('wallet_log.expense.praise_income.title')
     wl.tag_str = I18n.t('wallet_log.expense.praise_income.tag_str')
     wl.amount = -self.amount
@@ -56,7 +56,7 @@ module PraiseCompute
   end
 
   def sync_praise_coin_log
-    cl = self.coin_log || self.build_coin_log
+    cl = self.coin_logs.build
     cl.title = I18n.t('coin_log.expense.praise_income.title')
     cl.tag_str = I18n.t('coin_log.expense.praise_income.tag_str')
     cl.amount = -self.amount
