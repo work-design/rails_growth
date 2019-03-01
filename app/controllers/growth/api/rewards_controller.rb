@@ -18,7 +18,7 @@ class Growth::Api::RewardsController < Growth::Api::BaseController
     if params[:id]
       @reward = Reward.find params[:id]
     elsif params[:entity_type] && params[:entity_id]
-      @reward = Reward.find_by!(entity_type: params[:entity_type], entity_id: params[:entity_id])
+      @reward = Reward.find_or_create_by!(entity_type: params[:entity_type], entity_id: params[:entity_id])
     end
   end
 

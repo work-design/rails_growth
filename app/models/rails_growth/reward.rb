@@ -1,6 +1,9 @@
 class Reward < ApplicationRecord
   include WalletComputeAmount
 
+  attribute :min_piece, :decimal, default: RailsGrowth.config.default_min_piece
+  attribute :max_piece, :decimal, default: RailsGrowth.config.default_max_piece
+
   belongs_to :entity, polymorphic: true
   has_many :reward_incomes, dependent: :destroy
   has_many :praise_incomes, dependent: :destroy
