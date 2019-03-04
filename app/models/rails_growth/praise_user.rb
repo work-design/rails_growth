@@ -1,5 +1,5 @@
 class PraiseUser < ApplicationRecord
-  acts_as_list
+  acts_as_list scope: [:entity_type, :entity_id]
   attribute :amount, :decimal, default: 0
 
   belongs_to :user
