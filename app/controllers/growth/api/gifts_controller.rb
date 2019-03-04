@@ -11,9 +11,9 @@ class Growth::Api::GiftsController < Growth::Api::BaseController
     @praise_income = @gift.give_to(@reward, current_user)
 
     if @praise_income.persisted?
-      render json: { praise_income: @praise_income }
+      render 'give'
     else
-      render json: @gift.errors, status: :unprocessable_entity
+      process_errors(@praise_income)
     end
   end
 
