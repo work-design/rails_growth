@@ -16,8 +16,10 @@ class PraiseUser < ApplicationRecord
   end
 
   def self.reset_position
-    self.order(amount: :desc).each.with_index(1) do |item, index|
-      item.update_column :position, index
+    self.select(:entity_type, :entity_id).distinct.each do |pu|
+      self.where(entity_type: pu.entity_type, entity_id: pu.entity_id).order(amount: :desc).each.with_index(1) do |item, index|
+        item.update_column :position, index
+      end
     end
   end
 
