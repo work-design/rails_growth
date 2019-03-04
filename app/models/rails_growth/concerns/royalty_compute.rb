@@ -1,3 +1,4 @@
+# 给作者分成
 module RoyaltyCompute
   extend ActiveSupport::Concern
   included do
