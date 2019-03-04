@@ -1,0 +1,11 @@
+<div class="ui segment breadcrumb">
+  <%= link_to 'Back', admin_reward_reward_incomes_path(@reward_income.reward_id), class: 'section' %>
+  <div class="divider">/</div>
+  <div class="active section">Edit</div>
+</div>
+
+<div class="ui segment">
+  <%= form_with model: @reward_income, scope: :reward_income, url: admin_reward_income_path(@reward_income), method: :patch, local: true do |f| %>
+    <%= render partial: 'form', locals: { f: f } %>
+  <% end %>
+</div>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :rewards, shallow: true do
       resources :reward_incomes
     end
+    resources :praise_incomes
     resources :reward_expenses
     resources :gifts
   end

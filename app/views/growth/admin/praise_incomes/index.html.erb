@@ -20,6 +20,10 @@
     <tr>
       <th><%= RewardIncome.human_attribute_name(:id) %></th>
       <th><%= RewardIncome.human_attribute_name(:user_id) %></th>
+      <th>
+        <p><%= RewardIncome.human_attribute_name(:source_type) %></p>
+        <p><%= RewardIncome.human_attribute_name(:source_id) %></p>
+      </th>
       <th><%= RewardIncome.human_attribute_name(:reward_amount) %></th>
       <th>Actions</th>
     </tr>
@@ -29,6 +33,10 @@
     <tr>
       <td><%= reward_income.id %></td>
       <td><%= reward_income.user_id %></td>
+      <td>
+        <p><%= reward_income.source_type %></p>
+        <p><%= reward_income.source_id %></p>
+      </td>
       <td><%= reward_income.reward_amount %></td>
       <td class="ui labels">
         <%= link_to admin_reward_income_path(reward_income), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
