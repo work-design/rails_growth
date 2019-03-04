@@ -17,10 +17,11 @@ module PraiseCompute
     coin = user.coin.reload
 
     coin.expense_amount += self.amount
-    if coin.expense_amount == coin.compute_expense_amount
+    compute_amount = coin.compute_expense_amount
+    if coin.expense_amount == compute_amount
       coin.save!
     else
-      coin.errors.add :expense_amount, 'not equal'
+      coin.errors.add :expense_amount, "Praise:#{coin.expense_amount} not equal #{compute_amount}"
       logger.error "#{self.class.name}/Coin: #{coin.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(coin)
     end

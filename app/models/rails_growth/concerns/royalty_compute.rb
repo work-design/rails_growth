@@ -17,11 +17,12 @@ module RoyaltyCompute
     coin = earner.coin.reload
 
     coin.income_amount += self.royalty_amount
-    if coin.income_amount == coin.compute_income_amount
+    compute_amount = coin.compute_income_amount
+    if coin.income_amount == compute_amount
       coin.save!
       coin.to_cash(coin_amount: royalty_amount)
     else
-      coin.errors.add :income_amount, 'not equal'
+      coin.errors.add :income_amount, "Royalty: #{coin.income_amount} not equal #{compute_amount}"
       logger.error "#{self.class.name}/Coin: #{coin.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(coin)
     end

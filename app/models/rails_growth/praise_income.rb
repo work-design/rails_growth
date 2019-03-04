@@ -45,10 +45,11 @@ class PraiseIncome < ApplicationRecord
   def sync_to_reward
     reward.reload
     reward.income_amount += self.reward_amount
-    if reward.income_amount == reward.compute_income_amount
+    compute_amount = reward.compute_income_amount
+    if reward.income_amount == compute_amount
       reward.save!
     else
-      reward.errors.add :reward_amount, 'not equal'
+      reward.errors.add :reward_amount, "#{reward.income_amount} not equal #{compute_amount}"
       logger.error "#{self.class.name}/Reward: #{reward.errors.full_messages.join(', ')}"
       raise ActiveRecord::RecordInvalid.new(reward)
     end
