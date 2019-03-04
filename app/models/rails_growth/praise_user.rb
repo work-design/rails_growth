@@ -15,4 +15,10 @@ class PraiseUser < ApplicationRecord
     self.praise_incomes.sum(:amount)
   end
 
+  def self.reset_position
+    self.order(amount: :desc).each.with_index(1) do |item, index|
+      item.update_column :position, index
+    end
+  end
+
 end

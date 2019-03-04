@@ -19,6 +19,7 @@ module RoyaltyCompute
     coin.income_amount += self.royalty_amount
     if coin.income_amount == coin.compute_income_amount
       coin.save!
+      coin.to_cash(coin_amount: royalty_amount)
     else
       coin.errors.add :income_amount, 'not equal'
       logger.error "#{self.class.name}/Coin: #{coin.errors.full_messages.join(', ')}"
