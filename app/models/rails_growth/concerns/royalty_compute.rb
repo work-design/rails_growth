@@ -49,7 +49,7 @@ module RoyaltyCompute
   end
 
   def sync_royalty_wallet_log
-    wl = self.wallet_logs.build
+    wl = self.royalty_wallet_logs.build
     wl.title = I18n.t('wallet_log.income.praise_income.title')
     wl.tag_str = I18n.t('wallet_log.income.praise_income.tag_str')
     wl.amount = self.royalty_amount
@@ -57,7 +57,7 @@ module RoyaltyCompute
   end
 
   def sync_royalty_coin_log
-    cl = self.coin_logs.build
+    cl = self.royalty_coin_logs.build
     cl.title = I18n.t('coin_log.income.praise_income.title')
     cl.tag_str = I18n.t('coin_log.income.praise_income.tag_str')
     cl.amount = self.royalty_amount
