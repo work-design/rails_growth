@@ -2,6 +2,7 @@ class Aim < ApplicationRecord
 
   attribute :rate, :decimal, default: 1
   attribute :coin_amount, :integer, default: 0
+  attribute :reward_point, :integer, default: 0
   attribute :verbose, :boolean
   has_many :aim_codes, dependent: :delete_all
   has_many :aim_users, dependent: :nullify

@@ -36,7 +36,7 @@ class AimLog < ApplicationRecord
   def sync_aim_entity_state
     return unless reward_available?
 
-    if aim_entity.aim_logs_count.to_i >= aim.reward_point.to_i
+    if aim.reward_point > 0 && aim_entity.aim_logs_count.to_i >= aim.reward_point.to_i
       aim_entity.reward_amount = reward_amount
       aim_entity.commit_reward_done
       self.update(rewarded: true)
