@@ -1,6 +1,6 @@
 class RewardExpense < ApplicationRecord
   attribute :amount, :decimal, default: 0
-  belongs_to :reward, counter_cache: :expenses_count
+  belongs_to :reward
   belongs_to :user, optional: true
   belongs_to :coin, primary_key: :user_id, foreign_key: :user_id, optional: true, inverse_of: :reward_expenses
   belongs_to :aim, optional: true

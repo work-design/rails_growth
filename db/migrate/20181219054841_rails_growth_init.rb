@@ -61,6 +61,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       end
       t.string :code
       t.boolean :rewarded
+      t.string :serial_number
       t.datetime :created_at, null: false
     end
 

@@ -59,7 +59,7 @@ class AimEntity < ApplicationRecord
   end
 
   def user_name
-    user.name || user.id
+    user.name.presence || user.id
   end
 
 end

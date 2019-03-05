@@ -9,7 +9,6 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.decimal :max_piece, precision: 10, scale: 2
       t.decimal :min_piece, precision: 10, scale: 2
       t.integer :lock_version
-      t.integer :expenses_count
       t.datetime :start_at
       t.datetime :finish_at
       t.boolean :enabled, default: true
