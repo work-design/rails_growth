@@ -4,7 +4,6 @@ class AimUser < ApplicationRecord
 
   belongs_to :aim, optional: true
   belongs_to :user, optional: true
-  belongs_to :coin, foreign_key: :user_id, primary_key: :user_id, optional: true
   has_one :coin_log, ->(o) { where(user_id: o.user_id) }, as: :source
   has_many :aim_entities, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
 
@@ -38,7 +37,7 @@ class AimUser < ApplicationRecord
   end
 
   def sync_to_coin
-    coin.reload
+    coin = user.coin.reload
     coin.income_amount += self.coin_amount
     if coin.income_amount == coin.compute_income_amount
       coin.save!

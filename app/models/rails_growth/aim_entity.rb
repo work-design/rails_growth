@@ -1,4 +1,7 @@
 class AimEntity < ApplicationRecord
+
+  attribute :aim_logs_count, :integer, default: 0
+
   belongs_to :aim, optional: true
   belongs_to :user, optional: true
   belongs_to :entity, polymorphic: true, optional: true
@@ -11,7 +14,7 @@ class AimEntity < ApplicationRecord
   validates :user_id, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { ip.blank? }
   validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { user_id.blank? }
 
-  before_create :check_aim_user
+  before_create :init_aim_user
   after_create_commit :sync_aim_user_state
 
   enum state: {
@@ -20,12 +23,10 @@ class AimEntity < ApplicationRecord
     reward_done: 'reward_done'
   }
 
-  def check_aim_user
+  def init_aim_user
     self.aim_user || create_aim_user if self.user_id
     if aim.reward_point == 0
       self.state = 'reward_none'
-    elsif aim.reward_point == 1
-      self.state = 'reward_done'
     else
       self.state = 'reward_doing'
     end
@@ -35,27 +36,26 @@ class AimEntity < ApplicationRecord
     if aim_user.aim_entities_count.to_i >= aim.task_point.to_i
       self.aim_user.commit_task_done
     end
-    if reward_expense_id
-      sync_aim_and_user
+  end
+
+  def commit_reward_done
+    self.state = 'reward_done'
+
+    self.class.transaction do
+      self.save!
+      sync_to_reward_expense
     end
   end
 
-  def sync_reward_state
-    if self.aim_logs_count.to_i >= aim.reward_point.to_i
-      self.update(state: 'reward_done')
-    end
-  end
-
-  def sync_aim_and_user
-    reward_expense.aim_id = self.aim_id
-    reward_expense.user_id = self.user_id
-    reward_expense.save
-  end
-
-  def to_reward
-    if self.user && reward.available?
-      self.reward_expense || self.create_reward_expense!(user_id: user_id, reward_id: reward.id, amount: self.reward_amount)
-    end
+  def sync_to_reward_expense
+    re = self.reward_expense || self.build_reward_expense
+    re.attributes = {
+      user_id: user_id,
+      aim_id: aim_id,
+      reward_id: reward.id,
+      amount: self.reward_amount
+    }
+    re.save!
   end
 
 end

@@ -11,41 +11,38 @@ class AimLog < ApplicationRecord
   validates :user_id, presence: true, if: -> { ip.blank? }
   validates :ip, presence: true, if: -> { user_id.blank? }
 
-  before_create :check_aim_user
+  before_create :init_aim_entity
+  after_create_commit :sync_aim_entity_state
 
-  def check_aim_user
+  def init_aim_entity
     if self.user_id
       if self.aim_entity
-        self.aim_entity.sync_reward_state
-        check_rewarded
         self.aim_entity
       else
-       check_reward
+        create_aim_entity
       end
     elsif self.ip
       self.aim_entity_ip || create_aim_entity_ip
     end
   end
 
-  def check_reward
-    if user && reward&.available?
-      create_aim_entity!(reward_amount: per_amount)
-      aim_entity.to_reward
-      check_rewarded
-    else
-      self.create_aim_entity!
-    end
-  end
+  def sync_aim_entity_state
+    return unless reward_available?
 
-  def per_amount
-    per = reward.per_piece * aim.rate
-    per < reward.amount ? per : reward.amount
-  end
-
-  def check_rewarded
-    if aim_entity.state == 'reward_done'
+    if aim_entity.aim_logs_count.to_i >= aim.reward_point.to_i
+      aim_entity.reward_amount = reward_amount
+      aim_entity.commit_reward_done
       self.rewarded = true
     end
+  end
+
+  def reward_available?
+    user && reward&.available?
+  end
+
+  def reward_amount
+    per = reward.per_piece * aim.rate
+    per < reward.amount ? per : reward.amount
   end
 
   def serial_number
