@@ -48,4 +48,20 @@ module RailsGrowthEntity
     end
   end
 
+  # daily
+  # weekly
+  # monthly
+  # yearly
+  def logs_count(aim_code, timestamp = Time.now, type = nil)
+    aim_code = AimCode.find_by(code: aim_code)
+    return 0 unless aim_code
+
+    if type
+      sn = SerialNumberHelper.result(timestamp, type)
+      aim_logs.default_where(aim_id: aim_code.aim_id, 'serial_number-ll': sn).count
+    else
+      aim_logs.default_where(aim_id: aim_code.aim_id).count
+    end
+  end
+
 end
