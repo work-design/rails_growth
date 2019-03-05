@@ -36,12 +36,16 @@ module RailsGrowthEntity
   # weekly
   # monthly
   # yearly
-  def entity_count(timestamp, type, aim_code)
+  def entity_count(aim_code, timestamp = Time.now, type = nil)
     aim_code = AimCode.find_by(code: aim_code)
     return 0 unless aim_code
 
-    sn = SerialNumberHelper.result(timestamp, type)
-    aim_entities.default_where(aim_id: aim_code.aim_id, 'serial_number-ll': sn).count
+    if type
+      sn = SerialNumberHelper.result(timestamp, type)
+      aim_entities.default_where(aim_id: aim_code.aim_id, 'serial_number-ll': sn).count
+    else
+      aim_entities.default_where(aim_id: aim_code.aim_id).count
+    end
   end
 
 end

@@ -1,6 +1,6 @@
 module SerialNumberHelper
 
-  def self.result(timestamp, repeat_type)
+  def self.result(timestamp, repeat_type = nil)
     time = timestamp.to_datetime
     year = time.year
     month = time.month
