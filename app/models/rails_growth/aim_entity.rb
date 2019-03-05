@@ -58,4 +58,8 @@ class AimEntity < ApplicationRecord
     re.save!
   end
 
+  def user_name
+    user.name || user.id
+  end
+
 end

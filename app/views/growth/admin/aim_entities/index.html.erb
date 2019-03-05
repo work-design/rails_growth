@@ -28,6 +28,7 @@
         <p><%= AimEntity.human_attribute_name(:entity_id) %></p>
       </th>
       <th><%= AimEntity.human_attribute_name(:state) %></th>
+      <th><%= AimEntity.human_attribute_name(:reward_amount) %></th>
       <th><%= AimEntity.human_attribute_name(:created_at) %></th>
       <th>Actions</th>
     </tr>
@@ -38,7 +39,7 @@
       <td><%= aim_entity.id %></td>
       <td>
         <% if aim_entity.user_id %>
-          <%= link_to aim_entity.user.name, admin_user_path(aim_entity.user_id) %>
+          <%= link_to aim_entity.user_name, admin_user_path(aim_entity.user_id) %>
         <% end %>
         <span class="grey text"><%= aim_entity.ip %></span>
       </td>
@@ -49,6 +50,7 @@
         <p><%= aim_entity.entity_id %></p>
       </td>
       <td><%= aim_entity.state_i18n %></td>
+      <td><%= aim_entity.reward_amount %></td>
       <td><time><%= aim_entity.created_at.to_s(:rfc822) %></time></td>
       <td class="ui labels">
         <%= link_to admin_aim_entity_aim_logs_path(aim_entity), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
