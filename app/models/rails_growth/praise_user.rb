@@ -18,7 +18,7 @@ class PraiseUser < ApplicationRecord
   end
 
   def reset_position
-    lower_count = same_praise_users.default_where('amount-lt': self.amount).count
+    lower_count = same_praise_users.default_where('amount-lte': self.amount).count
     self.insert_at(lower_count)
   end
 
