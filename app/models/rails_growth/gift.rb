@@ -1,4 +1,7 @@
 class Gift < ApplicationRecord
+
+  attribute :praise_incomes_count, :integer, default: 0
+
   has_many :praise_incomes, as: :source
   has_one_attached :icon
 
