@@ -13,7 +13,7 @@ class PraiseUser < ApplicationRecord
       self.entity_id = reward.entity_id
     end
   end
-  after_commit :reset_position
+  after_commit :reset_position, if: -> { saved_change_to_amount? }
 
   def compute_amount
     self.praise_incomes.sum(:amount)
