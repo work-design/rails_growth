@@ -5,7 +5,7 @@ class PraiseUser < ApplicationRecord
   belongs_to :user
   belongs_to :reward
   has_many :praise_incomes, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id
-  has_many :same_praise_users, ->(o){ where(reward_id: o.reward_id, entity_type: o.entity_type, entity_id: o.entity_id) }, class_name: 'PraiseUser', foreign_key: :user_id, primary_key: :user_id
+  has_many :same_praise_users, ->(o){ where(reward_id: o.reward_id, entity_type: o.entity_type) }, class_name: 'PraiseUser', foreign_key: :entity_id, primary_key: :entity_id
 
   after_initialize if: :new_record? do
     if reward
