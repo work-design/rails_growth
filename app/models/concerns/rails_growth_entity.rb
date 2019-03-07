@@ -65,4 +65,8 @@ module RailsGrowthEntity
     end
   end
 
+  def cache_entity_logs
+    puts 'should implement this method in model'
+  end
+
 end

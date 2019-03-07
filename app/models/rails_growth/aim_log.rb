@@ -19,7 +19,7 @@ class AimLog < ApplicationRecord
     self.serial_number = init_serial_number
   end
   before_create :init_aim_entity
-  after_create_commit :sync_aim_entity_state
+  after_create_commit :sync_aim_entity_state, :cache_entity_logs
 
   def init_aim_entity
     if self.user_id
@@ -31,6 +31,10 @@ class AimLog < ApplicationRecord
     elsif self.ip
       self.aim_entity_ip || create_aim_entity_ip
     end
+  end
+
+  def cache_entity_logs
+    entity&.cache_entity_logs
   end
 
   def sync_aim_entity_state
