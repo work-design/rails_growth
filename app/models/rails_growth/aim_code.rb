@@ -19,7 +19,7 @@ class AimCode < ApplicationRecord
 
   def self.growth_hash
     Rails.cache.fetch('rails_growth', {}) do
-      AimCode.pluck(:code, :aim_id).to_combined_h
+      AimCode.pluck(:code, :aim_id).to_array_h.to_combine_h
     end
   end
 
