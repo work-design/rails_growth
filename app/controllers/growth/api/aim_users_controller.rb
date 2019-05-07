@@ -1,4 +1,4 @@
-class AimUsersController < ApplicationController
+class Growth::Api::AimUsersController < ApplicationController
   before_action :set_aim_user, only: [:show]
 
   def index
