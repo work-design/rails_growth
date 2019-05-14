@@ -1,5 +1,5 @@
 # 给作者分成
-module RoyaltyCompute
+module RailsGrowth::RoyaltyCompute
   extend ActiveSupport::Concern
   included do
     after_save :sync_to_royalty_account, if: -> { saved_change_to_royalty_amount? }

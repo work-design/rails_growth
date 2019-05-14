@@ -1,8 +1,6 @@
 module RailsGrowth::Reward
   extend ActiveSupport::Concern
   included do
-    include WalletComputeAmount
-  
     attribute :min_piece, :decimal, default: RailsGrowth.config.default_min_piece
     attribute :max_piece, :decimal, default: RailsGrowth.config.default_max_piece
   

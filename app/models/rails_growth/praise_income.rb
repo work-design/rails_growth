@@ -1,7 +1,6 @@
 module RailsGrowth::PraiseIncome
   extend ActiveSupport::Concern
-  include PraiseCompute
-  include RoyaltyCompute
+  
   included do
     attribute :amount, :decimal, default: 0  # 用户打赏
     attribute :profit_amount, :decimal, default: 0  # 平台收入
