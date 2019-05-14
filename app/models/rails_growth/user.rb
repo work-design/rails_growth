@@ -1,4 +1,4 @@
-module RailsGrowthUser
+module RailsGrowth::User
   extend ActiveSupport::Concern
 
   included do

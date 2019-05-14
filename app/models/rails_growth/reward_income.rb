@@ -1,12 +1,15 @@
-class RewardIncome < ApplicationRecord
-  belongs_to :reward, counter_cache: :incomes_count
-  belongs_to :user, optional: true
-
-  attribute :reward_amount, :decimal, default: 0
-  validates :reward_amount, numericality: { greater_than_or_equal_to: 0 }
-  after_create :sync_to_reward, if: -> { saved_change_to_reward_amount? }
-  after_update :reset_to_reward, if: -> { saved_change_to_reward_amount? }
-
+module RailsGrowth::RewardIncome
+  extend ActiveSupport::Concern
+  included do
+    belongs_to :reward, counter_cache: :incomes_count
+    belongs_to :user, optional: true
+  
+    attribute :reward_amount, :decimal, default: 0
+    validates :reward_amount, numericality: { greater_than_or_equal_to: 0 }
+    after_create :sync_to_reward, if: -> { saved_change_to_reward_amount? }
+    after_update :reset_to_reward, if: -> { saved_change_to_reward_amount? }
+  end
+  
   def sync_to_reward
     reward.reload
     reward.income_amount += self.reward_amount

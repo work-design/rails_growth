@@ -1,7 +1,9 @@
-require_dependency 'rails_wallet/cash'
-class Cash < ApplicationRecord
-  has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
-
+module RailsGrowth::Cash
+  extend ActiveSupport::Concern
+  included do
+    has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
+  end
+  
   alias_method :origin_compute_income_amount, :compute_income_amount
   def compute_income_amount
     origin_amount = origin_compute_income_amount

@@ -1,8 +1,10 @@
-require_dependency 'rails_wallet/wallet'
-class Wallet < ApplicationRecord
-  has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
-  has_many :earned_incomes, class_name: 'PraiseIncome', primary_key: :user_id, foreign_key: :earner_id
-
+module RailsGrowth::Wallet
+  extend ActiveSupport::Concern
+  included do
+    has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
+    has_many :earned_incomes, class_name: 'PraiseIncome', primary_key: :user_id, foreign_key: :earner_id
+  end
+  
   alias_method :origin_compute_expense_amount, :compute_expense_amount
   def compute_expense_amount
     origin_amount = origin_compute_expense_amount

@@ -1,20 +1,23 @@
-class Reward < ApplicationRecord
-  include WalletComputeAmount
-
-  attribute :min_piece, :decimal, default: RailsGrowth.config.default_min_piece
-  attribute :max_piece, :decimal, default: RailsGrowth.config.default_max_piece
-
-  belongs_to :entity, polymorphic: true
-  has_many :reward_incomes, dependent: :destroy
-  has_many :praise_incomes, dependent: :destroy
-  has_many :reward_expenses, dependent: :destroy
-  has_many :aim_users, ->(o){ where(entity_type: o.entity_type) }, primary_key: :entity_id, foreign_key: :entity_id
-  has_many :praise_users, dependent: :destroy
-
-  validates :max_piece, numericality: { greater_than_or_equal_to: -> (o) { o.min_piece } }, allow_blank: true
-  validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }, allow_blank: true
-  validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
-
+module RailsGrowth::Reward
+  extend ActiveSupport::Concern
+  included do
+    include WalletComputeAmount
+  
+    attribute :min_piece, :decimal, default: RailsGrowth.config.default_min_piece
+    attribute :max_piece, :decimal, default: RailsGrowth.config.default_max_piece
+  
+    belongs_to :entity, polymorphic: true
+    has_many :reward_incomes, dependent: :destroy
+    has_many :praise_incomes, dependent: :destroy
+    has_many :reward_expenses, dependent: :destroy
+    has_many :aim_users, ->(o){ where(entity_type: o.entity_type) }, primary_key: :entity_id, foreign_key: :entity_id
+    has_many :praise_users, dependent: :destroy
+  
+    validates :max_piece, numericality: { greater_than_or_equal_to: -> (o) { o.min_piece } }, allow_blank: true
+    validates :min_piece, numericality: { less_than_or_equal_to: -> (o) { o.max_piece } }, allow_blank: true
+    validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
+  end
+  
   def compute_expense_amount
     self.reward_expenses.sum(:amount)
   end
@@ -46,9 +49,11 @@ class Reward < ApplicationRecord
     self.reward_incomes.build(reward_amount: amount) if amount > 0
     self.save
   end
-
-  def self.entity_types
-    self.distinct(:entity_type).pluck(:entity_type)
+  
+  class_methods do
+    def entity_types
+      self.distinct(:entity_type).pluck(:entity_type)
+    end
   end
-
+  
 end

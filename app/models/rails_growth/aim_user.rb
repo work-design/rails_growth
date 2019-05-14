@@ -1,19 +1,22 @@
-class AimUser < ApplicationRecord
-  attribute :state, :string, default: 'task_doing'
-  attribute :coin_amount, :integer, default: 0
-
-  belongs_to :aim, optional: true
-  belongs_to :user, optional: true
-  has_one :coin_log, ->(o) { where(user_id: o.user_id) }, as: :source
-  has_many :aim_entities, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
-
-  enum state: {
-    task_doing: 'task_doing',
-    task_done: 'task_done'
-  }
-
-  after_commit :sync_log, if: -> { saved_change_to_coin_amount? }, on: [:create, :update]
-
+module RailsGrowth::AimUser
+  extend ActiveSupport::Concern
+  included do
+    attribute :state, :string, default: 'task_doing'
+    attribute :coin_amount, :integer, default: 0
+  
+    belongs_to :aim, optional: true
+    belongs_to :user, optional: true
+    has_one :coin_log, ->(o) { where(user_id: o.user_id) }, as: :source
+    has_many :aim_entities, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
+  
+    enum state: {
+      task_doing: 'task_doing',
+      task_done: 'task_done'
+    }
+  
+    after_commit :sync_log, if: -> { saved_change_to_coin_amount? }, on: [:create, :update]
+  end
+  
   def progress
     [aim_entities_count.to_i, aim.task_point]
   end

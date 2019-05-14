@@ -1,10 +1,11 @@
-require_dependency 'rails_wallet/coin'
-class Coin < ApplicationRecord
-  has_many :aim_users, primary_key: :user_id, foreign_key: :user_id
-  has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
-  has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
-  has_many :earned_incomes, class_name: 'PraiseIncome', primary_key: :user_id, foreign_key: :earner_id
-
+module RailsGrowth::Coin
+  extend ActiveSupport::Concern
+  included do
+    has_many :aim_users, primary_key: :user_id, foreign_key: :user_id
+    has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
+    has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
+    has_many :earned_incomes, class_name: 'PraiseIncome', primary_key: :user_id, foreign_key: :earner_id
+  end
   alias_method :origin_compute_income_amount, :compute_income_amount
   def compute_income_amount
     origin_amount = origin_compute_income_amount

@@ -1,4 +1,4 @@
-module RailsGrowthEntity
+module RailsGrowth::Entity
   extend ActiveSupport::Concern
 
   included do
