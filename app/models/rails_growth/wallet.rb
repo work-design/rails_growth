@@ -5,9 +5,8 @@ module RailsGrowth::Wallet
     has_many :earned_incomes, class_name: 'PraiseIncome', primary_key: :user_id, foreign_key: :earner_id
   end
   
-  alias_method :origin_compute_expense_amount, :compute_expense_amount
   def compute_expense_amount
-    origin_amount = origin_compute_expense_amount
+    origin_amount = super
 
     if RailsGrowth.config.gift_purchase == 'Wallet'
       praise_amount = self.praise_incomes.sum(:amount)
@@ -18,9 +17,8 @@ module RailsGrowth::Wallet
     origin_amount + praise_amount
   end
 
-  alias_method :origin_compute_income_amount, :compute_income_amount
   def compute_income_amount
-    origin_amount = origin_compute_income_amount
+    origin_amount = super
 
     if RailsGrowth.config.gift_purchase == 'Wallet'
       earned_amount = self.earned_incomes.sum(:royalty_amount)
