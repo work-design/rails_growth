@@ -1,5 +1,5 @@
-class PraiseUser < ApplicationRecord
-  include RailsGrowth::PraiseUser
+class PraiseIncome < ApplicationRecord
+  include RailsGrowth::PraiseIncome
   include RailsGrowth::PraiseCompute
   include RailsGrowth::RoyaltyCompute
-end unless defined? PraiseUser
+end unless defined? PraiseIncome
