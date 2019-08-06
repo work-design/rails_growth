@@ -1,4 +1,4 @@
-module RailsGrowth::Coin
+module RailsGrowth::Promote
   extend ActiveSupport::Concern
   included do
     has_many :aim_users, primary_key: :user_id, foreign_key: :user_id
@@ -19,12 +19,7 @@ module RailsGrowth::Coin
 
   def compute_expense_amount
     origin_amount = super
-
-    if RailsGrowth.config.gift_purchase == 'Coin'
-      praise_amount = self.praise_incomes.sum(:amount)
-    else
-      praise_amount = 0
-    end
+    praise_amount = self.praise_incomes.sum(:amount)
 
     origin_amount + praise_amount
   end
