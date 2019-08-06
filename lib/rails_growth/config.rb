@@ -6,11 +6,7 @@ module RailsGrowth
   configure do |config|
     config.admin_class = 'AdminController'
     config.my_class = 'MyController'
-    config.api_class = 'ApiController'
-    config.disabled_models = []
 
-    config.gift_purchase = 'Coin'
-    config.reward_purchase = 'Coin'
     config.rate_to_reward = 0.3
     config.rate_to_royalty = 0.5
     config.default_max_piece = 10

@@ -27,7 +27,7 @@ class RailsGrowthInit < ActiveRecord::Migration[5.2]
       t.string :serial_number
       t.string :state
       t.integer :aim_entities_count, default: 0
-      t.integer :coin_amount, default: 0
+      t.integer :amount, default: 0
       t.timestamps
     end
 

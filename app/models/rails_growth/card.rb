@@ -1,4 +1,4 @@
-module RailsGrowth::Wallet
+module RailsGrowth::Card
   extend ActiveSupport::Concern
   included do
     has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
@@ -7,24 +7,14 @@ module RailsGrowth::Wallet
   
   def compute_expense_amount
     origin_amount = super
-
-    if RailsGrowth.config.gift_purchase == 'Wallet'
-      praise_amount = self.praise_incomes.sum(:amount)
-    else
-      praise_amount = 0
-    end
+    praise_amount = self.praise_incomes.sum(:amount)
 
     origin_amount + praise_amount
   end
 
   def compute_income_amount
     origin_amount = super
-
-    if RailsGrowth.config.gift_purchase == 'Wallet'
-      earned_amount = self.earned_incomes.sum(:royalty_amount)
-    else
-      earned_amount = 0
-    end
+    earned_amount = self.earned_incomes.sum(:royalty_amount)
 
     origin_amount + earned_amount
   end

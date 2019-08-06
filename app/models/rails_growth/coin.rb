@@ -11,18 +11,9 @@ module RailsGrowth::Coin
     origin_amount = super
     aim_amount = self.aim_users.sum(:coin_amount)
 
-    if RailsGrowth.config.gift_purchase == 'Coin'
-      earned_amount = self.earned_incomes.sum(:royalty_amount)
-    else
-      earned_amount = 0
-    end
-
-    if RailsGrowth.config.reward_purchase == 'Coin'
-      reward_amount = self.reward_expenses.sum(:amount)
-    else
-      reward_amount = 0
-    end
-
+    earned_amount = self.earned_incomes.sum(:royalty_amount)
+    reward_amount = self.reward_expenses.sum(:amount)
+    
     origin_amount + aim_amount + earned_amount + reward_amount
   end
 

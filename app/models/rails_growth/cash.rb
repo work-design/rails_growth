@@ -6,12 +6,7 @@ module RailsGrowth::Cash
   
   def compute_income_amount
     origin_amount = super
-
-    if RailsGrowth.config.reward_purchase == 'Cash'
-      reward_amount = self.reward_expenses.sum(:amount)
-    else
-      reward_amount = 0
-    end
+    reward_amount = self.reward_expenses.sum(:amount)
 
     origin_amount + reward_amount
   end

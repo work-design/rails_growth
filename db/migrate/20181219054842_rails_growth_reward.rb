@@ -53,13 +53,5 @@ class RailsGrowthReward < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :gifts do |t|
-      t.string :name
-      t.string :code
-      t.integer :amount
-      t.integer :praise_incomes_count, default: 0
-      t.timestamps
-    end
-
   end
 end

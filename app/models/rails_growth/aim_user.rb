@@ -6,7 +6,6 @@ module RailsGrowth::AimUser
   
     belongs_to :aim, optional: true
     belongs_to :user, optional: true
-    has_one :coin_log, ->(o) { where(user_id: o.user_id) }, as: :source
     has_many :aim_entities, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
   
     enum state: {

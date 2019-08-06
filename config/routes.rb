@@ -18,10 +18,9 @@ Rails.application.routes.draw do
     end
     resources :praise_incomes
     resources :reward_expenses
-    resources :gifts
   end
 
-  scope :api, module: 'growth/api', as: :api do
+  scope :my, module: 'growth/my', as: :api do
     resources :aim_logs, only: [:create]
     scope ':entity_type/:entity_id' do
       resources :aim_logs, only: [:create]
