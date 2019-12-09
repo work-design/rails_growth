@@ -1,8 +1,11 @@
 module RailsGrowth::AimUser
   extend ActiveSupport::Concern
+
   included do
+    attribute :serial_number, :string
     attribute :state, :string, default: 'task_doing'
-    attribute :coin_amount, :integer, default: 0
+    attribute :amount, :integer, default: 0
+    attribute :aim_entities_count, :integer, default: 0
   
     belongs_to :aim, optional: true
     belongs_to :user, optional: true

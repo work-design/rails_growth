@@ -1,6 +1,7 @@
 # 给作者分成
 module RailsGrowth::RoyaltyCompute
   extend ActiveSupport::Concern
+
   included do
     after_save :sync_to_royalty_account, if: -> { saved_change_to_royalty_amount? }
     after_create_commit :sync_royalty_log, if: -> { saved_change_to_royalty_amount? }

@@ -58,7 +58,7 @@ module RailsGrowth::Entity
     return 0 unless aim_code
 
     if type
-      sn = SerialNumberHelper.result(timestamp, type)
+      sn = RailsGrowth::SerialNumberHelper.result(timestamp, type)
       aim_logs.default_where(aim_id: aim_code.aim_id, 'serial_number-ll': sn).count
     else
       aim_logs.default_where(aim_id: aim_code.aim_id).count

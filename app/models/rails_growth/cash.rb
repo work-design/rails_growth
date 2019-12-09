@@ -1,5 +1,6 @@
 module RailsGrowth::Cash
   extend ActiveSupport::Concern
+
   included do
     has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
   end

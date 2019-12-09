@@ -1,5 +1,6 @@
 module RailsGrowth::PraiseCompute
   extend ActiveSupport::Concern
+
   included do
     after_save :sync_to_praise_account, if: -> { saved_change_to_amount? }
     after_create_commit :sync_praise_log, if: -> { saved_change_to_amount? }

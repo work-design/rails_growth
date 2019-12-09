@@ -1,21 +1,24 @@
 module RailsGrowth::RewardExpense
   extend ActiveSupport::Concern
+
   included do
-    attribute :amount, :decimal, default: 0
+    attribute :amount, :decimal, precision: 10, scale: 2, default: 0
+
     belongs_to :reward
     belongs_to :user, optional: true
     belongs_to :coin, primary_key: :user_id, foreign_key: :user_id, optional: true, inverse_of: :reward_expenses
     belongs_to :aim, optional: true
+
     has_one :aim_entity, inverse_of: :reward_expense
     has_one :coin_log, -> (o){ where(user_id: o.user_id) }, as: :source
     has_one :cash_log, -> (o){ where(user_id: o.user_id) }, as: :source
   
     validates :amount, numericality: { greater_than_or_equal_to: 0 }
-  
+
     after_save :sync_to_reward, :sync_to_account, if: -> { saved_change_to_amount? }
     after_create_commit :sync_log
   end
-  
+
   def sync_to_reward
     reward.reload
     reward.expense_amount += self.amount

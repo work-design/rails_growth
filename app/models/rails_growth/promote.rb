@@ -1,5 +1,6 @@
 module RailsGrowth::Promote
   extend ActiveSupport::Concern
+
   included do
     has_many :aim_users, primary_key: :user_id, foreign_key: :user_id
     has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id

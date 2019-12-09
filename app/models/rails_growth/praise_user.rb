@@ -1,14 +1,16 @@
 module RailsGrowth::PraiseUser
   extend ActiveSupport::Concern
+
   included do
-    acts_as_list scope: [:entity_type, :entity_id]
-    attribute :amount, :decimal, default: 0
-  
+    attribute :amount, :decimal, precision: 10, scale: 2, default: 0
+    attribute :position, :integer
+
     belongs_to :user
     belongs_to :reward
+    belongs_to :entity, polymorphic: true
     has_many :praise_incomes, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id
     has_many :same_praise_users, ->(o){ where(reward_id: o.reward_id, entity_type: o.entity_type) }, class_name: 'PraiseUser', foreign_key: :entity_id, primary_key: :entity_id
-  
+
     after_initialize if: :new_record? do
       if reward
         self.entity_type = reward.entity_type
@@ -16,6 +18,8 @@ module RailsGrowth::PraiseUser
       end
     end
     after_commit :reset_position, if: -> { saved_change_to_amount? }
+
+    acts_as_list scope: [:entity_type, :entity_id]
   end
   
   def compute_amount

@@ -1,5 +1,6 @@
 module RailsGrowth::Card
   extend ActiveSupport::Concern
+
   included do
     has_many :praise_incomes, primary_key: :user_id, foreign_key: :user_id
     has_many :earned_incomes, class_name: 'PraiseIncome', primary_key: :user_id, foreign_key: :earner_id

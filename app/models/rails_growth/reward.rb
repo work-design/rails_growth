@@ -1,9 +1,17 @@
 module RailsGrowth::Reward
   extend ActiveSupport::Concern
+
   included do
-    attribute :min_piece, :decimal, default: RailsGrowth.config.default_min_piece
-    attribute :max_piece, :decimal, default: RailsGrowth.config.default_max_piece
-  
+    attribute :min_piece, :decimal, precision: 10, scale: 2, default: RailsGrowth.config.default_min_piece
+    attribute :max_piece, :decimal, precision: 10, scale: 2, default: RailsGrowth.config.default_max_piece
+    attribute :amount, :decimal, precision: 10, scale: 2
+    attribute :income_amount, :decimal, precision: 10, scale: 2
+    attribute :expense_amount, :decimal, precision: 10, scale: 2
+    attribute :start_at, :datetime
+    attribute :finish_at, :datetime
+    attribute :enabled, :boolean, default: true
+    attribute :lock_version, :integer
+
     belongs_to :entity, polymorphic: true
     has_many :reward_incomes, dependent: :destroy
     has_many :praise_incomes, dependent: :destroy

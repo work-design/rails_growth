@@ -2,41 +2,41 @@ module RailsGrowth::PraiseIncome
   extend ActiveSupport::Concern
   
   included do
-    attribute :amount, :decimal, default: 0  # 用户打赏
-    attribute :profit_amount, :decimal, default: 0  # 平台收入
-    attribute :royalty_amount, :decimal, default: 0  # 作者分成
-    attribute :reward_amount, :decimal, default: 0  # 赏金池
+    attribute :amount, :decimal, precision: 10, scale: 2, default: 0, comment: '用户打赏'
+    attribute :profit_amount, :decimal, precision: 10, scale: 2, default: 0, comment: '平台收入'
+    attribute :royalty_amount, :decimal, precision: 10, scale: 2, default: 0, comment: '作者分成'
+    attribute :reward_amount, :decimal, precision: 10, scale: 2, default: 0, comment: '赏金池'
     attribute :state, :string, default: 'init'
-  
+
     belongs_to :reward
     belongs_to :user
     belongs_to :earner, class_name: 'User', optional: true
-    belongs_to :gift, foreign_key: :source_id, counter_cache: true
+    belongs_to :source, polymorphic: true, counter_cache: true
     belongs_to :praise_user, ->(o){ where(reward_id: o.reward_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
-  
+
     has_many :wallet_logs, ->(o){ where(wallet_id: o.user.wallet_id) }, as: :source
     has_many :royalty_wallet_logs, ->(o){ where(wallet_id: o.earner.wallet_id) }, class_name: 'WalletLog', as: :source
     has_many :coin_logs, ->(o){ where(user_id: o.user_id) }, as: :source
     has_many :royalty_coin_logs, ->(o){ where(user_id: o.earner_id) }, class_name: 'CoinLog', as: :source
-  
+
     before_save :sync_earner
     before_save :split_amount, if: -> { amount_changed? }
     after_save :sync_to_reward, if: -> { saved_change_to_reward_amount? }
-    after_create_commit :sync_to_praise_user,
-                        :sync_to_notification
-  
+    after_create_commit :sync_to_praise_user, :sync_to_notification
+
     delegate :name, to: :user, prefix: :user
     delegate :name, to: :gift, prefix: :gift
-  
+
     enum state: {
       init: 'init',
       royalty_done: 'royalty_done'
     }
   
-    acts_as_notify :default,
-                   only: [:amount],
-                 methods: [:user_name, :gift_name]
-  
+    acts_as_notify(
+      :default,
+      only: [:amount],
+      methods: [:user_name, :gift_name]
+    )
   end
   
   def sync_earner
