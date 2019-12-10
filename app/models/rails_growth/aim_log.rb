@@ -71,7 +71,7 @@ module RailsGrowth::AimLog
     unless sa.blank?
       return sa.first
     end
-    SerialNumberHelper.result(created_at, aim.repeat_type)
+    RailsGrowth::SerialNumberHelper.result(created_at, aim.repeat_type)
   end
 
 end

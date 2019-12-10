@@ -1,4 +1,4 @@
-module SerialNumberHelper
+module RailsGrowth::SerialNumberHelper
   extend self
   
   def result(timestamp, repeat_type = nil)

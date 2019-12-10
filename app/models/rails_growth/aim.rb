@@ -36,7 +36,7 @@ module RailsGrowth::Aim
   end
 
   def serial_number(timestamp)
-    SerialNumberHelper.result(timestamp, repeat_type)
+    RailsGrowth::SerialNumberHelper.result(timestamp, repeat_type)
   end
   
   class_methods do
