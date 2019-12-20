@@ -1,6 +1,6 @@
 <div class="ui attached segment">
 
-<%= search_form_with model: AimUser.new do |f| %>
+<%= form_with theme: 'search', model: AimUser.new do |f| %>
   <div class="fields">
     <%= f.text_field :user_id %>
     <%= f.text_field :ip %>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   end
 
-  scope :admin, module: 'growth/admin', as: 'admin' do
+  scope :admin, module: 'growth/admin', as: :admin do
     resources :aims do
       get 'add_item/:item' => :add_item, on: :collection, as: :add_item
       get 'remove_item/:item' => :remove_item, on: :collection, as: :remove_item
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :reward_expenses
   end
 
-  scope :my, module: 'growth/my', as: :api do
+  scope :my, module: 'growth/my', as: :my do
     resources :aim_logs, only: [:create]
     scope ':entity_type/:entity_id' do
       resources :aim_logs, only: [:create]
