@@ -1,14 +1,5 @@
-<div class="ui top attached borderless menu">
-  <div class="header item">Admin Aims</div>
-  <div class="right menu">
-    <div class="item">
-      <%= link_to 'New Admin Aim', new_admin_aim_path, class: 'ui teal button' %>
-    </div>
-  </div>
-</div>
-
 <div class="ui attached segment">
-  <%= render 'search_form' %>
+  <%= render 'filter' %>
 </div>
 
 <table class="ui bottom attached table">
@@ -23,7 +14,11 @@
       <th><%= Aim.human_attribute_name(:coin_amount) %></th>
       <th><%= Aim.human_attribute_name(:rate) %></th>
       <th><%= Aim.human_attribute_name(:code) %></th>
-      <th>Actions</th>
+      <th>
+        <%= link_to new_admin_aim_path, data: { tooltip: t('.new') }, remote: true, class: 'ui teal button' do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
