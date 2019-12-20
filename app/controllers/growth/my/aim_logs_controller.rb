@@ -1,4 +1,4 @@
-class Growth::Api::AimLogsController < Growth::Api::BaseController
+class Growth::My::AimLogsController < Growth::My::BaseController
   before_action :set_aim_log, only: [:show]
 
   def show

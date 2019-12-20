@@ -1,4 +1,4 @@
-class Growth::Admin::BaseController < RailsGrowth.config.admin_class.constantize
+class Growth::Admin::BaseController < RailsGrowth.config.admin_controller.constantize
 
 
 end

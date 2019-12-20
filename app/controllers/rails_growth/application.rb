@@ -1,4 +1,4 @@
-module RailsGrowth::Api
+module RailsGrowth::Application
   extend ActiveSupport::Concern
 
   included do

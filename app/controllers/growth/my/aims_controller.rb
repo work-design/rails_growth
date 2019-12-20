@@ -1,4 +1,4 @@
-class Growth::Api::AimsController < Growth::Api::BaseController
+class Growth::My::AimsController < Growth::My::BaseController
   before_action :set_aim, only: [:show, :update, :destroy]
 
   def index

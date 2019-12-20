@@ -1,4 +1,4 @@
-class Growth::Api::RewardsController < Growth::Api::BaseController
+class Growth::My::RewardsController < Growth::My::BaseController
   before_action :set_reward, only: [:top]
 
   def top
