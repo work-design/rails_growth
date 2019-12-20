@@ -4,7 +4,7 @@ module RailsGrowth::AimUser
   included do
     attribute :serial_number, :string
     attribute :state, :string, default: 'task_doing'
-    attribute :amount, :integer, default: 0
+    attribute :reward_amount, :integer, default: 0
     attribute :aim_entities_count, :integer, default: 0
   
     belongs_to :aim, optional: true
@@ -16,7 +16,7 @@ module RailsGrowth::AimUser
       task_done: 'task_done'
     }
   
-    after_commit :sync_log, if: -> { saved_change_to_coin_amount? }, on: [:create, :update]
+    after_commit :sync_log, if: -> { saved_change_to_reward_amount? }, on: [:create, :update]
   end
   
   def progress
@@ -24,8 +24,10 @@ module RailsGrowth::AimUser
   end
 
   def commit_task_done
+    return if aim.task_point.to_i > aim_entities_count.to_i
+    
     self.state = 'task_done'
-    self.coin_amount = aim.coin_amount
+    self.reward_amount = aim.reward_amount
 
     self.class.transaction do
       self.save!
@@ -37,13 +39,13 @@ module RailsGrowth::AimUser
     cl = self.coin_log || self.build_coin_log
     cl.title = I18n.t('coin_log.income.aim_user.title')
     cl.tag_str = I18n.t('coin_log.income.aim_user.tag_str')
-    cl.amount = self.coin_amount
+    cl.amount = self.reward_amount
     cl.save
   end
 
   def sync_to_coin
     coin = user.coin.reload
-    coin.income_amount += self.coin_amount
+    coin.income_amount += self.reward_amount
     if coin.income_amount == coin.compute_income_amount
       coin.save!
     else

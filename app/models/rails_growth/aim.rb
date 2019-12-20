@@ -8,9 +8,9 @@ module RailsGrowth::Aim
     attribute :rate, :decimal, precision: 10, scale: 2, default: 1
     attribute :task_point, :integer, default: 0
     attribute :reward_point, :integer, default: 0
-    attribute :coin_amount, :integer, default: 0
+    attribute :reward_amount, :integer, default: 0
     attribute :verbose, :boolean
-    
+
     has_many :aim_codes, dependent: :delete_all
     has_many :aim_users, dependent: :nullify
     has_many :aim_entities, dependent: :nullify

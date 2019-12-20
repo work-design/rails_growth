@@ -12,6 +12,12 @@
 * 会员卡额度，可用于消费；
 * 优惠券
 
+## 原理
+
+```
+aim -> aim_user -> aim_entity -> aim_log
+```
+
 ## 依赖
 * [rails_vip](https://github.com/work-design/rails_vip) 发放奖励；
 * [rails_trade](https://github.com/work-design/rails_trade) 发放优惠券；

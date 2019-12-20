@@ -64,7 +64,7 @@ class Growth::Admin::AimsController < Growth::Admin::BaseController
       :unit,
       :rate,
       :repeat_type,
-      :coin_amount,
+      :reward_amount,
       aim_codes_attributes: {}
     )
   end

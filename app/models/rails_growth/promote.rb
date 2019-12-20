@@ -10,7 +10,7 @@ module RailsGrowth::Promote
   
   def compute_income_amount
     origin_amount = super
-    aim_amount = self.aim_users.sum(:coin_amount)
+    aim_amount = self.aim_users.sum(:reward_amount)
 
     earned_amount = self.earned_incomes.sum(:royalty_amount)
     reward_amount = self.reward_expenses.sum(:amount)

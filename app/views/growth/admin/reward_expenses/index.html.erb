@@ -1,21 +1,6 @@
-<div class="ui segment breadcrumb">
-  <%= link_to 'Back', admin_rewards_path, class: 'section' %>
-  <div class="divider">/</div>
-  <div class="action section">expenses</div>
+<div class="ui attached segment">
+  <%= render 'filter' %>
 </div>
-
-<div class="ui top attached borderless menu">
-  <div class="header item">Admin Reward Expenses</div>
-  <div class="right menu">
-    <% if params[:reward_id] %>
-    <div class="item">
-      <%= link_to 'New Reward expense', new_admin_reward_expense_path(reward_id: params[:reward_id]), class: 'ui teal button' %>
-    </div>
-    <% end %>
-  </div>
-</div>
-
-<%= render 'filter' %>
 
 <table class="ui bottom attached table">
   <thead>
@@ -25,7 +10,13 @@
       <th><%= RewardExpense.human_attribute_name(:aim) %></th>
       <th><%= RewardExpense.human_attribute_name(:user) %></th>
       <th><%= RewardExpense.human_attribute_name(:aim_entity) %></th>
-      <th>Actions</th>
+      <th>
+        <% if params[:reward_id] %>
+          <%= link_to new_admin_reward_expense_path(reward_id: params[:reward_id]), remote: true, class: 'ui teal button' do %>
+            <i class="fas fa-plus"></i>
+          <% end %>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -42,12 +33,12 @@
       <td>
         <%= reward_expense.aim_entity&.id %>
       </td>
-      <td class="ui labels">
-        <%= link_to edit_admin_reward_expense_path(reward_expense), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
-          <i class="pencil alternate icon"></i>
+      <td>
+        <%= link_to edit_admin_reward_expense_path(reward_expense), data: { tooltip: t('.edit') }, remote: true, class: 'ui pink mini icon button' do %>
+          <i class="fas fa-pencil"></i>
         <% end %>
-        <%= link_to admin_reward_expense_path(reward_expense), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
-          <i class="times icon"></i>
+        <%= link_to admin_reward_expense_path(reward_expense), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui red mini icon button' do %>
+          <i class="fas fa-trash"></i>
         <% end %>
       </td>
     </tr>
