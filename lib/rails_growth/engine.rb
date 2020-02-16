@@ -15,9 +15,5 @@ module RailsGrowth
       g.templates.unshift File.expand_path('lib/templates', RailsCom::Engine.root)
     end
 
-    initializer 'rails_growth.assets.precompile' do |app|
-      app.config.assets.precompile += ['rails_growth_manifest.js']
-    end
-
   end
 end
