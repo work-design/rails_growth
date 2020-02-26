@@ -21,10 +21,10 @@ module RailsGrowth::AimEntity
 
     validates :user_id, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { ip.blank? }
     validates :ip, presence: true, uniqueness: { scope: [:aim_id, :serial_number, :entity_type, :entity_id] }, if: -> { user_id.blank? }
-  
+
     before_create :init_aim_user
     after_create_commit :sync_aim_user_state
-  
+
     enum state: {
       reward_none: 'reward_none',
       reward_doing: 'reward_doing',

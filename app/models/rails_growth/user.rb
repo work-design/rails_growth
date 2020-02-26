@@ -13,4 +13,8 @@ module RailsGrowth::User
     self.reward_expenses.sum(:amount)
   end
 
+  def xx
+
+  end
+
 end
