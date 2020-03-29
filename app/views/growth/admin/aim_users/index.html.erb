@@ -43,15 +43,15 @@
       <td><time><%= aim_user.created_at.to_s(:rfc822) %></time></td>
       <td class="ui labels">
         <% if aim_user.user_id %>
-          <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), aria: { label: t('.show') }, class: 'ui blue mini icon button' do %>
             <i class="location arrow icon"></i>
           <% end %>
         <% else %>
-          <%= link_to admin_aim_aim_entities_path(ip: aim_user.ip), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+          <%= link_to admin_aim_aim_entities_path(ip: aim_user.ip), aria: { label: t('.show') }, class: 'ui blue mini icon button' do %>
             <i class="location arrow icon"></i>
           <% end %>
         <% end %>
-        <%= link_to admin_aim_user_path(aim_user), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+        <%= link_to admin_aim_user_path(aim_user), method: :delete, aria: { label: t('.destroy') }, data: { confrim: t('.confirm') }, class: 'ui red mini icon button' do %>
           <i class="times icon"></i>
         <% end %>
       </td>

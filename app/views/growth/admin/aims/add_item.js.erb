@@ -1,4 +1,4 @@
-<% form_object = default_form_object(@aim, on: { wrapper_id: true }) %>
+<% form_object = default_form_object(@aim, can: { wrap_id: true }) %>
 
 var template = '<%= j(render partial: 'item_field', locals: { f: form_object, index: UidHelper.sec_uuid }) %>'
 

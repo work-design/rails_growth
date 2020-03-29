@@ -15,7 +15,7 @@
       <th><%= Aim.human_attribute_name(:rate) %></th>
       <th><%= Aim.human_attribute_name(:code) %></th>
       <th>
-        <%= link_to new_admin_aim_path, data: { tooltip: t('.new') }, remote: true, class: 'ui teal button' do %>
+        <%= link_to new_admin_aim_path, aria: { label: t('.new') }, remote: true, class: 'ui teal button' do %>
           <i class="fas fa-plus"></i>
         <% end %>
       </th>
@@ -36,13 +36,13 @@
         <%= simple_format aim.aim_codes.pluck(:code) %>
       </td>
       <td class="ui labels">
-        <%= link_to admin_aim_aim_users_path(aim_id: aim.id), data: { tooltip: t('.show') }, class: 'ui blue mini icon button' do %>
+        <%= link_to admin_aim_aim_users_path(aim_id: aim.id), aria: { label: t('.show') }, class: 'ui blue mini icon button' do %>
           <i class="location arrow icon"></i>
         <% end %>
-        <%= link_to edit_admin_aim_path(aim), data: { tooltip: t('.edit') }, class: 'ui pink mini icon button' do %>
+        <%= link_to edit_admin_aim_path(aim), aria: { label: t('.edit') }, class: 'ui pink mini icon button' do %>
           <i class="pencil alternate icon"></i>
         <% end %>
-        <%= link_to admin_aim_path(aim), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+        <%= link_to admin_aim_path(aim), method: :delete, aria: { label: t('.destroy') }, data: { confrim: t('.confirm') }, class: 'ui red mini icon button' do %>
           <i class="times icon"></i>
         <% end %>
       </td>

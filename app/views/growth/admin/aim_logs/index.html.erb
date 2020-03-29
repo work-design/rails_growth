@@ -50,7 +50,7 @@
       </td>
       <td><%= aim_log.created_at %></td>
       <td class="ui labels">
-        <%= link_to admin_aim_log_path(aim_log, aim_user_id: params[:aim_user_id]), method: :delete, data: { tooltip: t('.destroy'), confirm: 'Are you sure?' }, class: 'ui red mini icon button' do %>
+        <%= link_to admin_aim_log_path(aim_log, aim_user_id: params[:aim_user_id]), method: :delete, aria: { label: t('.destroy') }, data: { confrim: t('.confirm') }, class: 'ui red mini icon button' do %>
           <i class="times icon"></i>
         <% end %>
       </td>
