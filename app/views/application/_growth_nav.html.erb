@@ -1,8 +1,8 @@
 <div class="<%= active_helper(modules: 'growth/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
-  <%= content_tag :div, class: 'menu-list' do -%>
-    <%= link_to '任务管理', admin_aims_path, class: active_helper(controllers: 'aims') %>
-    <%= link_to '赏金管理', admin_rewards_path, class: active_helper(controllers: 'rewards') %>
-    <%= link_to '打赏管理', admin_gifts_path, class: active_helper(controllers: 'gifts') %>
+  <%= content_tag :div, class: 'menu-list' do %>
+    <%= link_to '任务管理', admin_aims_path, class: active_helper(controllers: 'aims', active: 'is-active') %>
+    <%= link_to '赏金管理', admin_rewards_path, class: active_helper(controllers: 'rewards', active: 'is-active') %>
+    <%= link_to '打赏管理', admin_gifts_path, class: active_helper(controllers: 'gifts', active: 'is-active') -%>
   <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fas fa-calendar-check"></i>
