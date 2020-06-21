@@ -4,18 +4,18 @@
   <div class="active section">Show</div>
 </div>
 
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <tbody>
     <tr>
-      <td class="right aligned"><%= AimUser.human_attribute_name(:user) %></td>
+      <td class="has-text-right"><%= AimUser.human_attribute_name(:user) %></td>
       <td><%= @aim_user.user %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= AimUser.human_attribute_name(:present_point) %></td>
+      <td class="has-text-right"><%= AimUser.human_attribute_name(:present_point) %></td>
       <td><%= @aim_user.present_point %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= AimUser.human_attribute_name(:day) %></td>
+      <td class="has-text-right"><%= AimUser.human_attribute_name(:day) %></td>
       <td><%= @aim_user.day %></td>
     </tr>
   </tbody>

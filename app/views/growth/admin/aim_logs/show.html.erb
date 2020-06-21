@@ -4,10 +4,10 @@
   <div class="active section">Show</div>
 </div>
 
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <tbody>
     <tr>
-      <td class="right aligned"><%= AimLog.human_attribute_name(:created_at) %></td>
+      <td class="has-text-right"><%= AimLog.human_attribute_name(:created_at) %></td>
       <td><%= @aim_log.created_at %></td>
     </tr>
   </tbody>
