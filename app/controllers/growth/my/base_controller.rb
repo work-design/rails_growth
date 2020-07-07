@@ -1,4 +1,3 @@
-class Growth::My::BaseController < RailsGrowth.config.my_controller.constantize
+class Growth::My::BaseController < MyController
 
-
-end
+end unless defined? Growth::My::BaseController
