@@ -1,38 +1,40 @@
-module RailsGrowth::AimCode
-  extend ActiveSupport::Concern
-  
-  included do
-    attribute :controller_path, :string
-    attribute :action_name, :string
-    attribute :code, :string, null: false
-    
-    belongs_to :aim
-  
-    validates :code, uniqueness: { scope: :aim_id }, presence: true
-    before_validation :sync_code
-    after_commit :delete_cache
-  end
+module Growth
+  module Model::AimCode
+    extend ActiveSupport::Concern
 
-  def sync_code
-    if self.controller_path.present? && self.action_name.present?
-      self.code = [self.controller_path, self.action_name].join('#')
-    end
-  end
+    included do
+      attribute :controller_path, :string
+      attribute :action_name, :string
+      attribute :code, :string, null: false
 
-  def delete_cache
-    if Rails.cache.delete('rails_growth')
-      logger.debug "-----> Cache key rails_growth deleted"
+      belongs_to :aim
+
+      validates :code, uniqueness: { scope: :aim_id }, presence: true
+      before_validation :sync_code
+      after_commit :delete_cache
     end
-  end
-  
-  class_methods do
-    
-    def growth_hash
-      Rails.cache.fetch('rails_growth', {}) do
-        AimCode.pluck(:code, :aim_id).to_array_h.to_combine_h
+
+    def sync_code
+      if self.controller_path.present? && self.action_name.present?
+        self.code = [self.controller_path, self.action_name].join('#')
       end
     end
-    
-  end
 
+    def delete_cache
+      if Rails.cache.delete('rails_growth')
+        logger.debug "-----> Cache key rails_growth deleted"
+      end
+    end
+
+    class_methods do
+
+      def growth_hash
+        Rails.cache.fetch('rails_growth', {}) do
+          AimCode.pluck(:code, :aim_id).to_array_h.to_combine_h
+        end
+      end
+
+    end
+
+  end
 end

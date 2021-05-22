@@ -1,15 +1,17 @@
-module RailsGrowth::Cash
-  extend ActiveSupport::Concern
+module Growth
+  module Model::Cash
+    extend ActiveSupport::Concern
 
-  included do
-    has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
+    included do
+      has_many :reward_expenses, primary_key: :user_id, foreign_key: :user_id
+    end
+
+    def compute_income_amount
+      origin_amount = super
+      reward_amount = self.reward_expenses.sum(:amount)
+
+      origin_amount + reward_amount
+    end
+
   end
-  
-  def compute_income_amount
-    origin_amount = super
-    reward_amount = self.reward_expenses.sum(:amount)
-
-    origin_amount + reward_amount
-  end
-
 end
