@@ -1,3 +1,4 @@
-class Growth::Admin::BaseController < AdminController
-
-end unless defined? Growth::Admin::BaseController
+module Growth
+  class Admin::BaseController < AdminController
+  end
+end

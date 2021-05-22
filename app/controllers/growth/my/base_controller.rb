@@ -1,3 +1,4 @@
-class Growth::My::BaseController < MyController
-
-end unless defined? Growth::My::BaseController
+module Growth
+  class My::BaseController < MyController
+  end
+end
