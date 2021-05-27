@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.authors = ['qinmingyuan']
   spec.email = ['mingyuan0715@foxmail.com']
   spec.homepage = 'https://github.com/work-design/rails_growth'
-  spec.summary = 'Summary of RailsGrowth.'
+  spec.summary = '增长策略'
   spec.description = 'Description of RailsGrowth.'
-  spec.license = 'LGPL-3.0'
+  spec.license = 'MIT'
 
   spec.files = Dir[
     '{app,config,db,lib}/**/*',
