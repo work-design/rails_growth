@@ -1,4 +1,4 @@
-class Growth::My::GiftsController < Growth::My::BaseController
+class My::GiftsController < My::BaseController
   before_action :set_gift, only: [:give]
   before_action :require_login, only: [:give]
 
