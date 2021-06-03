@@ -17,23 +17,33 @@ Rails.application.routes.draw do
       resources :reward_expenses
     end
 
-    namespace :my, defaults: { business: 'my' } do
+    namespace :my, defaults: { namespace: 'my' } do
       resources :aim_logs, only: [:create]
       scope ':entity_type/:entity_id' do
         resources :aim_logs, only: [:create]
       end
       resources :rewards, only: [] do
-        get :top, on: :member
-        get :top, on: :collection
+        member do
+          get :top
+        end
+        collection do
+          get :top
+        end
       end
       scope ':entity_type/:entity_id' do
         resources :rewards, only: [] do
-          get :top, on: :collection
+          collection do
+            get :top
+          end
         end
       end
       resources :gifts, only: [:index] do
-        get :top, on: :collection
-        post :give, on: :member
+        collection do
+          get :top
+        end
+        member do
+          post :give
+        end
       end
       scope ':entity_type/:entity_id' do
         resources :gifts, only: [] do
