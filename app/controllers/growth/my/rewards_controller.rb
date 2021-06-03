@@ -1,26 +1,28 @@
-class Growth::My::RewardsController < Growth::My::BaseController
-  before_action :set_reward, only: [:top]
+module Growth
+  class My::RewardsController < My::BaseController
+    before_action :set_reward, only: [:top]
 
-  def top
-    @praise_users = @reward.praise_users.includes(:user).order(amount: :desc).page(params[:page])
+    def top
+      @praise_users = @reward.praise_users.includes(:user).order(amount: :desc).page(params[:page])
 
-    if current_user
-      @praise_user = @praise_users.find_by(user_id: current_user.id)
+      if current_user
+        @praise_user = @praise_users.find_by(user_id: current_user.id)
+      end
     end
-  end
 
-  def broadcast
-    @praise_amounts = PraiseIncome.top
-  end
-
-  private
-  def set_reward
-    if params[:id]
-      @reward = Reward.find params[:id]
-    elsif params[:entity_type] && params[:entity_id]
-      @reward = Reward.find_or_initialize_by(entity_type: params[:entity_type], entity_id: params[:entity_id])
-      @reward.save_with_amount
+    def broadcast
+      @praise_amounts = PraiseIncome.top
     end
-  end
 
+    private
+    def set_reward
+      if params[:id]
+        @reward = Reward.find params[:id]
+      elsif params[:entity_type] && params[:entity_id]
+        @reward = Reward.find_or_initialize_by(entity_type: params[:entity_type], entity_id: params[:entity_id])
+        @reward.save_with_amount
+      end
+    end
+
+  end
 end

@@ -17,9 +17,9 @@ module Growth
       @reward = Reward.new(reward_params)
 
       if @reward.save
-        redirect_to admin_rewards_url, notice: 'Reward was successfully created.'
+        render 'create'
       else
-        render :new
+        render :new, locals: { model: @reward }, status: :unprocessable_entity
       end
     end
 
@@ -30,16 +30,17 @@ module Growth
     end
 
     def update
-      if @reward.update(reward_params)
-        redirect_to admin_rewards_url, notice: 'Reward was successfully updated.'
+      @reward.assign_attributes(reward_params)
+
+      if @reward.save
+        render 'update'
       else
-        render :edit
+        render :edit, locals: { model: @reward }, status: :unprocessable_entity
       end
     end
 
     def destroy
       @reward.destroy
-      redirect_to admin_rewards_url, notice: 'Reward was successfully destroyed.'
     end
 
     private

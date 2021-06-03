@@ -4,6 +4,7 @@ module Growth
 
     def index
       @aim_entity = AimEntity.find(params[:aim_entity_id])
+
       @aim_logs = @aim_entity.aim_logs.order(id: :desc).page(params[:page])
     end
 
