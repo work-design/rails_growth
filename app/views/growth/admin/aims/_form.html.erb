@@ -1,5 +1,5 @@
 <%= form_with model: [:admin, @aim], local: true do |f| %>
-  <%= render 'shared/error_messages', target: @aim %>
+  <%= render 'error_messages', target: @aim %>
   <%= f.text_field :name %>
   <%= f.number_field :task_point %>
   <%= f.number_field :reward_point %>

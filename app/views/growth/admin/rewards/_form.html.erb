@@ -1,5 +1,5 @@
 <%= form_with model: [:admin, @reward], local: true do |f| %>
-  <%= render 'shared/error_messages', target: @reward %>
+  <%= render 'error_messages', target: @reward %>
   <%= f.text_field :entity_type %>
   <%= f.text_field :entity_id %>
   <%= f.number_field :max_piece %>
