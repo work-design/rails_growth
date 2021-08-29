@@ -1,0 +1,24 @@
+zh:
+  growth:
+    title: 数据增长
+  coin_log:
+    expense:
+      praise_income:
+        title: 金币打赏
+        tag_str: 打赏
+    income:
+      aim_user:
+        title: 任务奖励
+        tag_str: 任务
+      praise_income:
+        title: 获得打赏
+        tag_str: 打赏收入
+    wallet_log:
+      expense:
+        praise_income:
+          title: 虚拟币打赏
+          tag_str: 打赏
+      income:
+        praise_income:
+          title: 获得打赏
+          tag_str: 打赏收入
