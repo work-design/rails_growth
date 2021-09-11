@@ -1,5 +1,9 @@
 # RailsGrowth
 
+[![测试](https://github.com/work-design/rails_growth/actions/workflows/test.yml/badge.svg)](https://github.com/work-design/rails_growth/actions/workflows/test.yml)
+[![Docker构建](https://github.com/work-design/rails_growth/actions/workflows/cd.yml/badge.svg)](https://github.com/work-design/rails_growth/actions/workflows/cd.yml)
+[![Gem](https://github.com/work-design/rails_growth/actions/workflows/gempush.yml/badge.svg)](https://github.com/work-design/rails_growth/actions/workflows/gempush.yml)
+
 `rails_growth` 是一个用于运营增长的系统，具有如下特性：
 
 * 不需要埋点：除了服务端无法获知的客户端行为（如分享、跳转），只需要监听相关请求即可；
@@ -19,8 +23,6 @@ aim -> aim_user -> aim_entity -> aim_log
 ```
 
 ## 依赖
-* [rails_vip](https://github.com/work-design/rails_vip) 发放奖励；
-* [rails_trade](https://github.com/work-design/rails_trade) 发放优惠券；
 
 ## 注意
 

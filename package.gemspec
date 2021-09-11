@@ -1,9 +1,6 @@
-$:.push File.expand_path('lib', __dir__)
-require 'rails_growth/version'
-
 Gem::Specification.new do |spec|
   spec.name = 'rails_growth'
-  spec.version = RailsGrowth::VERSION
+  spec.version = '0.0.1'
   spec.authors = ['qinmingyuan']
   spec.email = ['mingyuan0715@foxmail.com']
   spec.homepage = 'https://github.com/work-design/rails_growth'
@@ -19,5 +16,4 @@ Gem::Specification.new do |spec|
   ]
 
   spec.add_dependency 'rails_com', '~> 1.2'
-  spec.add_development_dependency 'sqlite3'
 end
