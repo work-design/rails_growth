@@ -23,6 +23,13 @@ GIT
       rails
 
 GIT
+  remote: https://github.com/work-design/rails_extend.git
+  revision: f339c960ec81768c1cc80190f0713f9766150082
+  specs:
+    rails_extend (1.0.0)
+      rails (>= 5.0)
+
+GIT
   remote: https://github.com/work-design/rails_vite.git
   revision: 231c4cf7eb14fc610ffd8d36b686df8e5d2351cd
   specs:
@@ -200,8 +207,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    rails_extend (1.0.0)
-      rails (>= 6.1)
     railties (6.1.4.1)
       actionpack (= 6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -245,6 +250,7 @@ DEPENDENCIES
   rails
   rails_com!
   rails_design!
+  rails_extend!
   rails_growth!
   rails_vite!
   sdoc
