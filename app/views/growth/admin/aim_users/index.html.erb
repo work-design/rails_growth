@@ -40,7 +40,7 @@
       <td><%= aim_user.state_i18n %></td>
       <td><%= aim_user.reward_amount %></td>
       <td><%= aim_user.aim_entities_count %></td>
-      <td><time><%= aim_user.created_at.to_s(:rfc822) %></time></td>
+      <td><time><%= aim_user.created_at.to_s(:iso8601) %></time></td>
       <td class="ui labels">
         <% if aim_user.user_id %>
           <%= link_to admin_aim_aim_entities_path(user_id: aim_user.user_id), aria: { label: t('.show') }, class: 'ui blue mini icon button' do %>
