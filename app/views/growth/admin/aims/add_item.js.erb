@@ -1,9 +1,0 @@
-<% form_object = default_form_object(@aim, can: { wrap_id: true }) %>
-
-var template = '<%= j(render partial: 'item_field', locals: { f: form_object, index: UidHelper.sec_uuid }) %>'
-
-$('#aim_aim_codes_<%= params[:index] %>').after(template);
-
-$('[data-title="aim_aim_code"]').dropdown({
-  placeholder: true
-});

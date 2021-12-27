@@ -1,0 +1,5 @@
+<% if params[:reward_id] %>
+  <%= link_to new_admin_reward_expense_path(reward_id: params[:reward_id]), remote: true, class: 'ui teal button' do %>
+    <i class="fa-light fa-plus"></i>
+  <% end %>
+<% end %>
