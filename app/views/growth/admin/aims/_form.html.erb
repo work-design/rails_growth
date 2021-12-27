@@ -1,14 +1,10 @@
-<%= form_with model: [:admin, @aim], local: true do |f| %>
-  <%= render 'error_messages', target: @aim %>
-  <%= f.text_field :name %>
-  <%= f.number_field :task_point %>
-  <%= f.number_field :reward_point %>
-  <%= f.text_field :unit %>
-  <%= f.number_field :rate %>
-  <%= f.number_field :reward_amount %>
-  <%= f.select :repeat_type, options_for_select(Aim.options_i18n(:repeat_type), @aim.repeat_type) %>
-  <%= f.fields :aim_codes, on: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'two wide field' } do |ef| %>
-    <%= render partial: 'item_form', locals: { ef: ef } %>
-  <% end %>
-  <%= f.submit %>
+<%= f.text_field :name %>
+<%= f.number_field :task_point %>
+<%= f.number_field :reward_point %>
+<%= f.text_field :unit %>
+<%= f.number_field :rate %>
+<%= f.number_field :reward_amount %>
+<%= f.select :repeat_type, options_for_select(Aim.options_i18n(:repeat_type), @aim.repeat_type) %>
+<%= f.fields :aim_codes, on: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'two wide field' } do |ef| %>
+  <%= render partial: 'item_form', locals: { ef: ef } %>
 <% end %>

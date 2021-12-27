@@ -21,26 +21,6 @@ module Growth
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @reward_income.assign_attributes(reward_income_params)
-
-      if @reward_income.update(reward_income_params)
-        render 'update'
-      else
-        render :edit, locals: { model: @reward_income }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @reward_income.destroy
-    end
-
     private
     def set_reward
       @reward = Reward.find(params[:reward_id])

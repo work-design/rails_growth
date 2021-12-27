@@ -1,27 +1,23 @@
-<%= form_with model: [:admin, @reward], local: true do |f| %>
-  <%= render 'error_messages', target: @reward %>
-  <%= f.text_field :entity_type %>
-  <%= f.text_field :entity_id %>
-  <%= f.number_field :max_piece %>
-  <%= f.number_field :min_piece %>
-  <div class="inline fields">
-    <%= f.label :start_at %>
-    <div class="four wide field">
-      <%= f.date_field :'start_at(date)', can: { wrap_input: false, wrap_all: false }, label: false, required: true %>
-    </div>
-    <div class="three wide field">
-      <%= f.time_select :start_at, default: { hour: 8, min: 30 } %>
-    </div>
+<%= f.text_field :entity_type %>
+<%= f.text_field :entity_id %>
+<%= f.number_field :max_piece %>
+<%= f.number_field :min_piece %>
+<div class="inline fields">
+  <%= f.label :start_at %>
+  <div class="four wide field">
+    <%= f.date_field :'start_at(date)', can: { wrap_input: false, wrap_all: false }, label: false, required: true %>
   </div>
-  <div class="inline fields">
-    <%= f.label :finish_at %>
-    <div class="four wide field">
-      <%= f.date_field :'finish_at(date)', can: {wrap_input: false, wrap_all: false}, label: false, required: true %>
-    </div>
-    <div class="three wide field">
-      <%= f.time_select :finish_at, default: { hour: 17, min: 30 } %>
-    </div>
+  <div class="three wide field">
+    <%= f.time_select :start_at, default: { hour: 8, min: 30 } %>
   </div>
-  <%= f.check_box :enabled %>
-  <%= f.submit %>
-<% end %>
+</div>
+<div class="inline fields">
+  <%= f.label :finish_at %>
+  <div class="four wide field">
+    <%= f.date_field :'finish_at(date)', can: {wrap_input: false, wrap_all: false}, label: false, required: true %>
+  </div>
+  <div class="three wide field">
+    <%= f.time_select :finish_at, default: { hour: 17, min: 30 } %>
+  </div>
+</div>
+<%= f.check_box :enabled %>

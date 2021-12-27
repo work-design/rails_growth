@@ -23,26 +23,6 @@ module Growth
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @reward.assign_attributes(reward_params)
-
-      if @reward.save
-        render 'update'
-      else
-        render :edit, locals: { model: @reward }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @reward.destroy
-    end
-
     private
     def set_reward
       @reward = Reward.find(params[:id])

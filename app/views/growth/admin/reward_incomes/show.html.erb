@@ -1,18 +1,8 @@
-<div class="ui segment breadcrumb">
-  <%= link_to 'Back', admin_reward_incomes_path, class: 'section' %>
-  <div class="divider">/</div>
-  <div class="active section">Show</div>
-</div>
-
-<table class="table is-hoverable is-fullwidth">
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= RewardIncome.human_attribute_name(:type) %></td>
-      <td><%= @reward_income.type %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= RewardIncome.human_attribute_name(:amount) %></td>
-      <td><%= @reward_income.amount %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= RewardIncome.human_attribute_name(:type) %></td>
+  <td><%= @reward_income.type %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= RewardIncome.human_attribute_name(:amount) %></td>
+  <td><%= @reward_income.amount %></td>
+</tr>

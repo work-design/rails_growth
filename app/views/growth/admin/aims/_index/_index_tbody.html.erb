@@ -1,0 +1,10 @@
+<td><%= model.name %></td>
+<td><%= model.repeat_type %></td>
+<td><%= model.task_point %></td>
+<td><%= model.reward_point %></td>
+<td><%= model.unit %></td>
+<td><%= model.reward_amount %></td>
+<td><%= model.rate %></td>
+<td>
+  <%= simple_format model.model_codes.pluck(:code) %>
+</td>

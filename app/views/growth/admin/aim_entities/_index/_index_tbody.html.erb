@@ -1,0 +1,15 @@
+<td>
+  <% if aim_entity.user_id %>
+    <%= link_to aim_entity.user_name, admin_user_path(aim_entity.user_id) %>
+  <% end %>
+  <span class="grey text"><%= aim_entity.ip %></span>
+</td>
+<td><%= aim_entity.aim_logs_count %></td>
+<td><%= aim_entity.serial_number %></td>
+<td>
+  <p><%= aim_entity.entity_type %></p>
+  <p><%= aim_entity.entity_id %></p>
+</td>
+<td><%= aim_entity.state_i18n %></td>
+<td><%= aim_entity.reward_amount %></td>
+<td><time><%= aim_entity.created_at.to_s(:iso8601) %></time></td>

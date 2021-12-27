@@ -10,13 +10,6 @@ module Growth
       @aim_entities = @aim.aim_entities.includes(:user).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
-    def show
-    end
-
-    def destroy
-      @aim_entity.destroy
-    end
-
     private
     def set_aim_entity
       @aim_entity = AimEntity.find(params[:id])

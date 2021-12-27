@@ -8,10 +8,6 @@ module Growth
       @aim_logs = @aim_entity.aim_logs.order(id: :desc).page(params[:page])
     end
 
-    def destroy
-      @aim_log.destroy
-    end
-
     private
     def set_aim_log
       @aim_log = AimLog.find(params[:id])

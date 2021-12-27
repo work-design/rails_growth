@@ -1,0 +1,12 @@
+<td>
+  <% if model.user_id %>
+    <%= link_to model.user.name, admin_user_path(model.user_id) %>
+  <% end %>
+</td>
+<td class="grey text"><%= model.ip %></td>
+<td><%= model.code %></td>
+<td>
+  <p><%= model.entity_type %></p>
+  <p><%= model.entity_id %></p>
+</td>
+<td><time data-controller="time"><%= model.created_at.to_s(:iso8601) %></time></td>

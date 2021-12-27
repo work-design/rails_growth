@@ -10,13 +10,6 @@ module Growth
       @aim_users = @aim.aim_users.includes(:user).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
-    def show
-    end
-
-    def destroy
-      @aim_user.destroy
-    end
-
     private
     def set_aim
       @aim = Aim.find(params[:aim_id])

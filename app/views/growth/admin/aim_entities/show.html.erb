@@ -1,22 +1,12 @@
-<div class="ui segment breadcrumb">
-  <%= link_to 'Back', admin_aim_users_path, class: 'section' %>
-  <div class="divider"> / </div>
-  <div class="active section">Show</div>
-</div>
-
-<table class="table is-hoverable is-fullwidth">
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= AimUser.human_attribute_name(:user) %></td>
-      <td><%= @aim_user.user %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= AimUser.human_attribute_name(:present_point) %></td>
-      <td><%= @aim_user.present_point %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= AimUser.human_attribute_name(:day) %></td>
-      <td><%= @aim_user.day %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= Growth::AimUser.human_attribute_name(:user) %></td>
+  <td><%= @aim_user.user %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Growth::AimUser.human_attribute_name(:present_point) %></td>
+  <td><%= @aim_user.present_point %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Growth::AimUser.human_attribute_name(:day) %></td>
+  <td><%= @aim_user.day %></td>
+</tr>

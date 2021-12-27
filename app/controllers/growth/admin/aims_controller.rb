@@ -21,20 +21,9 @@ module Growth
       end
     end
 
-    def show
-    end
-
     def edit
       if @aim.aim_codes.count == 0
         @aim.aim_codes.build
-      end
-    end
-
-    def update
-      if @aim.update(aim_params)
-        redirect_to admin_aims_url, notice: 'Aim was successfully updated.'
-      else
-        render :edit
       end
     end
 
@@ -44,11 +33,6 @@ module Growth
     end
 
     def remove_item
-
-    end
-
-    def destroy
-      @aim.destroy
     end
 
     private

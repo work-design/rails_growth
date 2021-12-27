@@ -1,0 +1,26 @@
+<td><%= model.amount %></td>
+<td>
+  <p><%= model.income_amount %></p>
+  <p><%= model.expense_amount %></p>
+</td>
+<td>
+  <p><%= model.entity_type %></p>
+  <p><%= model.entity_id %></p>
+</td>
+<td>
+  <p><time><%= model.start_at&.to_s(:iso8601) %></time></p>
+  <p><time><%= model.finish_at&.to_s(:iso8601) %></time></p>
+</td>
+<td>
+  <p><%= model.max_piece %></p>
+  <p><%= model.min_piece %></p>
+</td>
+<td>
+  <div class="ui toggle checkbox">
+    <%= check_box_tag '[model]enabled', nil, model.enabled, data: { method: :patch, remote: true, params: "[model]enabled=#{!model.enabled}", url: admin_model_path(model), submit: true }, id: nil %>
+  </div>
+</td>
+<td>
+  <p><%= link_to 'incomes', admin_model_model_incomes_path(model) %></p>
+  <p><%= link_to 'expenses', admin_model_expenses_path(model_id: model.id) %></p>
+</td>

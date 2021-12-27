@@ -21,24 +21,6 @@ module Growth
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      if @reward_income.update(reward_income_params)
-        render 'update'
-      else
-        render :edit
-      end
-    end
-
-    def destroy
-      @reward_income.destroy
-    end
-
     private
     def set_reward
       @reward = Reward.find(params[:reward_id])
