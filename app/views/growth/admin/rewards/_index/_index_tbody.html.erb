@@ -8,8 +8,8 @@
   <p><%= model.entity_id %></p>
 </td>
 <td>
-  <p><time><%= model.start_at&.to_s(:iso8601) %></time></p>
-  <p><time><%= model.finish_at&.to_s(:iso8601) %></time></p>
+  <p><time><%= model.start_at&.to_formatted_s(:iso8601) %></time></p>
+  <p><time><%= model.finish_at&.to_formatted_s(:iso8601) %></time></p>
 </td>
 <td>
   <p><%= model.max_piece %></p>
