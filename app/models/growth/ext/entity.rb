@@ -1,5 +1,5 @@
 module Growth
-  module Model::Entity
+  module Ext::Entity
     extend ActiveSupport::Concern
 
     included do
