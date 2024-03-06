@@ -2,14 +2,16 @@ Rails.application.routes.draw do
   namespace 'growth', defaults: { business: 'growth' } do
     namespace :admin, defaults: { namespace: 'admin' } do
       resources :aims do
-        get 'add_item/:item' => :add_item, on: :collection, as: :add_item
-        get 'remove_item/:item' => :remove_item, on: :collection, as: :remove_item
+        collection do
+          get 'add_item/:item' => :add_item
+          get 'remove_item/:item' => :remove_item
+        end
+        resources :aim_codes
         resources :aim_users, shallow: true, only: [:index, :show, :destroy]
         resources :aim_entities, shallow: true, only: [:index, :show, :destroy] do
           resources :aim_logs, only: [:index, :destroy]
         end
       end
-      resources :aim_codes
       resources :rewards, shallow: true do
         resources :reward_incomes
       end
