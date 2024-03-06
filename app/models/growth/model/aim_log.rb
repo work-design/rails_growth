@@ -24,12 +24,13 @@ module Growth
       validates :user_id, presence: true, if: -> { ip.blank? }
       validates :ip, presence: true, if: -> { user_id.blank? }
 
-      before_validation if: :new_record? do
-        self.created_at = Time.now
-        self.serial_number = init_serial_number
-      end
+      before_validation :init_serial, if: :new_record?
       before_create :init_aim_entity
       after_create_commit :sync_aim_entity_state, :cache_entity_logs
+    end
+
+    def init_serial
+      self.serial_number = init_serial_number
     end
 
     def init_aim_entity
