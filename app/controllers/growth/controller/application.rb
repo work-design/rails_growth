@@ -35,10 +35,8 @@ module Growth
       growth_api(code, params[:entity_type], params[:entity_id])
     end
 
-    def growth_record
+    def growth_record(entity_type: controller_name.classify, entity_id: params.fetch('id', nil))
       code = [controller_path, action_name].join('#')
-      entity_type = growth_entity_type
-      entity_id = growth_entity_id
       r = growth_api(code, entity_type, entity_id)
       growth_response(r) if r.present?
     end
@@ -59,14 +57,6 @@ module Growth
         body = JSON.parse(self.response_body[0])
         self.response_body = body.merge(reward: reward).to_json
       end
-    end
-
-    def growth_entity_type
-      controller_name.classify
-    end
-
-    def growth_entity_id
-      params.fetch('id', nil)
     end
 
   end
