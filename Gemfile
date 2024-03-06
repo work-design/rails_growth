@@ -13,5 +13,6 @@ gem 'rails_design', github: 'work-design/rails_design'
 gem 'amazing_print'
 group :development, :test do
   gem 'debug'
+  gem 'listen'
   gem 'sdoc'
 end
