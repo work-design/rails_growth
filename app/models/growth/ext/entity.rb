@@ -4,6 +4,7 @@ module Growth
 
     included do
       attribute :title, :string
+
       has_one :reward, as: :entity
       has_many :aim_entities, as: :entity
       has_many :aim_logs, as: :entity
