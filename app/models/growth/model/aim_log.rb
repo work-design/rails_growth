@@ -9,8 +9,9 @@ module Growth
       attribute :rewarded, :boolean
       attribute :created_at, :datetime, null: false
 
+      belongs_to :user, class_name: 'Auth::User', optional: true
+
       belongs_to :aim
-      belongs_to :user, optional: true
       belongs_to :entity, polymorphic: true, optional: true
       belongs_to :aim_entity, ->(o){ where(aim_id: o.aim_id, entity_type: o.entity_type, entity_id: o.entity_id, serial_number: o.serial_number) }, primary_key: :user_id, foreign_key: :user_id, counter_cache: true, optional: true
       belongs_to :aim_entity_ip, ->(o){ where(user_id: o.user_id, aim_id: o.aim_id, entity_type: o.entity_type, entity_id: o.entity_id, serial_number: o.serial_number) }, class_name: 'AimEntity', primary_key: :ip, foreign_key: :ip, counter_cache: true, optional: true

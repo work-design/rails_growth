@@ -11,8 +11,9 @@ module Growth
       attribute :reward_amount, :decimal, precision: 10, scale: 2
       attribute :aim_logs_count, :integer, default: 0
 
+      belongs_to :user, class_name: 'Auth::User', optional: true
+
       belongs_to :aim, optional: true
-      belongs_to :user, optional: true
       belongs_to :entity, polymorphic: true, optional: true
       belongs_to :reward_expense, inverse_of: :aim_entity, optional: true
       belongs_to :aim_user, ->(o){ where(aim_id: o.aim_id, serial_number: o.serial_number) }, primary_key: :user_id, foreign_key: :user_id, counter_cache: true, optional: true

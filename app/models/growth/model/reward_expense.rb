@@ -5,8 +5,9 @@ module Growth
     included do
       attribute :amount, :decimal, precision: 10, scale: 2, default: 0
 
+      belongs_to :user, class_name: 'Auth::User', optional: true
+
       belongs_to :reward
-      belongs_to :user, optional: true
       belongs_to :coin, primary_key: :user_id, foreign_key: :user_id, optional: true, inverse_of: :reward_expenses
       belongs_to :aim, optional: true
 
