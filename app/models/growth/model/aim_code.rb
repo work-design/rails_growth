@@ -10,6 +10,7 @@ module Growth
       belongs_to :aim
 
       validates :code, uniqueness: { scope: :aim_id }, presence: true
+
       before_validation :sync_code
       after_commit :delete_cache
     end

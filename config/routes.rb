@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           resources :aim_logs, only: [:index, :destroy]
         end
       end
+      resources :aim_codes
       resources :rewards, shallow: true do
         resources :reward_incomes
       end
