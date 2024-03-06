@@ -5,6 +5,7 @@ gemspec
 gem 'rails'
 gem 'pg'
 gem 'puma'
+gem 'propshaft'
 
 gem 'rails_extend', github: 'work-design/rails_extend'
 gem 'rails_com', github: 'work-design/rails_com'

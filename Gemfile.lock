@@ -209,6 +209,11 @@ GEM
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pg (1.5.6)
+    propshaft (0.8.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.1.2)
       stringio
     puma (6.4.2)
@@ -288,6 +293,7 @@ DEPENDENCIES
   debug
   listen
   pg
+  propshaft
   puma
   rails
   rails_com!
