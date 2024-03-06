@@ -6,7 +6,7 @@ module Growth
       after_action :growth_record
     end
 
-    def growth_api(code, entity_type, entity_id)
+    def growth_api(code, entity = nil)
       aim_ids = AimCode.growth_hash[code]
       return if aim_ids.blank?
 
@@ -14,17 +14,16 @@ module Growth
         if current_user
           sn = RailsGrowth::SerialNumberHelper.result(Time.current, aim.repeat_type)
           au = current_user.aim_users.find_by(aim_id: aim.id, serial_number: sn)
-          ae = current_user.aim_entities.find_by(aim_id: aim.id, serial_number: sn, entity_type: entity_type, entity_id: entity_id)
-          next if au&.task_done? && ae
-          aim_log = current_user.aim_logs.build(aim_id: aim.id)
+          aim_entity = current_user.aim_entities.find_by(aim_id: aim.id, serial_number: sn)
+          aim_entity.entity = entity
+          next if au&.task_done? && aim_entity
+          aim_log = aim_entity.aim_logs.build(aim_id: aim.id)
         else
           next unless aim.verbose
           aim_log = AimLog.new(aim_id: aim.id)
         end
 
         aim_log.ip = request.remote_ip
-        aim_log.entity_type = entity_type
-        aim_log.entity_id = entity_id
         aim_log.code = code
         aim_log.save!
         aim_log
@@ -35,9 +34,8 @@ module Growth
       growth_api(code, params[:entity_type], params[:entity_id])
     end
 
-    def growth_record(entity_type: controller_name.classify, entity_id: params.fetch('id', nil))
-      code = [controller_path, action_name].join('#')
-      r = growth_api(code, entity_type, entity_id)
+    def growth_record
+      r = growth_api([controller_path, action_name].join('#'))
       growth_response(r) if r.present?
     end
 
