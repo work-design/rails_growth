@@ -1,5 +1,5 @@
 module Growth
-  module Model::Promote
+  module Ext::Promote
     extend ActiveSupport::Concern
 
     included do

@@ -1,5 +1,5 @@
 module Growth
-  module Model::Cash
+  module Ext::Cash
     extend ActiveSupport::Concern
 
     included do

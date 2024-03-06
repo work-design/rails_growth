@@ -1,5 +1,5 @@
 module Growth
-  module Model::Card
+  module Ext::Card
     extend ActiveSupport::Concern
 
     included do
