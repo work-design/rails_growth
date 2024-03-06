@@ -44,7 +44,7 @@ module Growth
     end
 
     def sync_aim_user_state
-      aim_user.commit_task_done
+      #aim_user.commit_task_done
     end
 
     def commit_reward_done

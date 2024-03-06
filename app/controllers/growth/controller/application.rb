@@ -31,12 +31,12 @@ module Growth
     end
 
     def growth_log(code)
-      growth_api(code, params[:entity_type], params[:entity_id])
+      growth_api(code, entity)
     end
 
     def growth_record
       r = growth_api([controller_path, action_name].join('#'))
-      growth_response(r) if r.present?
+      #growth_response(r) if r.present?
     end
 
     def growth_response(r)

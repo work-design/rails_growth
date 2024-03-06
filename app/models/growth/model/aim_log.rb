@@ -74,7 +74,7 @@ module Growth
       unless sa.blank?
         return sa.first
       end
-      RailsGrowth::SerialNumberHelper.result(created_at, aim.repeat_type)
+      RailsGrowth::SerialNumberHelper.result(Time.current, aim.repeat_type)
     end
 
   end
