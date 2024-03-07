@@ -41,7 +41,7 @@ module Growth
       when 'forever'
         now.strftime('%Y%j%H%M%S%L')
       when 'daily'
-        { text_day: now.strftime('%Y%j') }
+        { text_date: now.strftime('%Y%j') }
       when 'weekly'
         { text_week: now.strftime('%Y%U') }
       when 'monthly'

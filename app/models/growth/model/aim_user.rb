@@ -15,7 +15,7 @@ module Growth
         task_done: 'task_done'
       }
 
-      after_commit :sync_log, if: -> { saved_change_to_reward_amount? }, on: [:create, :update]
+      #after_commit :sync_log, if: -> { saved_change_to_reward_amount? }, on: [:create, :update]
     end
 
     def progress

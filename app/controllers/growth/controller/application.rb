@@ -13,7 +13,7 @@ module Growth
       Aim.where(id: aim_ids).map do |aim|
         if current_user
           aim_user = current_user.aim_users.find_or_create_by(aim_id: aim.id, **aim.serial_hash)
-          unless aim_user.task_done? && entity
+          if !aim_user.task_done? && entity
             aim_entity = aim_user.aim_entities.find_or_initialize_by(entity_type: entity.class, entity_id: entity.try(:id))
             aim_entity.aim_logs.build(aim_id: aim.id)
             aim_entity.save
