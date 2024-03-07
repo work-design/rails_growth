@@ -1,17 +1,13 @@
 module Growth
   module Model::AimUser
     extend ActiveSupport::Concern
+    include Inner::Text
 
     included do
-      attribute :text_year, :string
-      attribute :text_month, :string
       attribute :state, :string, default: 'task_doing'
       attribute :reward_amount, :integer, default: 0
       attribute :aim_entities_count, :integer, default: 0
 
-      belongs_to :user, class_name: 'Auth::User', optional: true
-
-      belongs_to :aim, optional: true
       has_many :aim_entities, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
 
       enum state: {
