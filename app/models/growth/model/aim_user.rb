@@ -8,7 +8,7 @@ module Growth
       attribute :reward_amount, :integer, default: 0
       attribute :aim_entities_count, :integer, default: 0
 
-      has_many :aim_entities, ->(o){ where(user_id: o.user_id) }, foreign_key: :aim_id, primary_key: :aim_id
+      has_many :aim_entities, ->(o){ where(o.filter_hash) }, foreign_key: :user_id, primary_key: :user_id
 
       enum state: {
         task_doing: 'task_doing',
