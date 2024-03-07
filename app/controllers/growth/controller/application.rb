@@ -22,6 +22,10 @@ module Growth
       end
     end
 
+    def growth_record
+      growth_api([controller_path, action_name].join('#'))
+    end
+
     def growth_response(r)
       reward_amount = r.select(&:rewarded).sum { |i| i.aim_entity.reward_amount }
       rewardable_codes = []

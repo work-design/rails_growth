@@ -15,7 +15,10 @@ module Growth
     def filter_hash
       {
         aim_id: aim_id,
-        text_year: text_year
+        text_year: text_year,
+        text_month: text_month,
+        text_week: text_week,
+        text_date: text_date
       }
     end
 
