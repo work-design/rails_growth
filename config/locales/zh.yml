@@ -1,11 +1,22 @@
 zh:
-  activerecord:
-    attributes:
-      aim:
-        rate: 金币比例
-        unit: 单位
-      reward_income/type:
-        InhouseIncome: 平台运营
-      coin_exchange/type:
-        CoinWallet: 兑换虚拟币
-        CoinCash: 提现
+  coin_log:
+    expense:
+      praise_income:
+        title: 金币打赏
+        tag_str: 打赏
+    income:
+      aim_user:
+        title: 任务奖励
+        tag_str: 任务
+      praise_income:
+        title: 获得打赏
+        tag_str: 打赏收入
+    wallet_log:
+      expense:
+        praise_income:
+          title: 虚拟币打赏
+          tag_str: 打赏
+      income:
+        praise_income:
+          title: 获得打赏
+          tag_str: 打赏收入
