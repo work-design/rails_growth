@@ -5,7 +5,6 @@ module Growth
     included do
       attribute :present_point, :integer
       attribute :state, :string
-      attribute :serial_number, :string
       attribute :text_year, :string
       attribute :text_month, :string
       attribute :text_week, :string
@@ -35,6 +34,12 @@ module Growth
         reward_none: 'reward_none',
         reward_doing: 'reward_doing',
         reward_done: 'reward_done'
+      }
+    end
+
+    def filter_hash
+      {
+        text_year: text_year
       }
     end
 

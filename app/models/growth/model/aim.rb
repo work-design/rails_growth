@@ -36,30 +36,22 @@ module Growth
       self.aim_users.find { |i| i.user_id == user_id }
     end
 
-    def serial_number(timestamp)
-      time = timestamp.to_datetime
-      year = time.year
-      month = time.month
-      day = time.day
-      cweek = time.cweek
-      seconds = time.seconds_since_midnight
-
+    def serial_number(now = Time.current)
       case repeat_type
       when 'forever'
-        [year, month, cweek, day, seconds, UidHelper.rand_string].join('-')
+        now.strftime('%Y%j%H%M%S%L')
       when 'daily'
-        [year, month, cweek, day].join('-')
+        now.strftime('%Y%j')
       when 'weekly'
-        [year, month, cweek].join('-')
+        now.strftime('%Y%U')
       when 'monthly'
-        [year, month].join('-')
+        now.strftime('%Y%m')
       when 'yearly'
-        year.to_s
+        now.strftime('%Y')
       else
-        ''
+        now.strftime('%Y%j%H%M%S%L')
       end
     end
-
 
     class_methods do
 
