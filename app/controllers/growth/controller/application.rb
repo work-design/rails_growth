@@ -22,15 +22,6 @@ module Growth
       end
     end
 
-    def growth_log(code)
-      growth_api(code, entity)
-    end
-
-    def growth_record
-      r = growth_api([controller_path, action_name].join('#'))
-      #growth_response(r) if r.present?
-    end
-
     def growth_response(r)
       reward_amount = r.select(&:rewarded).sum { |i| i.aim_entity.reward_amount }
       rewardable_codes = []
