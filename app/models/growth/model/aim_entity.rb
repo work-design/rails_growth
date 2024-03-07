@@ -6,6 +6,10 @@ module Growth
       attribute :present_point, :integer
       attribute :state, :string
       attribute :serial_number, :string
+      attribute :text_year, :string
+      attribute :text_month, :string
+      attribute :text_week, :string
+      attribute :text_date, :date
       attribute :last_access_at, :datetime
       attribute :ip, :string
       attribute :reward_amount, :decimal, precision: 10, scale: 2
