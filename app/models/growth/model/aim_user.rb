@@ -4,6 +4,7 @@ module Growth
 
     included do
       attribute :text_year, :string
+      attribute :text_month, :string
       attribute :state, :string, default: 'task_doing'
       attribute :reward_amount, :integer, default: 0
       attribute :aim_entities_count, :integer, default: 0

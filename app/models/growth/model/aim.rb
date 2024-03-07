@@ -41,13 +41,13 @@ module Growth
       when 'forever'
         now.strftime('%Y%j%H%M%S%L')
       when 'daily'
-        now.strftime('%Y%j')
+        { text_day: now.strftime('%Y%j') }
       when 'weekly'
-        now.strftime('%Y%U')
+        { text_week: now.strftime('%Y%U') }
       when 'monthly'
-        now.strftime('%Y%m')
+        { text_month: now.strftime('%Y%m') }
       when 'yearly'
-        now.strftime('%Y')
+        { text_year: now.strftime('%Y') }
       else
         now.strftime('%Y%j%H%M%S%L')
       end

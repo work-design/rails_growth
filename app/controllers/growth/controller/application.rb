@@ -12,11 +12,10 @@ module Growth
 
       Aim.where(id: aim_ids).map do |aim|
         if current_user
-          sn = RailsGrowth::SerialNumberHelper.result(Time.current, aim.repeat_type)
-          au = current_user.aim_users.find_by(aim_id: aim.id, serial_number: sn)
+          aim_user = current_user.aim_users.find_or_initialize_by(aim_id: aim.id, **aim.sn)
           aim_entity = current_user.aim_entities.find_by(aim_id: aim.id, serial_number: sn)
           aim_entity.entity = entity
-          next if au&.task_done? && aim_entity
+          next if aim_user.task_done? && aim_entity
           aim_log = aim_entity.aim_logs.build(aim_id: aim.id)
         else
           next unless aim.verbose
