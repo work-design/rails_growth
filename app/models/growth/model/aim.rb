@@ -36,7 +36,7 @@ module Growth
       self.aim_users.find { |i| i.user_id == user_id }
     end
 
-    def serial_number(now = Time.current)
+    def serial_hash(now = Time.current)
       case repeat_type
       when 'forever'
         now.strftime('%Y%j%H%M%S%L')
