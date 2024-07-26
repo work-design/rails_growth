@@ -20,7 +20,7 @@ module Growth
       end
       after_commit :reset_position, if: -> { saved_change_to_amount? }
 
-      acts_as_list scope: [:entity_type, :entity_id]
+      positioned on: [:entity_type, :entity_id]
     end
 
     def compute_amount
