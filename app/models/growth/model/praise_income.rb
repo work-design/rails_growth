@@ -28,7 +28,7 @@ module Growth
       delegate :name, to: :user, prefix: :user
       delegate :name, to: :gift, prefix: :gift
 
-      enum state: {
+      enum :state, {
         init: 'init',
         royalty_done: 'royalty_done'
       }

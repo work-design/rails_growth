@@ -25,7 +25,7 @@ module Growth
       before_create :init_aim_user
       after_create_commit :sync_aim_user_state
 
-      enum state: {
+      enum :state, {
         reward_none: 'reward_none',
         reward_doing: 'reward_doing',
         reward_done: 'reward_done'

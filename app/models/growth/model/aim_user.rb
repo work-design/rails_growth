@@ -10,7 +10,7 @@ module Growth
 
       has_many :aim_entities, ->(o){ where(o.filter_hash) }, foreign_key: :user_id, primary_key: :user_id
 
-      enum state: {
+      enum :state, {
         task_doing: 'task_doing',
         task_done: 'task_done'
       }

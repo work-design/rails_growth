@@ -19,7 +19,7 @@ module Growth
 
       accepts_nested_attributes_for :aim_codes, allow_destroy: true, reject_if: :all_blank
 
-      enum repeat_type: {
+      enum :repeat_type, {
         once: 'once',
         daily: 'daily',
         weekly: 'weekly',
